@@ -123,8 +123,8 @@ export default {
         this.storage.get(async (rom) => {
           if (rom) {
             this.rom = await this.$core.f(rom);
-            // this.renderFlag();
-            // this.renderTeamName();
+            this.renderFlag();
+            this.renderTeamName();
             this.renderTeamPlayers();
           }
         });
@@ -147,9 +147,9 @@ export default {
       let handler = new PlayerNameRomHandler(this.rom);
       console.log(
         handler.readFromRomAt(this.team),
-        // new PlayerNumberRomHandler(this.rom).readFromRomAt(this.team),
-        // new PlayerColorRomHandler(this.rom).readFromRomAt(this.team),
-        // new HairStyleRomHandler(this.rom).readFromRomAt(this.team)
+        new PlayerNumberRomHandler(this.rom).readFromRomAt(this.team),
+        new PlayerColorRomHandler(this.rom).readFromRomAt(this.team),
+        new HairStyleRomHandler(this.rom).readFromRomAt(this.team)
       );
     },
     async renderTeamName() {
