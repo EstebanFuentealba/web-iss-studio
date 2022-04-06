@@ -60,7 +60,6 @@ export default {
         }
 
         const decompress = (offset) => {
-          console.log("decompress " + offset.toString(16));
           return new Promise((resolve, reject) => {
             let code = Core.cwrap("decompress", "number", [
               "string",
