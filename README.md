@@ -1,4 +1,5 @@
 # Web ISS Studio (WIP 🚧)
+<img src="public/principal.jpeg" />
 
 Web ISS Studio is a Graphical Web User Interface to create your own game based on International Superstar Soccer for Super Nintendo Entertainment System (SNES).
 
@@ -59,6 +60,6 @@ You can edit:
 - WASM
 - C++
 
-## 👍 Special thanks to
+## 👍 Acknowledgements
 - **Rodrigo Mallmann Guerra** This is a web version of [`ISS Studio`](https://github.com/rodmguerra/issparser) the editor created in Java by Rodrigo
 - **Vladimir Protopopov** creador de [`KONAMI SNES COMPRESSOR`](https://github.com/ProtonNoir/SNES-decompression-tools/blob/master/Konami/konami_c.cpp) and [`KONAMI SNES DECOMPRESSOR`](https://github.com/ProtonNoir/SNES-decompression-tools/blob/master/Konami/konami_d.cpp)
