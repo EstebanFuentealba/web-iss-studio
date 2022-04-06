@@ -22,6 +22,37 @@ You can edit:
 0x17680 to 0x17FFF - Team name tile images (automatically moved to this address)
 0x43ED5 to 0x44486 - Team name positional text data
 
+## 👨🏻‍🏫 Instructions
+- Download a compatible SNES ROM of [`International Super Star Soccer`](https://wowroms.com/es/roms/super-nintendo/international-superstar-soccer-europe/27942.html) 
+- Enter to [**Web ISS Studio**](https://estebanfuentealba.github.io/web-iss-studio/)
+- Open ROM
+- Edit ROM
+
+## 📋 TODO
+- [X] Read Team
+    - [x] Read Teams Names
+    - [x] Read Team Flags
+    - [x] Read Team Colors
+- [ ] Read Team Players
+    - [x] Read Player Names
+    - [x] Read Player Number
+    - [x] Read Player Hair
+    - [x] Read Player Color
+    - [ ] Read Player Abilities
+- [ ] Write Team
+    - [ ] Read Teams Names
+    - [ ] Read Team Flags
+    - [ ] Read Team Colors
+- [ ] Write Team Players
+    - [ ] Write Player Names
+    - [ ] Write Player Number
+    - [ ] Write Player Hair
+    - [ ] Write Player Color
+    - [ ] Write Player Abilities
+- [x] Navigate between teams
+- [ ] Edit Initial Image
+- [ ] Edit Sounds
+- [ ] Edit GoalKeeper colors
 ## 🤖 Technologies
 - ⚡️ Vite
 - Vue3
