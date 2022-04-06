@@ -126,7 +126,6 @@ export class ParsingUtils {
         return b & 0xFF;
     }
     static issChar(b) {
-        // console.log("issChar " +b+" -- " + ParsingUtils.unsigned(b) + " -- " + (ParsingUtils.unsigned(b) - 0x6c + 'A'.charCodeAt(0)) +" -- " +  String.fromCharCode( (ParsingUtils.unsigned(b) - 0x6c + 'A'.charCodeAt(0)) ));
         if(ParsingUtils.unsigned(b) >= 0x6c && ParsingUtils.unsigned(b) <= 0x85) return String.fromCharCode( (ParsingUtils.unsigned(b) - 0x6c + 'A'.charCodeAt(0)) );
         if(ParsingUtils.unsigned(b) >= 0x86 && ParsingUtils.unsigned(b) <= 0x9f) return String.fromCharCode( (ParsingUtils.unsigned(b) - 0x86 + 'a'.charCodeAt(0)) );
         if(ParsingUtils.unsigned(b) >= 0x62 && ParsingUtils.unsigned(b) <= 0x6B) return String.fromCharCode( (ParsingUtils.unsigned(b) - 0x62 + '0'.charCodeAt(0)) );

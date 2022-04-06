@@ -1,7 +1,5 @@
 <template>
   <div>
-    <router-link :to="{ name: 'Home' }">Go to Home</router-link>
-    <router-link :to="{ name: 'About' }">Go to About</router-link>
     <router-view />
     <div v-bind="getRootProps()">
       <div v-show="isDragActive">drop</div>
@@ -15,18 +13,10 @@
 import { useDropzone } from "vue3-dropzone";
 export default {
   setup() {
-   
     function onDrop(acceptFiles, rejectReasons) {}
     const { getRootProps, getInputProps, ...rest } = useDropzone({
       noClick: true,
-      accept: [
-        // "image/sfc",
-        // "image/png",
-        // "image/jpeg",
-        // "image/gif",
-        // "video/mp4",
-        // "video/webm"
-      ],
+      accept: [],
       onDrop,
     });
     return {
