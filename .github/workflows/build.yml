@@ -5,10 +5,8 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Install WASM
+      - name: Checkout WASM
         uses: mymindstorm/setup-emsdk@master
-      - name: Build WASM
-        run: emcc -o public/wasm/iss-studio-core.js cpp/web-iss-studio.cpp -O3 -s WASM=1 -s NO_EXIT_RUNTIME=1 -s MODULARIZE=1 -s EXPORT_NAME=\"'createISSStudioCore'\" -s \"EXTRA_EXPORTED_RUNTIME_METHODS=['FS', 'ccall', 'cwrap', 'decompress', 'compress']\" -s FORCE_FILESYSTEM=1
         
       - name: Checkout 🛎️
         uses: actions/checkout@v3
@@ -16,6 +14,7 @@ jobs:
       - name: Install and Build 🔧 # This example project is built using npm and outputs the result to the 'build' folder. Replace with the commands required to build your project, or remove this step entirely if your site is pre-built.
         run: |
           npm ci
+          npm run build-wasm
           npm run build
 
       - name: Deploy 🚀
