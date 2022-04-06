@@ -1,6 +1,6 @@
 <template>
   <div>
-    <strong>Open ROM</strong>
+    <strong>Open ROM</strong><br /><br />
     <input type="file" id="rom" @change="onChangeFile" />
   </div>
   <br />
@@ -10,56 +10,63 @@
     {{ teamName }} (<i>{{ team?.name }}</i
     >)
     <button type="button" @click="next">Next</button>
-    <div v-if="rgbs.length > 0">
-      <div class="flag flex flex-col">
-        <div
-          v-for="(row, index) in matrix"
-          :key="`row-${index}`"
-          class="flex flex-row"
-        >
+    <div v-if="rgbs.length > 0" class="flex flex-row">
+      <div class="mr-4">
+        <span class="font-bold">Team Data</span>
+        <div class="flag flex flex-col">
           <div
-            v-for="(col, index) in row"
-            :key="`col-${index}`"
-            class="square"
-            :style="{
-              backgroundColor: rgbs[0][col]?.toHex(),
-            }"
-          ></div>
+            v-for="(row, index) in matrix"
+            :key="`row-${index}`"
+            class="flex flex-row"
+          >
+            <div
+              v-for="(col, index) in row"
+              :key="`col-${index}`"
+              class="square"
+              :style="{
+                backgroundColor: rgbs[0][col]?.toHex(),
+              }"
+            ></div>
+          </div>
         </div>
-      </div>
-      <br /><br />
-      <div class="flag flex flex-col">
-        <div
-          v-for="(row, index) in teamMatrix"
-          :key="`row-${index}`"
-          class="flex flex-row"
-        >
+        <br /><br />
+        <div class="flag flex flex-col">
           <div
-            v-for="(col, index) in row"
-            :key="`col-${index}`"
-            class="square"
-            :data-dev="col"
-            :style="{
-              backgroundColor: new TeamNameTilesColor(
-                TeamNameTilesColor.getColors()[col]
-              ).toHex(),
-            }"
-          ></div>
+            v-for="(row, index) in teamMatrix"
+            :key="`row-${index}`"
+            class="flex flex-row"
+          >
+            <div
+              v-for="(col, index) in row"
+              :key="`col-${index}`"
+              class="square"
+              :data-dev="col"
+              :style="{
+                backgroundColor: new TeamNameTilesColor(
+                  TeamNameTilesColor.getColors()[col]
+                ).toHex(),
+              }"
+            ></div>
+          </div>
         </div>
-      </div>
-      <br /><br />
+        <br /><br />
 
-      <div class="flex flex-row">
-        <div
-          v-for="(color, index) in Object.keys(rgbs[0])"
-          :key="`color-${index}`"
-          class="color-block"
-          :style="{
-            backgroundColor: rgbs[0][color]?.toHex(),
-          }"
-        >
-          {{ color }}
+        <div class="flex flex-row">
+          <div
+            v-for="(color, index) in Object.keys(rgbs[0])"
+            :key="`color-${index}`"
+            class="color-block"
+            :style="{
+              backgroundColor: rgbs[0][color]?.toHex(),
+            }"
+          >
+            {{ color }}
+          </div>
         </div>
+      </div>
+      <div class="ml-4">
+        <span>Players</span>
+        <pre>{{ JSON.stringify(players, null, 2) }}</pre>
       </div>
     </div>
   </div>
@@ -78,11 +85,11 @@ import TeamNameTextRomHandler from "../handlers/texts/TeamNameTextRomHandler";
 import TeamNameTilesRomHandler from "../handlers/TeamNameTilesRomHandler";
 import PlayerNameRomHandler from "../handlers/texts/PlayerNameRomHandler";
 import PlayerNumberRomHandler from "../handlers/texts/PlayerNumberRomHandler";
-import PlayerColorRomHandler from '../handlers/texts/PlayerColorRomHandler'
-import HairStyleRomHandler from '../handlers/texts/HairStyleRomHandler'
-import AbilitiesRomHandler from '../handlers/texts/AbilitiesRomHandler'
+import PlayerColorRomHandler from "../handlers/texts/PlayerColorRomHandler";
+import HairStyleRomHandler from "../handlers/texts/HairStyleRomHandler";
+import AbilitiesRomHandler from "../handlers/texts/AbilitiesRomHandler";
 import Storage from "../utils/Storage";
-import HairStyle from '../models/HairStyle';
+import HairStyle from "../models/HairStyle";
 export default {
   data() {
     return {
@@ -92,6 +99,7 @@ export default {
       rom: null,
       matrix: [],
       teamMatrix: [],
+      players: [],
       teamName: "",
       rgbs: [],
       team: new Team(Team.GERMANY),
@@ -99,7 +107,6 @@ export default {
     };
   },
   mounted() {
-
     setTimeout(() => {
       this.storage.init(() => {
         this.storage.get(async (rom) => {
@@ -117,14 +124,16 @@ export default {
   },
   methods: {
     async findFlag() {
-      console.log('findFlag start')
-      for(let offset=0; offset<this.rom.length; offset++) {
-         let bytes = await this.$core.d(`0x${(offset).toString(16)}`);
-         if(bytes.byteLength== 96 && bytes.filter((byte) => byte == 0x00).length != 96 ) {
-           console.log('finded',`0x${(offset).toString(16)}`, bytes)
-         }
+      console.log("findFlag start");
+      for (let offset = 0; offset < this.rom.length; offset++) {
+        let bytes = await this.$core.d(`0x${offset.toString(16)}`);
+        if (
+          bytes.byteLength == 96 &&
+          bytes.filter((byte) => byte == 0x00).length != 96
+        ) {
+          console.log("finded", `0x${offset.toString(16)}`, bytes);
+        }
       }
-     
     },
     prev() {
       this.team = this.team.previous();
@@ -140,26 +149,27 @@ export default {
     },
     async renderTeamPlayers() {
       let names = new PlayerNameRomHandler(this.rom).readFromRomAt(this.team);
-      let numbers = new PlayerNumberRomHandler(this.rom).readFromRomAt(this.team);
+      let numbers = new PlayerNumberRomHandler(this.rom).readFromRomAt(
+        this.team
+      );
       let colors = new PlayerColorRomHandler(this.rom).readFromRomAt(this.team);
       let hairs = new HairStyleRomHandler(this.rom).readFromRomAt(this.team);
       //  TODO:
-      let abilities = new AbilitiesRomHandler(this.rom).readFromRomAt(this.team);
-      console.log({
-        players: names.reduce((acc, curr, index) => {
-          if(hairs[index].text == HairStyle.DREADLOCKS) {
-            alert("encontrado "+ curr)
+      let abilities = new AbilitiesRomHandler(this.rom).readFromRomAt(
+        this.team
+      );
+      this.players = names.reduce((acc, curr, index) => {
+          if (hairs[index].text == HairStyle.DREADLOCKS) {
+            alert("encontrado " + curr);
           }
           acc.push({
             name: curr,
             no: numbers[index],
             color: colors[index],
-            hair: hairs[index].text
-          })
+            hair: hairs[index].text,
+          });
           return acc;
-        }, [])
-        
-      });
+        }, []);
     },
     async renderTeamName() {
       let handler2 = new TeamNameTextRomHandler(this.rom);
@@ -294,7 +304,6 @@ export default {
     },
   },
 };
-
 </script>
 <style lang="css">
 .flex {
@@ -326,5 +335,11 @@ export default {
 .flag {
   width: 240px;
   border: 1px solid #eee;
+}
+.ml-4 {
+margin-left: 1rem;
+}
+.mr-4 {
+margin-right: 1rem;
 }
 </style>
