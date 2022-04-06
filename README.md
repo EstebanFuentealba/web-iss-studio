@@ -59,6 +59,6 @@ You can edit:
 - WASM
 - C++
 
-## 👍 Special thanks to
-- **Rodrigo Mallmann Guerra** This is a web version of [`ISS Studio`](https://github.com/rodmguerra/issparser) the editor created in Java by Rodrigo
-- **Vladimir Protopopov** creador de [`KONAMI SNES COMPRESSOR`](https://github.com/ProtonNoir/SNES-decompression-tools/blob/master/Konami/konami_c.cpp) and [`KONAMI SNES DECOMPRESSOR`](https://github.com/ProtonNoir/SNES-decompression-tools/blob/master/Konami/konami_d.cpp)
+## 👍 Acknowledgements
+-  [**Rodrigo Mallmann Guerra**](https://github.com/rodmguerra) This is a web version of [`ISS Studio`](https://github.com/rodmguerra/issparser) the editor created in Java by Rodrigo
+- [**Vladimir Protopopov**](https://github.com/ProtonNoir) creador de [`KONAMI SNES COMPRESSOR`](https://github.com/ProtonNoir/SNES-decompression-tools/blob/master/Konami/konami_c.cpp) and [`KONAMI SNES DECOMPRESSOR`](https://github.com/ProtonNoir/SNES-decompression-tools/blob/master/Konami/konami_d.cpp)
