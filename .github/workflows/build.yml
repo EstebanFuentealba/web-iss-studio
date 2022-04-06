@@ -5,8 +5,9 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Build WASM
+      - name: Install WASM
         uses: mymindstorm/setup-emsdk@master
+      - name: Build WASM
         run: emcc -o public/wasm/iss-studio-core.js cpp/web-iss-studio.cpp -O3 -s WASM=1 -s NO_EXIT_RUNTIME=1 -s MODULARIZE=1 -s EXPORT_NAME=\"'createISSStudioCore'\" -s \"EXTRA_EXPORTED_RUNTIME_METHODS=['FS', 'ccall', 'cwrap', 'decompress', 'compress']\" -s FORCE_FILESYSTEM=1
         
       - name: Checkout 🛎️
