@@ -22,6 +22,12 @@ You can edit:
 0x17680 to 0x17FFF - Team name tile images (automatically moved to this address)
 0x43ED5 to 0x44486 - Team name positional text data
 
+## 🤖 Technologies
+- ⚡️ Vite
+- Vue3
+- WASM
+- C++
+
 ## 👍 Special thanks to
 - **Rodrigo Mallmann Guerra** This is a web version of [`ISS Studio`](https://github.com/rodmguerra/issparser) the editor created in Java by Rodrigo
 - **Vladimir Protopopov** creador de [`KONAMI SNES COMPRESSOR`](https://github.com/ProtonNoir/SNES-decompression-tools/blob/master/Konami/konami_c.cpp) and [`KONAMI SNES DECOMPRESSOR`](https://github.com/ProtonNoir/SNES-decompression-tools/blob/master/Konami/konami_d.cpp)
