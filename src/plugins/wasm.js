@@ -6,7 +6,7 @@ function createWASMCore() {
   return new Promise((resolve, reject) => {
     let script = document.createElement("script");
     script.async = true;
-    script.src = "/wasm/iss-studio-core.js";
+    script.src = "wasm/iss-studio-core.js";
     script.type = "text/javascript";
     script.addEventListener("load", (data) => {
       console.log("iss-studio-core.js script loaded");
