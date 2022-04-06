@@ -8,8 +8,8 @@ jobs:
       - uses: mymindstorm/setup-emsdk@master
       - name: Verify
         run: ls -lha && pwd
-      - name: Build WASM
-        run: emcc -o ../../public/wasm/iss-studio-core.js ../../cpp/web-iss-studio.cpp -O3 -s WASM=1 -s NO_EXIT_RUNTIME=1 -s MODULARIZE=1 -s EXPORT_NAME=\"'createISSStudioCore'\" -s \"EXTRA_EXPORTED_RUNTIME_METHODS=['FS', 'ccall', 'cwrap', 'decompress', 'compress']\" -s FORCE_FILESYSTEM=1
+      - name: Build
+        run: emcc -o ../public/wasm/iss-studio-core.js ../cpp/web-iss-studio.cpp -O3 -s WASM=1 -s NO_EXIT_RUNTIME=1 -s MODULARIZE=1 -s EXPORT_NAME=\"'createISSStudioCore'\" -s \"EXTRA_EXPORTED_RUNTIME_METHODS=['FS', 'ccall', 'cwrap', 'decompress', 'compress']\" -s FORCE_FILESYSTEM=1
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
@@ -25,4 +25,4 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4.3.0
         with:
           branch: gh-pages # The branch the action should deploy to.
-          folder: build # The folder the action should deploy.
+          folder: dist # The folder the action should deploy.
