@@ -1,5 +1,5 @@
 # Web ISS Studio (WIP 🚧)
-<img src="public/principal.jpeg" />
+<img src="public/principal.jpeg" /><br />
 
 Web ISS Studio is a Graphical Web User Interface to create your own game based on International Superstar Soccer for Super Nintendo Entertainment System (SNES).
 
