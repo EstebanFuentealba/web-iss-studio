@@ -18,7 +18,7 @@ export default class HairStyle {
     return {
       SHORT: HairStyle.SHORT,
       CURLY: HairStyle.CURLY,
-      LONG_CURLY: HairStyle.LONG_CURLY.LONG_CURLY,
+      LONG_CURLY: HairStyle.LONG_CURLY,
       LONG_WITH_BEARD: HairStyle.LONG_WITH_BEARD,
       LONG_STRAIGHT: HairStyle.LONG_STRAIGHT,
       DREADLOCKS: HairStyle.DREADLOCKS,
@@ -31,7 +31,6 @@ export default class HairStyle {
   }
 
   static fromByte(code) {
-      console.log('fromByte', code)
     let ordinal = code % 0x10;
     for (let index in HairStyle.getHairStyles()) {
       let style = new HairStyle(HairStyle.getHairStyles()[index]);
