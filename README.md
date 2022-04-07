@@ -43,9 +43,9 @@ You can edit:
     - [x] Read Player Color
     - [ ] Read Player Abilities
 - [ ] Write Team
-    - [ ] Read Teams Names
-    - [ ] Read Team Flags
-    - [ ] Read Team Colors
+    - [ ] Write Teams Names
+    - [ ] Write Team Flags (Editor)
+    - [ ] Write Team Colors
 - [ ] Write Team Players
     - [ ] Write Player Names
     - [ ] Write Player Number
