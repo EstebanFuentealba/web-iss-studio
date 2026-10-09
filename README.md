@@ -1,20 +1,4 @@
-## Editor ISS Deluxe USA
-
-Al abrir ISS Deluxe USA aparece el editor con secciones de jugadores, apariencia, gráficos, audio y proyecto. El lector de ISS USA se conserva.
-
-- Jugadores: nombres de 8 caracteres compatibles, dorsal/identificador con intercambio para conservar unicidad, posición, 14 estilos de pelo, piel y estadísticas; filtros, selección múltiple, plantillas y undo/redo.
-- Equipos: edición gráfica del rótulo y copia de las formaciones originales, incluyendo coordenadas y roles. El diagrama es una vista esquemática.
-- Apariencia: paletas BGR555 local/visitante, portero, bandera y piel/pelo alternativos. Los cambios compartidos indican a qué equipos afectan.
-- Pixel Art Maker: banderas completas e independientes, rótulos, detalle de camiseta sobre el jugador, sprites completos de jugador/portero, números, balón, pelos y logo de portada armado con sus colores reales; herramientas de dibujo, PNG con recorte/cuantización, flips y restauración. Los bloques comprimidos deben caber en su espacio original.
-- Audio: waveform y pitch DSP de **inspección** continuo. Importar WAV PCM mono/estéreo 8/16 bits, convertir a BRR y previsualizar antes de aplicar. 69 de las 76 muestras originales admiten reemplazo fijo; loops y recursos fragmentados se rechazan. **La velocidad exacta por evento todavía está pendiente**; 12000 Hz iniciales son una referencia de inspección, no una frecuencia verificada para todo el juego.
-- Autoguardado IndexedDB por SHA-256, original inmutable, cambios por recurso, proyecto JSON importable/exportable y restauración.
-- Exportar ROM aplica cambios binarios, valida recursos y checksum, conserva cabecera SMC y tamaño. Sin cambios produce el archivo original idéntico.
-
-No se implementa aumento/eliminación/reordenamiento de los 36 equipos: depende de código ejecutable y referencias aún no resueltas. Fotos de portada/equipo y formaciones personalizadas siguen pendientes. El logo conserva los mapas y tiles del juego; algunos píxeles se reutilizan y la edición respeta las paletas de cada capa. La vista frontal de detalles de camiseta edita su tile del pecho; otras poses aún no tienen vista dedicada. La ROM editada aún no se ha probado en emulador.
-
-El estado y todas las tareas pendientes están en [ISSD-Editor-Plan.md](ISSD-Editor-Plan.md). `npm test` ejecuta pruebas del lector y editor; las pruebas de ROM real requieren los archivos privados en `roms/` (no se incluyen).
-
-# Web ISS Studio (WIP 🚧)
+# Web ISS/ISSD Studio (WIP 🚧)
 <p align='center'>
 <img src="public/principal.jpeg" width="600" /><br />
 </p>
@@ -57,6 +41,22 @@ You can edit:
 0x48000 to 0x48A7F - Flag design tile images
 0x17680 to 0x17FFF - Team name tile images (automatically moved to this address)
 0x43ED5 to 0x44486 - Team name positional text data
+
+## Editor ISS Deluxe USA
+
+Al abrir ISS Deluxe USA aparece el editor con secciones de jugadores, apariencia, gráficos, audio y proyecto. El lector de ISS USA se conserva.
+
+- Jugadores: nombres de 8 caracteres compatibles, dorsal/identificador con intercambio para conservar unicidad, posición, 14 estilos de pelo, piel y estadísticas; filtros, selección múltiple, plantillas y undo/redo.
+- Equipos: edición gráfica del rótulo y copia de las formaciones originales, incluyendo coordenadas y roles. El diagrama es una vista esquemática.
+- Apariencia: paletas BGR555 local/visitante, portero, bandera y piel/pelo alternativos. Los cambios compartidos indican a qué equipos afectan.
+- Pixel Art Maker: banderas completas e independientes, rótulos, detalle de camiseta sobre el jugador, sprites completos de jugador/portero, números, balón, pelos y logo de portada armado con sus colores reales; herramientas de dibujo, PNG con recorte/cuantización, flips y restauración. Los bloques comprimidos deben caber en su espacio original.
+- Audio: waveform y pitch DSP de **inspección** continuo. Importar WAV PCM mono/estéreo 8/16 bits, convertir a BRR y previsualizar antes de aplicar. 69 de las 76 muestras originales admiten reemplazo fijo; loops y recursos fragmentados se rechazan. **La velocidad exacta por evento todavía está pendiente**; 12000 Hz iniciales son una referencia de inspección, no una frecuencia verificada para todo el juego.
+- Autoguardado IndexedDB por SHA-256, original inmutable, cambios por recurso, proyecto JSON importable/exportable y restauración.
+- Exportar ROM aplica cambios binarios, valida recursos y checksum, conserva cabecera SMC y tamaño. Sin cambios produce el archivo original idéntico.
+
+No se implementa aumento/eliminación/reordenamiento de los 36 equipos: depende de código ejecutable y referencias aún no resueltas. Fotos de portada/equipo y formaciones personalizadas siguen pendientes. El logo conserva los mapas y tiles del juego; algunos píxeles se reutilizan y la edición respeta las paletas de cada capa. La vista frontal de detalles de camiseta edita su tile del pecho; otras poses aún no tienen vista dedicada. La ROM editada aún no se ha probado en emulador.
+
+El estado y todas las tareas pendientes están en [ISSD-Editor-Plan.md](ISSD-Editor-Plan.md). `npm test` ejecuta pruebas del lector y editor; las pruebas de ROM real requieren los archivos privados en `roms/` (no se incluyen).
 
 ## 👨🏻‍🏫 Instructions
 - Download a compatible SNES ROM of [`International Super Star Soccer`](https://wowroms.com/es/roms/super-nintendo/international-superstar-soccer-europe/27942.html) 
