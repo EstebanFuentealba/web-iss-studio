@@ -1,6 +1,6 @@
 <template>
   <main>
-    <h1>Web ISS Studio</h1>
+    <h1>Web ISSD Studio</h1>
     <label for="rom">Abrir ROM ISS / ISS Deluxe (USA)</label>
     <input id="rom" type="file" accept=".sfc,.smc" @change="onChangeFile" :disabled="loading" />
     <p v-if="loading" role="status">Leyendo ROM…</p>
