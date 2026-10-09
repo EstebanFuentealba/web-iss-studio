@@ -2,6 +2,7 @@
   "name": "web-iss-studio",
   "version": "0.0.0",
   "scripts": {
+    "test": "node tests/rom.cjs && node tests/editor.cjs",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
