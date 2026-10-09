@@ -10,7 +10,7 @@ Customize national teams, players, uniforms, flags, graphics, sound effects, and
 
 The project also maintains compatibility with the original **International Superstar Soccer (ISS)**.
 
-🎮 **[Open Web ISSD Studio](https://estebanfuentealba.github.io/web-iss-studio/)**
+🎮 **[Open Web ISSD Studio](https://estebanfuentealba.github.io/web-snes-issd-studio/)**
 
 ---
 
@@ -177,7 +177,7 @@ Exporting a project without modifications produces a ROM identical to the origin
 
 ### Online Editor
 
-1. Open [Web ISSD Studio](https://estebanfuentealba.github.io/web-iss-studio/).
+1. Open [Web ISSD Studio](https://estebanfuentealba.github.io/web-snes-issd-studio/).
 2. Select a compatible ISS or ISS Deluxe USA ROM from your own collection.
 3. Wait for automatic ROM detection and asset loading.
 4. Select a team, player, graphic or audio resource.
@@ -196,8 +196,8 @@ ROM files are not included or distributed with this project.
 Clone the repository and install dependencies:
 
 ```bash
-git clone https://github.com/EstebanFuentealba/web-iss-studio.git
-cd web-iss-studio
+git clone https://github.com/EstebanFuentealba/web-snes-issd-studio.git
+cd web-snes-issd-studio
 npm ci
 ```
 
