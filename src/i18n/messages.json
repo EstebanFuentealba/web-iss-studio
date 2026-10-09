@@ -1,0 +1,3092 @@
+{
+  "% de capacidad": {
+    "es": "% de capacidad",
+    "en": "% of capacity",
+    "pt": "% da capacidade"
+  },
+  ". Arrastra dentro para moverla; fuera para seleccionar otra región.": {
+    "es": ". Arrastra dentro para moverla; fuera para seleccionar otra región.",
+    "en": ". Drag inside to move it; outside to select another region.",
+    "pt": ". Arraste dentro para mover; fora para selecionar outra região."
+  },
+  ". La etiqueta del selector identifica el slot original.": {
+    "es": ". La etiqueta del selector identifica el slot original.",
+    "en": ". The selector label identifies the original slot.",
+    "pt": ". A etiqueta do seletor identifica o slot original."
+  },
+  "16 kHz": {
+    "es": "16 kHz",
+    "en": "16 kHz",
+    "pt": "16 kHz"
+  },
+  "32 kHz": {
+    "es": "32 kHz",
+    "en": "32 kHz",
+    "pt": "32 kHz"
+  },
+  "42 equipos · 840 jugadores ·": {
+    "es": "42 equipos · 840 jugadores ·",
+    "en": "42 teams · 840 players ·",
+    "pt": "42 equipes · 840 jogadores ·"
+  },
+  "8 kHz": {
+    "es": "8 kHz",
+    "en": "8 kHz",
+    "pt": "8 kHz"
+  },
+  "AFRICAN STAR": {
+    "es": "AFRICAN STAR",
+    "en": "AFRICAN STAR",
+    "pt": "AFRICAN STAR"
+  },
+  "ALL AMERICAN STAR": {
+    "es": "ALL AMERICAN STAR",
+    "en": "ALL AMERICAN STAR",
+    "pt": "ALL AMERICAN STAR"
+  },
+  "ALL STAR": {
+    "es": "ALL STAR",
+    "en": "ALL STAR",
+    "pt": "ALL STAR"
+  },
+  "ASIAN STAR": {
+    "es": "ASIAN STAR",
+    "en": "ASIAN STAR",
+    "pt": "ASIAN STAR"
+  },
+  "Abrir ROM ISS / ISS Deluxe (USA)": {
+    "es": "Abrir ROM ISS / ISS Deluxe (USA)",
+    "en": "Open ISS / ISS Deluxe ROM (USA)",
+    "pt": "Abrir ROM ISS / ISS Deluxe (USA)"
+  },
+  "Acercar al recorte": {
+    "es": "Acercar al recorte",
+    "en": "Zoom in on trim",
+    "pt": "Ampliar recorte"
+  },
+  "African Stars": {
+    "es": "Estrellas de África",
+    "en": "African Stars",
+    "pt": "Estrelas da África"
+  },
+  "Ajustar a capacidad": {
+    "es": "Ajustar a capacidad",
+    "en": "Fit to capacity",
+    "pt": "Ajustar à capacidade"
+  },
+  "All American Stars": {
+    "es": "Estrellas de América",
+    "en": "All American Stars",
+    "pt": "Estrelas das Américas"
+  },
+  "All Stars": {
+    "es": "Todas las estrellas",
+    "en": "All Stars",
+    "pt": "Todas as estrelas"
+  },
+  "Alternativa": {
+    "es": "Alternativa",
+    "en": "Alternative",
+    "pt": "Alternativa"
+  },
+  "Anterior": {
+    "es": "Anterior",
+    "en": "Previous",
+    "pt": "Anterior"
+  },
+  "Apariencia": {
+    "es": "Apariencia",
+    "en": "Appearance",
+    "pt": "Aparência"
+  },
+  "Aplica o descarta el dibujo pendiente antes de generar textos.": {
+    "es": "Aplica o descarta el dibujo pendiente antes de generar textos.",
+    "en": "Apply or discard the pending drawing before generating text.",
+    "pt": "Aplique ou descarte o desenho pendente antes de gerar textos."
+  },
+  "Aplica o descarta el nombre preparado antes de guardar un dibujo.": {
+    "es": "Aplica o descarta el nombre preparado antes de guardar un dibujo.",
+    "en": "Apply or discard the prepared name before saving a drawing.",
+    "pt": "Aplique ou descarte o nome preparado antes de salvar um desenho."
+  },
+  "Aplica o descarta la previsualización pendiente antes de descargar el proyecto.": {
+    "es": "Aplica o descarta la previsualización pendiente antes de descargar el proyecto.",
+    "en": "Apply or discard the pending preview before downloading the project.",
+    "pt": "Aplique ou descarte a prévia pendente antes de baixar o projeto."
+  },
+  "Aplica o descarta la previsualización pendiente antes de exportar.": {
+    "es": "Aplica o descarta la previsualización pendiente antes de exportar.",
+    "en": "Apply or discard the pending preview before exporting.",
+    "pt": "Aplique ou descarte a prévia pendente antes de exportar."
+  },
+  "Aplicar a seleccionados": {
+    "es": "Aplicar a seleccionados",
+    "en": "Apply to selected",
+    "pt": "Aplicar aos selecionados"
+  },
+  "Aplicar formación": {
+    "es": "Aplicar formación",
+    "en": "Apply formation",
+    "pt": "Aplicar formação"
+  },
+  "Aplicar gráfico a la ROM": {
+    "es": "Aplicar gráfico a la ROM",
+    "en": "Apply graphic to ROM",
+    "pt": "Aplicar gráfico à ROM"
+  },
+  "Aplicar nombres a la ROM": {
+    "es": "Aplicar nombres a la ROM",
+    "en": "Apply names to ROM",
+    "pt": "Aplicar nomes à ROM"
+  },
+  "Aplicar recorte a la ROM": {
+    "es": "Aplicar recorte a la ROM",
+    "en": "Apply trim to ROM",
+    "pt": "Aplicar recorte à ROM"
+  },
+  "Arrastra los extremos para recortar o mueve el bloque azul para elegir otro fragmento.": {
+    "es": "Arrastra los extremos para recortar o mueve el bloque azul para elegir otro fragmento.",
+    "en": "Drag the ends to trim, or move the blue block to choose another segment.",
+    "pt": "Arraste as extremidades para recortar ou mova o bloco azul para escolher outro trecho."
+  },
+  "Asian Stars": {
+    "es": "Estrellas de Asia",
+    "en": "Asian Stars",
+    "pt": "Estrelas da Ásia"
+  },
+  "Atributo para cambio múltiple": {
+    "es": "Atributo para cambio múltiple",
+    "en": "Attribute for bulk edit",
+    "pt": "Atributo para edição em lote"
+  },
+  "Atributos fuera del rango del juego.": {
+    "es": "Atributos fuera del rango del juego.",
+    "en": "Attributes outside the game's range.",
+    "pt": "Atributos fora do intervalo do jogo."
+  },
+  "Audio": {
+    "es": "Audio",
+    "en": "Audio",
+    "pt": "Áudio"
+  },
+  "Audio completo": {
+    "es": "Audio completo",
+    "en": "Full audio",
+    "pt": "Áudio completo"
+  },
+  "Audio de la ROM": {
+    "es": "Audio de la ROM",
+    "en": "ROM audio",
+    "pt": "Áudio da ROM"
+  },
+  "Audio remuestreado demasiado grande.": {
+    "es": "Audio remuestreado demasiado grande.",
+    "en": "Resampled audio is too large.",
+    "pt": "Áudio reamostrado muito grande."
+  },
+  "Audio vacío o demasiado grande.": {
+    "es": "Audio vacío o demasiado grande.",
+    "en": "Audio is empty or too large.",
+    "pt": "Áudio vazio ou muito grande."
+  },
+  "Audio · muestras BRR": {
+    "es": "Audio · muestras BRR",
+    "en": "Audio · BRR samples",
+    "pt": "Áudio · amostras BRR"
+  },
+  "Balón · atlas compartido": {
+    "es": "Balón · atlas compartido",
+    "en": "Ball · shared atlas",
+    "pt": "Bola · atlas compartilhado"
+  },
+  "Banco de banderas inválido.": {
+    "es": "Banco de banderas inválido.",
+    "en": "Invalid flag bank.",
+    "pt": "Banco de bandeiras inválido."
+  },
+  "Banco de rótulos inválido.": {
+    "es": "Banco de rótulos inválido.",
+    "en": "Invalid label bank.",
+    "pt": "Banco de rótulos inválido."
+  },
+  "Bandera": {
+    "es": "Bandera",
+    "en": "Flag",
+    "pt": "Bandeira"
+  },
+  "Bandera completa · independiente": {
+    "es": "Bandera completa · independiente",
+    "en": "Full flag · independent",
+    "pt": "Bandeira completa · independente"
+  },
+  "Bandera de la ROM": {
+    "es": "Bandera de la ROM",
+    "en": "ROM flag",
+    "pt": "Bandeira da ROM"
+  },
+  "Bandera del equipo": {
+    "es": "Bandera del equipo",
+    "en": "Team flag",
+    "pt": "Bandeira da equipe"
+  },
+  "Bandera fuera de su espacio reservado.": {
+    "es": "Bandera fuera de su espacio reservado.",
+    "en": "Flag outside its reserved space.",
+    "pt": "Bandeira fora do espaço reservado."
+  },
+  "Banderas antiguas inválidas.": {
+    "es": "Banderas antiguas inválidas.",
+    "en": "Invalid legacy flags.",
+    "pt": "Bandeiras antigas inválidas."
+  },
+  "Banderas independientes": {
+    "es": "Banderas independientes",
+    "en": "Independent flags",
+    "pt": "Bandeiras independentes"
+  },
+  "Bloque comprimido demasiado grande.": {
+    "es": "Bloque comprimido demasiado grande.",
+    "en": "Compressed block is too large.",
+    "pt": "Bloco comprimido muito grande."
+  },
+  "Bloque comprimido inválido.": {
+    "es": "Bloque comprimido inválido.",
+    "en": "Invalid compressed block.",
+    "pt": "Bloco comprimido inválido."
+  },
+  "Bloque comprimido truncado.": {
+    "es": "Bloque comprimido truncado.",
+    "en": "Truncated compressed block.",
+    "pt": "Bloco comprimido truncado."
+  },
+  "Bloque descomprimido demasiado grande.": {
+    "es": "Bloque descomprimido demasiado grande.",
+    "en": "Decompressed block is too large.",
+    "pt": "Bloco descomprimido muito grande."
+  },
+  "Borrador": {
+    "es": "Borrador",
+    "en": "Eraser",
+    "pt": "Borracha"
+  },
+  "Buscar jugador": {
+    "es": "Buscar jugador",
+    "en": "Search player",
+    "pt": "Buscar jogador"
+  },
+  "CZECH REP": {
+    "es": "CZECH REP",
+    "en": "CZECH REP",
+    "pt": "CZECH REP"
+  },
+  "Cabecera SMC detectada": {
+    "es": "Cabecera SMC detectada",
+    "en": "SMC header detected",
+    "pt": "Cabeçalho SMC detectado"
+  },
+  "Cambiar la paleta de esta bandera con los colores de la imagen (máximo 4)": {
+    "es": "Cambiar la paleta de esta bandera con los colores de la imagen (máximo 4)",
+    "en": "Change this flag's palette using the image colors (up to 4)",
+    "pt": "Alterar a paleta desta bandeira com as cores da imagem (máximo 4)"
+  },
+  "Cambios sin guardar": {
+    "es": "Cambios sin guardar",
+    "en": "Unsaved changes",
+    "pt": "Alterações não salvas"
+  },
+  "Cancelar": {
+    "es": "Cancelar",
+    "pt": "Cancelar",
+    "en": "Cancel"
+  },
+  "Capas 4bpp": {
+    "es": "Capas 4bpp",
+    "en": "4bpp layers",
+    "pt": "Camadas 4bpp"
+  },
+  "Cargador antiguo inesperado.": {
+    "es": "Cargador antiguo inesperado.",
+    "en": "Unexpected legacy loader.",
+    "pt": "Carregador antigo inesperado."
+  },
+  "Cargador antiguo inválido.": {
+    "es": "Cargador antiguo inválido.",
+    "en": "Invalid legacy loader.",
+    "pt": "Carregador antigo inválido."
+  },
+  "Cargador de banderas inválido.": {
+    "es": "Cargador de banderas inválido.",
+    "en": "Invalid flag loader.",
+    "pt": "Carregador de bandeiras inválido."
+  },
+  "Cargador de rótulos inválido.": {
+    "es": "Cargador de rótulos inválido.",
+    "en": "Invalid label loader.",
+    "pt": "Carregador de rótulos inválido."
+  },
+  "Cargando motor SNES…": {
+    "es": "Cargando motor SNES…",
+    "en": "Loading SNES engine…",
+    "pt": "Carregando motor SNES…"
+  },
+  "Cargar ROM modificada": {
+    "es": "Cargar ROM modificada",
+    "en": "Load modified ROM",
+    "pt": "Carregar ROM modificada"
+  },
+  "Cargar audio": {
+    "es": "Cargar audio",
+    "en": "Load audio",
+    "pt": "Carregar áudio"
+  },
+  "Cerrar": {
+    "es": "Cerrar",
+    "en": "Close",
+    "pt": "Fechar"
+  },
+  "Chunk WAV truncado.": {
+    "es": "Chunk WAV truncado.",
+    "en": "Truncated WAV chunk.",
+    "pt": "Bloco WAV truncado."
+  },
+  "Cierra otras pestañas del editor para habilitar el guardado.": {
+    "es": "Cierra otras pestañas del editor para habilitar el guardado.",
+    "en": "Close other editor tabs to enable saving.",
+    "pt": "Feche outras abas do editor para habilitar o salvamento."
+  },
+  "Color fuera de la paleta de las fotos.": {
+    "es": "Color fuera de la paleta de las fotos.",
+    "en": "Color outside the photo palette.",
+    "pt": "Cor fora da paleta das fotos."
+  },
+  "Color inválido.": {
+    "es": "Color inválido.",
+    "en": "Invalid color.",
+    "pt": "Cor inválida."
+  },
+  "Composición OAM no compatible.": {
+    "es": "Composición OAM no compatible.",
+    "en": "Unsupported OAM composition.",
+    "pt": "Composição OAM não compatível."
+  },
+  "Contiene loop BRR: falta verificar el punto de bucle del directorio SPC700.": {
+    "es": "Contiene loop BRR: falta verificar el punto de bucle del directorio SPC700.",
+    "en": "Contains a BRR loop: the loop point in the SPC700 directory still needs verification.",
+    "pt": "Contém loop BRR: falta verificar o ponto de repetição no diretório SPC700."
+  },
+  "Convertido a PCM de 16 bits / mono": {
+    "es": "Convertido a PCM de 16 bits / mono",
+    "en": "Converted to 16-bit mono PCM",
+    "pt": "Convertido para PCM de 16 bits / mono"
+  },
+  "Convertir imagen a pixel art": {
+    "es": "Convertir imagen a pixel art",
+    "en": "Convert image to pixel art",
+    "pt": "Converter imagem em pixel art"
+  },
+  "Convirtiendo audio…": {
+    "es": "Convirtiendo audio…",
+    "en": "Converting audio…",
+    "pt": "Convertendo áudio…"
+  },
+  "Copiar plantilla": {
+    "es": "Copiar plantilla",
+    "en": "Copy roster",
+    "pt": "Copiar elenco"
+  },
+  "Copiar selección": {
+    "es": "Copiar selección",
+    "en": "Copy selection",
+    "pt": "Copiar seleção"
+  },
+  "Copiar sus 20 jugadores": {
+    "es": "Copiar sus 20 jugadores",
+    "en": "Copy all 20 players",
+    "pt": "Copiar seus 20 jogadores"
+  },
+  "Corrige los textos antes de aplicarlos.": {
+    "es": "Corrige los textos antes de aplicarlos.",
+    "en": "Correct the text before applying it.",
+    "pt": "Corrija os textos antes de aplicar."
+  },
+  "Cuadrícula": {
+    "es": "Cuadrícula",
+    "en": "Grid",
+    "pt": "Grade"
+  },
+  "Cuentagotas": {
+    "es": "Cuentagotas",
+    "en": "Eyedropper",
+    "pt": "Conta-gotas"
+  },
+  "Czech Rep.": {
+    "es": "República Checa",
+    "en": "Czech Republic",
+    "pt": "República Tcheca"
+  },
+  "Datos": {
+    "es": "Datos",
+    "en": "Data",
+    "pt": "Dados"
+  },
+  "Decodificado y convertido a PCM de 16 bits / mono": {
+    "es": "Decodificado y convertido a PCM de 16 bits / mono",
+    "en": "Decoded and converted to 16-bit mono PCM",
+    "pt": "Decodificado e convertido para PCM de 16 bits / mono"
+  },
+  "Defensa": {
+    "es": "Defensa",
+    "en": "Defender",
+    "pt": "Defensor"
+  },
+  "Defensa ofensivo": {
+    "es": "Defensa ofensivo",
+    "en": "Attacking defender",
+    "pt": "Defensor ofensivo"
+  },
+  "Delantero": {
+    "es": "Delantero",
+    "en": "Forward",
+    "pt": "Atacante"
+  },
+  "Descarga un proyecto para respaldar tus cambios.": {
+    "es": "Descarga un proyecto para respaldar tus cambios.",
+    "en": "Download a project to back up your changes.",
+    "pt": "Baixe um projeto para fazer uma cópia das alterações."
+  },
+  "Descargar WAV": {
+    "es": "Descargar WAV",
+    "en": "Download WAV",
+    "pt": "Baixar WAV"
+  },
+  "Descargar proyecto editable": {
+    "es": "Descargar proyecto editable",
+    "en": "Download editable project",
+    "pt": "Baixar projeto editável"
+  },
+  "Descarta el dibujo pendiente antes de aplicar los nombres.": {
+    "es": "Descarta el dibujo pendiente antes de aplicar los nombres.",
+    "en": "Discard the pending drawing before applying names.",
+    "pt": "Descarte o desenho pendente antes de aplicar os nomes."
+  },
+  "Descartar audio subido": {
+    "es": "Descartar audio subido",
+    "en": "Discard uploaded audio",
+    "pt": "Descartar áudio enviado"
+  },
+  "Descartar previsualización": {
+    "es": "Descartar previsualización",
+    "en": "Discard preview",
+    "pt": "Descartar prévia"
+  },
+  "Deshacer dibujo": {
+    "es": "Deshacer dibujo",
+    "en": "Undo drawing",
+    "pt": "Desfazer desenho"
+  },
+  "Desplazar vista del audio": {
+    "es": "Desplazar vista del audio",
+    "en": "Scroll audio view",
+    "pt": "Deslocar visualização do áudio"
+  },
+  "Detalles de camiseta · vista frontal compartida": {
+    "es": "Detalles de camiseta · vista frontal compartida",
+    "en": "Shirt details · shared front view",
+    "pt": "Detalhes da camisa · vista frontal compartilhada"
+  },
+  "Detener": {
+    "es": "Detener",
+    "en": "Stop",
+    "pt": "Parar"
+  },
+  "Dibujo pendiente de aplicar": {
+    "es": "Dibujo pendiente de aplicar",
+    "en": "Drawing waiting to be applied",
+    "pt": "Desenho pendente de aplicação"
+  },
+  "Dimensiones de tiles inválidas.": {
+    "es": "Dimensiones de tiles inválidas.",
+    "en": "Invalid tile dimensions.",
+    "pt": "Dimensões dos tiles inválidas."
+  },
+  "Dirección LoROM inválida.": {
+    "es": "Dirección LoROM inválida.",
+    "en": "Invalid LoROM address.",
+    "pt": "Endereço LoROM inválido."
+  },
+  "Dirección fuera de la ROM.": {
+    "es": "Dirección fuera de la ROM.",
+    "en": "Address outside the ROM.",
+    "pt": "Endereço fora da ROM."
+  },
+  "Dorsal": {
+    "es": "Dorsal",
+    "en": "Shirt number",
+    "pt": "Número da camisa"
+  },
+  "Dorsales/identificadores únicos (1–20): elegir uno ya asignado intercambia ambos valores.": {
+    "es": "Dorsales/identificadores únicos (1–20): elegir uno ya asignado intercambia ambos valores.",
+    "en": "Unique shirt numbers/IDs (1–20): choosing an assigned value swaps both values.",
+    "pt": "Números/identificadores únicos (1–20): escolher um já atribuído troca os dois valores."
+  },
+  "Duración máxima a este pitch: {0} s. Elige un WAV más corto.": {
+    "es": "Duración máxima a este pitch: {0} s. Elige un WAV más corto.",
+    "en": "Maximum duration at this pitch: {0} s. Choose a shorter WAV.",
+    "pt": "Duração máxima neste pitch: {0} s. Escolha um WAV mais curto."
+  },
+  "Edición": {
+    "es": "Edición",
+    "en": "Edited",
+    "pt": "Edição"
+  },
+  "Edita la zona clara del pecho sobre el uniforme. Las demás partes del jugador sirven de contexto. Este patrón puede repetirse en otros equipos.": {
+    "es": "Edita la zona clara del pecho sobre el uniforme. Las demás partes del jugador sirven de contexto. Este patrón puede repetirse en otros equipos.",
+    "en": "Edit the light chest area on the uniform. Other player parts provide context. This pattern may be reused by other teams.",
+    "pt": "Edite a área clara do peito no uniforme. As outras partes do jogador servem de contexto. Este padrão pode se repetir em outras equipes."
+  },
+  "Editar rótulo": {
+    "es": "Editar rótulo",
+    "en": "Edit label",
+    "pt": "Editar rótulo"
+  },
+  "Editar sprites y detalles": {
+    "es": "Editar sprites y detalles",
+    "en": "Edit sprites and details",
+    "pt": "Editar sprites e detalhes"
+  },
+  "Ejecutando ROM modificada.": {
+    "es": "Ejecutando ROM modificada.",
+    "en": "Running modified ROM.",
+    "pt": "Executando ROM modificada."
+  },
+  "El WAV supera el límite de 10 millones de muestras.": {
+    "es": "El WAV supera el límite de 10 millones de muestras.",
+    "en": "The WAV exceeds the limit of 10 million samples.",
+    "pt": "O WAV ultrapassa o limite de 10 milhões de amostras."
+  },
+  "El audio está vacío.": {
+    "es": "El audio está vacío.",
+    "en": "The audio is empty.",
+    "pt": "O áudio está vazio."
+  },
+  "El audio supera el límite de 50 MB.": {
+    "es": "El audio supera el límite de 50 MB.",
+    "en": "The audio exceeds the 50 MB limit.",
+    "pt": "O áudio ultrapassa o limite de 50 MB."
+  },
+  "El cambio se convierte a BGR555. Los colores de piel/pelo alternativo y algunos gráficos se comparten entre equipos.": {
+    "es": "El cambio se convierte a BGR555. Los colores de piel/pelo alternativo y algunos gráficos se comparten entre equipos.",
+    "en": "Changes are converted to BGR555. Alternative skin/hair colors and some graphics are shared between teams.",
+    "pt": "A alteração é convertida para BGR555. As cores alternativas de pele/cabelo e alguns gráficos são compartilhados entre equipes."
+  },
+  "El dibujo asigna colores distintos al mismo píxel reutilizado.": {
+    "es": "El dibujo asigna colores distintos al mismo píxel reutilizado.",
+    "en": "The drawing assigns different colors to the same reused pixel.",
+    "pt": "O desenho atribui cores diferentes ao mesmo pixel reutilizado."
+  },
+  "El espacio de precarga de banderas está ocupado.": {
+    "es": "El espacio de precarga de banderas está ocupado.",
+    "en": "The flag preload space is occupied.",
+    "pt": "O espaço de pré-carregamento das bandeiras está ocupado."
+  },
+  "El gráfico necesita {0} bytes; solo hay {1}. Reduce detalle o restaura píxeles.": {
+    "es": "El gráfico necesita {0} bytes; solo hay {1}. Reduce detalle o restaura píxeles.",
+    "en": "The graphic needs {0} bytes; only {1} are available. Reduce detail or restore pixels.",
+    "pt": "O gráfico precisa de {0} bytes; há apenas {1}. Reduza os detalhes ou restaure pixels."
+  },
+  "El guardado anterior no pudo validarse. ¿Reemplazarlo por el proyecto actual?": {
+    "es": "El guardado anterior no pudo validarse. ¿Reemplazarlo por el proyecto actual?",
+    "en": "The previous save could not be validated. Replace it with the current project?",
+    "pt": "Não foi possível validar o salvamento anterior. Substituir pelo projeto atual?"
+  },
+  "El hash no coincide con la ROM original del proyecto.": {
+    "es": "El hash no coincide con la ROM original del proyecto.",
+    "en": "The hash does not match the project's original ROM.",
+    "pt": "O hash não corresponde à ROM original do projeto."
+  },
+  "El juego no admite el carácter «{0}». Usa letras sin acentos, espacio, punto, comillas o /.": {
+    "es": "El juego no admite el carácter «{0}». Usa letras sin acentos, espacio, punto, comillas o /.",
+    "en": "The game does not support the character “{0}”. Use unaccented letters, spaces, periods, quotes or /.",
+    "pt": "O jogo não aceita o caractere «{0}». Use letras sem acentos, espaço, ponto, aspas ou /."
+  },
+  "El nombre admite entre 1 y 8 caracteres.": {
+    "es": "El nombre admite entre 1 y 8 caracteres.",
+    "en": "The name must contain 1 to 8 characters.",
+    "pt": "O nome deve conter entre 1 e 8 caracteres."
+  },
+  "El nombre admite {0} caracteres, pero esta combinación requiere {1} sprites y el slot dispone de {2}. Prueba una combinación con letras emparejadas del juego.": {
+    "es": "El nombre admite {0} caracteres, pero esta combinación requiere {1} sprites y el slot dispone de {2}. Prueba una combinación con letras emparejadas del juego.",
+    "en": "The name allows {0} characters, but this combination needs {1} sprites and the slot has {2}. Try a combination using the game's paired letters.",
+    "pt": "O nome aceita {0} caracteres, mas esta combinação requer {1} sprites e o slot tem {2}. Tente uma combinação com letras emparelhadas do jogo."
+  },
+  "El nombre no cabe en el rótulo pequeño de 32 píxeles.": {
+    "es": "El nombre no cabe en el rótulo pequeño de 32 píxeles.",
+    "en": "The name does not fit in the small 32-pixel label.",
+    "pt": "O nome não cabe no rótulo pequeno de 32 pixels."
+  },
+  "El pitch DSP debe estar entre 1 y 16383.": {
+    "es": "El pitch DSP debe estar entre 1 y 16383.",
+    "en": "DSP pitch must be between 1 and 16383.",
+    "pt": "O pitch DSP deve estar entre 1 e 16383."
+  },
+  "El proyecto descargado incluye tu ROM original y modificaciones. El archivo se conserva localmente.": {
+    "es": "El proyecto descargado incluye tu ROM original y modificaciones. El archivo se conserva localmente.",
+    "en": "The downloaded project includes your original ROM and modifications. The file is kept locally.",
+    "pt": "O projeto baixado inclui sua ROM original e as modificações. O arquivo é mantido localmente."
+  },
+  "El proyecto supera el límite de 8 MB.": {
+    "es": "El proyecto supera el límite de 8 MB.",
+    "en": "The project exceeds the 8 MB limit.",
+    "pt": "O projeto ultrapassa o limite de 8 MB."
+  },
+  "El punto del nombre excede el espacio de su fuente.": {
+    "es": "El punto del nombre excede el espacio de su fuente.",
+    "en": "The name's period exceeds the font's available space.",
+    "pt": "O ponto do nome excede o espaço da fonte."
+  },
+  "El recorte debe contener al menos una muestra.": {
+    "es": "El recorte debe contener al menos una muestra.",
+    "en": "The trim must contain at least one sample.",
+    "pt": "O recorte deve conter pelo menos uma amostra."
+  },
+  "El recorte debe estar dentro de la imagen.": {
+    "es": "El recorte debe estar dentro de la imagen.",
+    "en": "The crop must be inside the image.",
+    "pt": "O recorte deve estar dentro da imagem."
+  },
+  "El recorte se redimensiona a": {
+    "es": "El recorte se redimensiona a",
+    "en": "The crop is resized to",
+    "pt": "O recorte é redimensionado para"
+  },
+  "El rótulo debe medir 32 × 8.": {
+    "es": "El rótulo debe medir 32 × 8.",
+    "en": "The label must be 32 × 8.",
+    "pt": "O rótulo deve medir 32 × 8."
+  },
+  "El rótulo excede su espacio reservado.": {
+    "es": "El rótulo excede su espacio reservado.",
+    "en": "The label exceeds its reserved space.",
+    "pt": "O rótulo excede o espaço reservado."
+  },
+  "El rótulo se guarda por equipo en un espacio reservado de 69 bytes; cualquier dibujo de 32 × 8 cabe.": {
+    "es": "El rótulo se guarda por equipo en un espacio reservado de 69 bytes; cualquier dibujo de 32 × 8 cabe.",
+    "en": "The label is saved per team in a reserved 69-byte space; any 32 × 8 drawing fits.",
+    "pt": "O rótulo é salvo por equipe em um espaço reservado de 69 bytes; qualquer desenho de 32 × 8 cabe."
+  },
+  "Elegir pelo ·": {
+    "es": "Elegir pelo ·",
+    "en": "Choose hair ·",
+    "pt": "Escolher cabelo ·"
+  },
+  "Emulador": {
+    "es": "Emulador",
+    "en": "Emulator",
+    "pt": "Emulador"
+  },
+  "Emulador SNES": {
+    "es": "Emulador SNES",
+    "en": "SNES emulator",
+    "pt": "Emulador SNES"
+  },
+  "Emulador de la ROM ISSD modificada": {
+    "es": "Emulador de la ROM ISSD modificada",
+    "en": "Modified ISSD ROM emulator",
+    "pt": "Emulador da ROM ISSD modificada"
+  },
+  "Emulador detenido.": {
+    "es": "Emulador detenido.",
+    "en": "Emulator stopped.",
+    "pt": "Emulador parado."
+  },
+  "Equipo": {
+    "es": "Equipo",
+    "en": "Team",
+    "pt": "Equipe"
+  },
+  "Equipo inválido.": {
+    "es": "Equipo inválido.",
+    "en": "Invalid team.",
+    "pt": "Equipe inválida."
+  },
+  "Equipos": {
+    "es": "Equipos",
+    "en": "Teams",
+    "pt": "Equipes"
+  },
+  "Error de cuota o almacenamiento.": {
+    "es": "Error de cuota o almacenamiento.",
+    "en": "Storage or quota error.",
+    "pt": "Erro de cota ou armazenamento."
+  },
+  "Escuchar recorte convertido": {
+    "es": "Escuchar recorte convertido",
+    "en": "Listen to converted trim",
+    "pt": "Ouvir recorte convertido"
+  },
+  "Ese píxel queda fuera de la zona editable del recurso.": {
+    "es": "Ese píxel queda fuera de la zona editable del recurso.",
+    "en": "That pixel is outside the resource's editable area.",
+    "pt": "Esse pixel está fora da área editável do recurso."
+  },
+  "Estadísticas": {
+    "es": "Estadísticas",
+    "en": "Statistics",
+    "pt": "Estatísticas"
+  },
+  "Este WAV necesita conversión mediante el decodificador del navegador.": {
+    "es": "Este WAV necesita conversión mediante el decodificador del navegador.",
+    "en": "This WAV requires conversion using the browser decoder.",
+    "pt": "Este WAV precisa de conversão pelo decodificador do navegador."
+  },
+  "Este audio de portada contiene cuatro fragmentos que el juego activa por separado, incluido un bucle inicial. Se conservan sus límites y marcas de reproducción al aplicar el recorte; la previsualización los reproduce seguidos.": {
+    "es": "Este audio de portada contiene cuatro fragmentos que el juego activa por separado, incluido un bucle inicial. Se conservan sus límites y marcas de reproducción al aplicar el recorte; la previsualización los reproduce seguidos.",
+    "en": "This title audio contains four segments that the game triggers separately, including an initial loop. Their boundaries and playback flags are preserved when applying the trim; the preview plays them consecutively.",
+    "pt": "Este áudio da tela inicial contém quatro trechos que o jogo ativa separadamente, incluindo um loop inicial. Seus limites e marcas de reprodução são preservados ao aplicar o recorte; a prévia os reproduz em sequência."
+  },
+  "Este color afecta a jugadores o recursos que usan esta paleta: {0}. ¿Aplicar color?": {
+    "es": "Este color afecta a jugadores o recursos que usan esta paleta: {0}. ¿Aplicar color?",
+    "en": "This color affects players or resources using this palette: {0}. Apply color?",
+    "pt": "Esta cor afeta jogadores ou recursos que usam esta paleta: {0}. Aplicar cor?"
+  },
+  "Este equipo no tiene un registro alternativo de este tipo.": {
+    "es": "Este equipo no tiene un registro alternativo de este tipo.",
+    "en": "This team has no alternative record of this type.",
+    "pt": "Esta equipe não tem um registro alternativo deste tipo."
+  },
+  "Este gráfico es compartido por {0}. ¿Aplicar a todos sus usos?": {
+    "es": "Este gráfico es compartido por {0}. ¿Aplicar a todos sus usos?",
+    "en": "This graphic is shared by {0}. Apply to all its uses?",
+    "pt": "Este gráfico é compartilhado por {0}. Aplicar a todos os seus usos?"
+  },
+  "Este recurso modifica el logo global de la portada.": {
+    "es": "Este recurso modifica el logo global de la portada.",
+    "en": "This resource changes the global title screen logo.",
+    "pt": "Este recurso modifica o logo global da tela inicial."
+  },
+  "Estructuras aún pendientes": {
+    "es": "Estructuras aún pendientes",
+    "en": "Structures still pending",
+    "pt": "Estruturas ainda pendentes"
+  },
+  "Euro Stars A": {
+    "es": "Estrellas de Europa A",
+    "en": "European Stars A",
+    "pt": "Estrelas da Europa A"
+  },
+  "Euro Stars B": {
+    "es": "Estrellas de Europa B",
+    "en": "European Stars B",
+    "pt": "Estrelas da Europa B"
+  },
+  "Exportar PNG": {
+    "es": "Exportar PNG",
+    "en": "Export PNG",
+    "pt": "Exportar PNG"
+  },
+  "Exportar ROM": {
+    "es": "Exportar ROM",
+    "en": "Export ROM",
+    "pt": "Exportar ROM"
+  },
+  "Falló la verificación de compresión.": {
+    "es": "Falló la verificación de compresión.",
+    "en": "Compression verification failed.",
+    "pt": "Falha na verificação da compressão."
+  },
+  "Filtrar posición": {
+    "es": "Filtrar posición",
+    "en": "Filter position",
+    "pt": "Filtrar posição"
+  },
+  "Fin (s)": {
+    "es": "Fin (s)",
+    "en": "End (s)",
+    "pt": "Fim (s)"
+  },
+  "Fin del recorte": {
+    "es": "Fin del recorte",
+    "en": "Trim end",
+    "pt": "Fim do recorte"
+  },
+  "Final BRR inválido.": {
+    "es": "Final BRR inválido.",
+    "en": "Invalid BRR end.",
+    "pt": "Final BRR inválido."
+  },
+  "Final BRR no verificado.": {
+    "es": "Final BRR no verificado.",
+    "en": "Unverified BRR end.",
+    "pt": "Final BRR não verificado."
+  },
+  "Forma de onda": {
+    "es": "Forma de onda",
+    "en": "Waveform",
+    "pt": "Forma de onda"
+  },
+  "Forma de onda del audio subido": {
+    "es": "Forma de onda del audio subido",
+    "en": "Uploaded audio waveform",
+    "pt": "Forma de onda do áudio enviado"
+  },
+  "Formación": {
+    "es": "Formación",
+    "en": "Formation",
+    "pt": "Formação"
+  },
+  "Formación fuera de la ROM.": {
+    "es": "Formación fuera de la ROM.",
+    "en": "Formation outside the ROM.",
+    "pt": "Formação fora da ROM."
+  },
+  "Formación original": {
+    "es": "Formación original",
+    "en": "Original formation",
+    "pt": "Formação original"
+  },
+  "Formación {0}": {
+    "es": "Formación {0}",
+    "en": "Formation {0}",
+    "pt": "Formação {0}"
+  },
+  "Formación · equipo {0} ({1})": {
+    "es": "Formación · equipo {0} ({1})",
+    "en": "Formation · team {0} ({1})",
+    "pt": "Formação · equipe {0} ({1})"
+  },
+  "Formato WAV truncado.": {
+    "es": "Formato WAV truncado.",
+    "en": "Truncated WAV format.",
+    "pt": "Formato WAV truncado."
+  },
+  "Formato de bandera inválido.": {
+    "es": "Formato de bandera inválido.",
+    "en": "Invalid flag format.",
+    "pt": "Formato de bandeira inválido."
+  },
+  "Formato de nombres grandes no compatible.": {
+    "es": "Formato de nombres grandes no compatible.",
+    "en": "Unsupported large-name format.",
+    "pt": "Formato dos nomes grandes não compatível."
+  },
+  "Foto de equipo y composición de pantalla principal. Las cinco fotos de portada ya se pueden editar en Gráficos. El logo ya se compone con sus mapas, sprites y paletas originales.": {
+    "es": "Foto de equipo y composición de pantalla principal. Las cinco fotos de portada ya se pueden editar en Gráficos. El logo ya se compone con sus mapas, sprites y paletas originales.",
+    "en": "Team photo and main screen composition. All five title photos can now be edited in Graphics. The logo is composed using its original maps, sprites and palettes.",
+    "pt": "Foto da equipe e composição da tela principal. As cinco fotos da tela inicial já podem ser editadas em Gráficos. O logo é composto com seus mapas, sprites e paletas originais."
+  },
+  "Frecuencia de previsualización": {
+    "es": "Frecuencia de previsualización",
+    "en": "Preview sample rate",
+    "pt": "Frequência de prévia"
+  },
+  "Frecuencia inválida.": {
+    "es": "Frecuencia inválida.",
+    "en": "Invalid sample rate.",
+    "pt": "Frequência inválida."
+  },
+  "Fuente de precarga inválida.": {
+    "es": "Fuente de precarga inválida.",
+    "en": "Invalid preload source.",
+    "pt": "Fonte de pré-carregamento inválida."
+  },
+  "Gráfico editado": {
+    "es": "Gráfico editado",
+    "en": "Edited graphic",
+    "pt": "Gráfico editado"
+  },
+  "Gráfico original": {
+    "es": "Gráfico original",
+    "en": "Original graphic",
+    "pt": "Gráfico original"
+  },
+  "Gráficos": {
+    "es": "Gráficos",
+    "en": "Graphics",
+    "pt": "Gráficos"
+  },
+  "Guardado anterior no validado": {
+    "es": "Guardado anterior no validado",
+    "en": "Previous save not validated",
+    "pt": "Salvamento anterior não validado"
+  },
+  "Guardado cancelado.": {
+    "es": "Guardado cancelado.",
+    "en": "Save canceled.",
+    "pt": "Salvamento cancelado."
+  },
+  "Guardando…": {
+    "es": "Guardando…",
+    "en": "Saving…",
+    "pt": "Salvando…"
+  },
+  "Hay cambios nuevos. Recarga la ROM para probarlos; el juego comenzará desde el inicio.": {
+    "es": "Hay cambios nuevos. Recarga la ROM para probarlos; el juego comenzará desde el inicio.",
+    "en": "There are new changes. Reload the ROM to test them; the game will restart.",
+    "pt": "Há novas alterações. Recarregue a ROM para testá-las; o jogo começará do início."
+  },
+  "Hay una previsualización que todavía no se aplicó a la ROM. ¿Descartar esa previsualización?": {
+    "es": "Hay una previsualización que todavía no se aplicó a la ROM. ¿Descartar esa previsualización?",
+    "en": "A preview has not been applied to the ROM yet. Discard that preview?",
+    "pt": "Há uma prévia que ainda não foi aplicada à ROM. Descartar essa prévia?"
+  },
+  "Haz clic en «Iniciar juego» dentro de la pantalla. En la barra del emulador puedes pausar, usar pantalla completa y configurar teclado o mando. Al salir de este menú se detiene la emulación.": {
+    "es": "Haz clic en «Iniciar juego» dentro de la pantalla. En la barra del emulador puedes pausar, usar pantalla completa y configurar teclado o mando. Al salir de este menú se detiene la emulación.",
+    "en": "Click “Start game” inside the screen. Use the emulator toolbar to pause, enter fullscreen, and configure the keyboard or controller. Leaving this menu stops emulation.",
+    "pt": "Clique em «Iniciar jogo» dentro da tela. Na barra do emulador você pode pausar, usar tela cheia e configurar teclado ou controle. Ao sair deste menu, a emulação é interrompida."
+  },
+  "Herramienta": {
+    "es": "Herramienta",
+    "en": "Tool",
+    "pt": "Ferramenta"
+  },
+  "I .": {
+    "es": "I .",
+    "en": "I .",
+    "pt": "I ."
+  },
+  "Importar imagen": {
+    "es": "Importar imagen",
+    "en": "Import image",
+    "pt": "Importar imagem"
+  },
+  "Importar proyecto": {
+    "es": "Importar proyecto",
+    "en": "Import project",
+    "pt": "Importar projeto"
+  },
+  "IndexedDB no está disponible. Exporta el proyecto para conservar los cambios.": {
+    "es": "IndexedDB no está disponible. Exporta el proyecto para conservar los cambios.",
+    "en": "IndexedDB is unavailable. Export the project to keep your changes.",
+    "pt": "IndexedDB não está disponível. Exporte o projeto para manter as alterações."
+  },
+  "Información general ·": {
+    "es": "Información general ·",
+    "en": "General information ·",
+    "pt": "Informações gerais ·"
+  },
+  "Inicio (s)": {
+    "es": "Inicio (s)",
+    "en": "Start (s)",
+    "pt": "Início (s)"
+  },
+  "Inicio del recorte": {
+    "es": "Inicio del recorte",
+    "en": "Trim start",
+    "pt": "Início do recorte"
+  },
+  "International Superstar Soccer (USA)": {
+    "es": "International Superstar Soccer (USA)",
+    "en": "International Superstar Soccer (USA)",
+    "pt": "International Superstar Soccer (USA)"
+  },
+  "International Superstar Soccer Deluxe": {
+    "es": "International Superstar Soccer Deluxe",
+    "en": "International Superstar Soccer Deluxe",
+    "pt": "International Superstar Soccer Deluxe"
+  },
+  "International Superstar Soccer Deluxe (USA)": {
+    "es": "International Superstar Soccer Deluxe (USA)",
+    "en": "International Superstar Soccer Deluxe (USA)",
+    "pt": "International Superstar Soccer Deluxe (USA)"
+  },
+  "Jugador completo": {
+    "es": "Jugador completo",
+    "en": "Full player",
+    "pt": "Jogador completo"
+  },
+  "Jugador completo · sprite compartido": {
+    "es": "Jugador completo · sprite compartido",
+    "en": "Full player · shared sprite",
+    "pt": "Jogador completo · sprite compartilhado"
+  },
+  "Jugador inválido.": {
+    "es": "Jugador inválido.",
+    "en": "Invalid player.",
+    "pt": "Jogador inválido."
+  },
+  "Jugadores": {
+    "es": "Jugadores",
+    "en": "Players",
+    "pt": "Jogadores"
+  },
+  "Jugadores (": {
+    "es": "Jugadores (",
+    "en": "Players (",
+    "pt": "Jogadores ("
+  },
+  "Jugadores ·": {
+    "es": "Jugadores ·",
+    "en": "Players ·",
+    "pt": "Jogadores ·"
+  },
+  "La ROM no tiene libre el espacio verificado para las banderas.": {
+    "es": "La ROM no tiene libre el espacio verificado para las banderas.",
+    "en": "The ROM does not have the verified free space for flags.",
+    "pt": "A ROM não tem o espaço livre verificado para as bandeiras."
+  },
+  "La bandera debe medir 24 × 16.": {
+    "es": "La bandera debe medir 24 × 16.",
+    "en": "The flag must be 24 × 16.",
+    "pt": "A bandeira deve medir 24 × 16."
+  },
+  "La bandera excede su espacio reservado.": {
+    "es": "La bandera excede su espacio reservado.",
+    "en": "The flag exceeds its reserved space.",
+    "pt": "A bandeira excede o espaço reservado."
+  },
+  "La bandera usa los colores 12–15 o transparencia.": {
+    "es": "La bandera usa los colores 12–15 o transparencia.",
+    "en": "The flag uses colors 12–15 or transparency.",
+    "pt": "A bandeira usa as cores 12–15 ou transparência."
+  },
+  "La carga está tardando demasiado. Revisa tu conexión y vuelve a cargar la ROM.": {
+    "es": "La carga está tardando demasiado. Revisa tu conexión y vuelve a cargar la ROM.",
+    "en": "Loading is taking too long. Check your connection and reload the ROM.",
+    "pt": "O carregamento está demorando demais. Verifique sua conexão e recarregue a ROM."
+  },
+  "La edición binaria está disponible para ISS Deluxe USA.": {
+    "es": "La edición binaria está disponible para ISS Deluxe USA.",
+    "en": "Binary editing is available for ISS Deluxe USA.",
+    "pt": "A edição binária está disponível para ISS Deluxe USA."
+  },
+  "La exportación valida todos los recursos y equipos. Usa el menú Emulador para probar la ROM con los cambios aplicados.": {
+    "es": "La exportación valida todos los recursos y equipos. Usa el menú Emulador para probar la ROM con los cambios aplicados.",
+    "en": "Export validates all resources and teams. Use the Emulator menu to test the ROM with your changes.",
+    "pt": "A exportação valida todos os recursos e equipes. Use o menu Emulador para testar a ROM com as alterações aplicadas."
+  },
+  "La imagen supera 16 millones de píxeles.": {
+    "es": "La imagen supera 16 millones de píxeles.",
+    "en": "The image exceeds 16 million pixels.",
+    "pt": "A imagem ultrapassa 16 milhões de pixels."
+  },
+  "La imagen supera 20 MB.": {
+    "es": "La imagen supera 20 MB.",
+    "en": "The image exceeds 20 MB.",
+    "pt": "A imagem ultrapassa 20 MB."
+  },
+  "La muestra BRR no tiene bloque final.": {
+    "es": "La muestra BRR no tiene bloque final.",
+    "en": "The BRR sample has no final block.",
+    "pt": "A amostra BRR não tem bloco final."
+  },
+  "La música secuenciada requiere editar eventos/instrumentos y emular el SPC700. Las muestras musicales listadas son fragmentos o instrumentos, no un editor de canciones.": {
+    "es": "La música secuenciada requiere editar eventos/instrumentos y emular el SPC700. Las muestras musicales listadas son fragmentos o instrumentos, no un editor de canciones.",
+    "en": "Sequenced music requires editing events/instruments and emulating the SPC700. The listed music samples are segments or instruments, not a song editor.",
+    "pt": "A música sequenciada requer edição de eventos/instrumentos e emulação do SPC700. As amostras musicais listadas são trechos ou instrumentos, não um editor de músicas."
+  },
+  "La paleta de esta bandera está compartida y requiere reubicación.": {
+    "es": "La paleta de esta bandera está compartida y requiere reubicación.",
+    "en": "This flag's palette is shared and requires relocation.",
+    "pt": "A paleta desta bandeira é compartilhada e requer realocação."
+  },
+  "La previsualización cambia al escribir. Cada campo modifica su propia imagen; el dibujo libre de abajo modifica el rótulo pequeño.": {
+    "es": "La previsualización cambia al escribir. Cada campo modifica su propia imagen; el dibujo libre de abajo modifica el rótulo pequeño.",
+    "en": "The preview updates as you type. Each field changes its own image; the freehand drawing below changes the small label.",
+    "pt": "A prévia muda ao digitar. Cada campo modifica sua própria imagem; o desenho livre abaixo modifica o rótulo pequeno."
+  },
+  "La resolución debe conservarse.": {
+    "es": "La resolución debe conservarse.",
+    "en": "The resolution must be preserved.",
+    "pt": "A resolução deve ser preservada."
+  },
+  "La restauración parcial supera el espacio del bloque de nombres.": {
+    "es": "La restauración parcial supera el espacio del bloque de nombres.",
+    "en": "Partial restoration exceeds the name block's available space.",
+    "pt": "A restauração parcial excede o espaço do bloco de nomes."
+  },
+  "Las banderas se guardan por equipo y no cambian las de otros países. Los rótulos conservan sus referencias originales.": {
+    "es": "Las banderas se guardan por equipo y no cambian las de otros países. Los rótulos conservan sus referencias originales.",
+    "en": "Flags are saved per team and do not change those of other countries. Labels keep their original references.",
+    "pt": "As bandeiras são salvas por equipe e não alteram as de outros países. Os rótulos mantêm suas referências originais."
+  },
+  "Las muestras no contienen una frecuencia WAV. El DSP consume 32000 × pitch / 4096 muestras/s. El juego calcula el pitch por evento; esos eventos aún no están vinculados al catálogo. Este control es de inspección.": {
+    "es": "Las muestras no contienen una frecuencia WAV. El DSP consume 32000 × pitch / 4096 muestras/s. El juego calcula el pitch por evento; esos eventos aún no están vinculados al catálogo. Este control es de inspección.",
+    "en": "Samples do not contain a WAV sample rate. The DSP consumes 32000 × pitch / 4096 samples/s. The game calculates pitch per event; those events are not yet linked to the catalog. This is an inspection control.",
+    "pt": "As amostras não contêm uma frequência WAV. O DSP consome 32000 × pitch / 4096 amostras/s. O jogo calcula o pitch por evento; esses eventos ainda não estão vinculados ao catálogo. Este controle é de inspeção."
+  },
+  "Leyendo ROM…": {
+    "es": "Leyendo ROM…",
+    "en": "Reading ROM…",
+    "pt": "Lendo ROM…"
+  },
+  "Lienzo pixel art": {
+    "es": "Lienzo pixel art",
+    "en": "Pixel art canvas",
+    "pt": "Tela de pixel art"
+  },
+  "Logo armado con sus dos capas y texto original. Los colores se ajustan a la paleta de la capa editada. El fondo sin tiles propios no se puede dibujar.": {
+    "es": "Logo armado con sus dos capas y texto original. Los colores se ajustan a la paleta de la capa editada. El fondo sin tiles propios no se puede dibujar.",
+    "en": "Logo assembled with its two layers and original text. Colors follow the edited layer's palette. The background without its own tiles cannot be painted.",
+    "pt": "Logo montado com suas duas camadas e texto original. As cores seguem a paleta da camada editada. O fundo sem tiles próprios não pode ser desenhado."
+  },
+  "Logo completo de portada": {
+    "es": "Logo completo de portada",
+    "en": "Full title screen logo",
+    "pt": "Logo completo da tela inicial"
+  },
+  "Los equipos ocupan slots fijos. Agregar/eliminar o reordenar requiere modificar código y referencias del juego; estas operaciones están pendientes de ingeniería inversa.": {
+    "es": "Los equipos ocupan slots fijos. Agregar/eliminar o reordenar requiere modificar código y referencias del juego; estas operaciones están pendientes de ingeniería inversa.",
+    "en": "Teams occupy fixed slots. Adding/removing or reordering requires changing game code and references; these operations still require reverse engineering.",
+    "pt": "As equipes ocupam slots fixos. Adicionar/remover ou reordenar requer modificar código e referências do jogo; essas operações ainda dependem de engenharia reversa."
+  },
+  "Los identificadores/dorsales de cada equipo deben ser únicos.": {
+    "es": "Los identificadores/dorsales de cada equipo deben ser únicos.",
+    "en": "Each team's IDs/shirt numbers must be unique.",
+    "pt": "Os identificadores/números de cada equipe devem ser únicos."
+  },
+  "Los nombres de equipo usados por el juego se editan como rótulos gráficos. Las etiquetas del selector identifican los slots originales.": {
+    "es": "Los nombres de equipo usados por el juego se editan como rótulos gráficos. Las etiquetas del selector identifican los slots originales.",
+    "en": "Team names used by the game are edited as graphic labels. The selector labels identify the original slots.",
+    "pt": "Os nomes de equipe usados pelo jogo são editados como rótulos gráficos. As etiquetas do seletor identificam os slots originais."
+  },
+  "Los nombres de estos jugadores se comparten con sus selecciones de origen. Editar un nombre también lo cambia allí; los atributos pertenecen al equipo de estrellas.": {
+    "es": "Los nombres de estos jugadores se comparten con sus selecciones de origen. Editar un nombre también lo cambia allí; los atributos pertenecen al equipo de estrellas.",
+    "en": "These player names are shared with their original national teams. Editing a name also changes it there; attributes belong to the all-star team.",
+    "pt": "Os nomes destes jogadores são compartilhados com suas seleções de origem. Editar um nome também o altera lá; os atributos pertencem à equipe de estrelas."
+  },
+  "Los recortes se normalizan automáticamente al mismo nivel de señal, con protección de picos. El volumen final también depende del evento y la envolvente del juego.": {
+    "es": "Los recortes se normalizan automáticamente al mismo nivel de señal, con protección de picos. El volumen final también depende del evento y la envolvente del juego.",
+    "en": "Trims are automatically normalized to the same signal level, with peak protection. Final volume also depends on the game's event and envelope.",
+    "pt": "Os recortes são normalizados automaticamente para o mesmo nível de sinal, com proteção de picos. O volume final também depende do evento e do envelope do jogo."
+  },
+  "Lápiz": {
+    "es": "Lápiz",
+    "en": "Pencil",
+    "pt": "Lápis"
+  },
+  "Línea": {
+    "es": "Línea",
+    "en": "Line",
+    "pt": "Linha"
+  },
+  "Mapa de banderas inválido.": {
+    "es": "Mapa de banderas inválido.",
+    "en": "Invalid flag map.",
+    "pt": "Mapa de bandeiras inválido."
+  },
+  "Marcas BRR de los fragmentos alteradas.": {
+    "es": "Marcas BRR de los fragmentos alteradas.",
+    "en": "BRR segment flags were altered.",
+    "pt": "Marcas BRR dos trechos alteradas."
+  },
+  "Medio defensivo": {
+    "es": "Medio defensivo",
+    "en": "Defensive midfielder",
+    "pt": "Meio-campista defensivo"
+  },
+  "Medio ofensivo": {
+    "es": "Medio ofensivo",
+    "en": "Attacking midfielder",
+    "pt": "Meio-campista ofensivo"
+  },
+  "Mediocampo": {
+    "es": "Mediocampo",
+    "en": "Midfielder",
+    "pt": "Meio-campista"
+  },
+  "Modificación duplicada o inválida.": {
+    "es": "Modificación duplicada o inválida.",
+    "en": "Duplicate or invalid modification.",
+    "pt": "Modificação duplicada ou inválida."
+  },
+  "Modificado": {
+    "es": "Modificado",
+    "en": "Modified",
+    "pt": "Modificado"
+  },
+  "Mover recorte": {
+    "es": "Mover recorte",
+    "en": "Move trim",
+    "pt": "Mover recorte"
+  },
+  "Mover vista": {
+    "es": "Mover vista",
+    "en": "Move view",
+    "pt": "Mover visualização"
+  },
+  "Muestra": {
+    "es": "Muestra",
+    "en": "Sample",
+    "pt": "Amostra"
+  },
+  "Muestra BRR incompleta.": {
+    "es": "Muestra BRR incompleta.",
+    "en": "Incomplete BRR sample.",
+    "pt": "Amostra BRR incompleta."
+  },
+  "Muestra actual de la ROM": {
+    "es": "Muestra actual de la ROM",
+    "en": "Current ROM sample",
+    "pt": "Amostra atual da ROM"
+  },
+  "Muestra fuera de la ROM.": {
+    "es": "Muestra fuera de la ROM.",
+    "en": "Sample outside the ROM.",
+    "pt": "Amostra fora da ROM."
+  },
+  "No está libre el espacio verificado para los rótulos.": {
+    "es": "No está libre el espacio verificado para los rótulos.",
+    "en": "The verified space for labels is not free.",
+    "pt": "O espaço verificado para os rótulos não está livre."
+  },
+  "No se pudo cargar el emulador. Vuelve a intentarlo.": {
+    "es": "No se pudo cargar el emulador. Vuelve a intentarlo.",
+    "en": "Could not load the emulator. Try again.",
+    "pt": "Não foi possível carregar o emulador. Tente novamente."
+  },
+  "No se pudo decodificar este audio. Prueba un WAV PCM/float, MP3, M4A, OGG o FLAC válido.": {
+    "es": "No se pudo decodificar este audio. Prueba un WAV PCM/float, MP3, M4A, OGG o FLAC válido.",
+    "en": "Could not decode this audio. Try a valid PCM/float WAV, MP3, M4A, OGG or FLAC.",
+    "pt": "Não foi possível decodificar este áudio. Tente um WAV PCM/float, MP3, M4A, OGG ou FLAC válido."
+  },
+  "No se pudo leer la imagen.": {
+    "es": "No se pudo leer la imagen.",
+    "en": "Could not read the image.",
+    "pt": "Não foi possível ler a imagem."
+  },
+  "No se pudo reproducir automáticamente. Usa los controles de audio para iniciar la reproducción.": {
+    "es": "No se pudo reproducir automáticamente. Usa los controles de audio para iniciar la reproducción.",
+    "en": "Could not play automatically. Use the audio controls to start playback.",
+    "pt": "Não foi possível reproduzir automaticamente. Use os controles de áudio para iniciar a reprodução."
+  },
+  "No se puede cambiar la cantidad de sprites de los nombres grandes.": {
+    "es": "No se puede cambiar la cantidad de sprites de los nombres grandes.",
+    "en": "The number of large-name sprites cannot be changed.",
+    "pt": "Não é possível alterar a quantidade de sprites dos nomes grandes."
+  },
+  "Nombre": {
+    "es": "Nombre",
+    "en": "Name",
+    "pt": "Nome"
+  },
+  "Nombre con codificación inválida.": {
+    "es": "Nombre con codificación inválida.",
+    "en": "Name with invalid encoding.",
+    "pt": "Nome com codificação inválida."
+  },
+  "Nombre en juego: rótulo gráfico 2bpp de": {
+    "es": "Nombre en juego: rótulo gráfico 2bpp de",
+    "en": "In-game name: 2bpp graphic label sized",
+    "pt": "Nome no jogo: rótulo gráfico 2bpp de"
+  },
+  "Nombre grande de selección · {0}": {
+    "es": "Nombre grande de selección · {0}",
+    "en": "Large selection name · {0}",
+    "pt": "Nome grande de seleção · {0}"
+  },
+  "Nombre gráfico del equipo": {
+    "es": "Nombre gráfico del equipo",
+    "en": "Team graphic name",
+    "pt": "Nome gráfico da equipe"
+  },
+  "Nombre pequeño": {
+    "es": "Nombre pequeño",
+    "en": "Small name",
+    "pt": "Nome pequeno"
+  },
+  "Nombre rojo y amarillo": {
+    "es": "Nombre rojo y amarillo",
+    "en": "Red and yellow name",
+    "pt": "Nome vermelho e amarelo"
+  },
+  "Nombres independientes del equipo": {
+    "es": "Nombres independientes del equipo",
+    "en": "Independent team names",
+    "pt": "Nomes independentes da equipe"
+  },
+  "Normal": {
+    "es": "Normal",
+    "en": "Normal",
+    "pt": "Normal"
+  },
+  "Normalizar audios modificados (": {
+    "es": "Normalizar audios modificados (",
+    "en": "Normalize modified audio (",
+    "pt": "Normalizar áudios modificados ("
+  },
+  "Números de camisetas · atlas compartido": {
+    "es": "Números de camisetas · atlas compartido",
+    "en": "Shirt numbers · shared atlas",
+    "pt": "Números das camisas · atlas compartilhado"
+  },
+  "Original": {
+    "es": "Original",
+    "en": "Original",
+    "pt": "Original"
+  },
+  "Paleta": {
+    "es": "Paleta",
+    "en": "Palette",
+    "pt": "Paleta"
+  },
+  "Paleta BGR555 inválida.": {
+    "es": "Paleta BGR555 inválida.",
+    "en": "Invalid BGR555 palette.",
+    "pt": "Paleta BGR555 inválida."
+  },
+  "Paleta de bandera independiente": {
+    "es": "Paleta de bandera independiente",
+    "en": "Independent flag palette",
+    "pt": "Paleta de bandeira independente"
+  },
+  "Paleta de bandera inválida.": {
+    "es": "Paleta de bandera inválida.",
+    "en": "Invalid flag palette.",
+    "pt": "Paleta de bandeira inválida."
+  },
+  "Para empezar selecciona Jugadores, Apariencia, Gráficos o Audio. La ROM exportada conserva tamaño, mapeo y cabecera; los cambios recalculan checksum y complemento.": {
+    "es": "Para empezar selecciona Jugadores, Apariencia, Gráficos o Audio. La ROM exportada conserva tamaño, mapeo y cabecera; los cambios recalculan checksum y complemento.",
+    "en": "To begin, select Players, Appearance, Graphics or Audio. Exported ROMs preserve size, mapping and header; changes recalculate the checksum and complement.",
+    "pt": "Para começar, selecione Jogadores, Aparência, Gráficos ou Áudio. A ROM exportada mantém tamanho, mapeamento e cabeçalho; as alterações recalculam checksum e complemento."
+  },
+  "Pegar": {
+    "es": "Pegar",
+    "en": "Paste",
+    "pt": "Colar"
+  },
+  "Pelo": {
+    "es": "Pelo",
+    "en": "Hair",
+    "pt": "Cabelo"
+  },
+  "Pelo alternativo": {
+    "es": "Pelo alternativo",
+    "en": "Alternative hair",
+    "pt": "Cabelo alternativo"
+  },
+  "Piel": {
+    "es": "Piel",
+    "en": "Skin",
+    "pt": "Pele"
+  },
+  "Piel alternativa": {
+    "es": "Piel alternativa",
+    "en": "Alternative skin",
+    "pt": "Pele alternativa"
+  },
+  "Pitch DSP": {
+    "es": "Pitch DSP",
+    "en": "DSP pitch",
+    "pt": "Pitch DSP"
+  },
+  "Pitch por evento, secuencias musicales y bucles del SPC700 pendientes. La previsualización de muestras usa el pitch de inspección elegido, sin afirmar reproducción idéntica al juego.": {
+    "es": "Pitch por evento, secuencias musicales y bucles del SPC700 pendientes. La previsualización de muestras usa el pitch de inspección elegido, sin afirmar reproducción idéntica al juego.",
+    "en": "Per-event pitch, music sequences and SPC700 loops are still pending. Sample previews use the selected inspection pitch and do not claim identical game playback.",
+    "pt": "Pitch por evento, sequências musicais e loops do SPC700 ainda pendentes. A prévia das amostras usa o pitch de inspeção escolhido, sem afirmar reprodução idêntica ao jogo."
+  },
+  "Pixel Art Maker": {
+    "es": "Pixel Art Maker",
+    "en": "Pixel art editor",
+    "pt": "Editor de pixel art"
+  },
+  "Portero": {
+    "es": "Portero",
+    "en": "Goalkeeper",
+    "pt": "Goleiro"
+  },
+  "Portero completo": {
+    "es": "Portero completo",
+    "en": "Full goalkeeper",
+    "pt": "Goleiro completo"
+  },
+  "Portero completo · sprite compartido": {
+    "es": "Portero completo · sprite compartido",
+    "en": "Full goalkeeper · shared sprite",
+    "pt": "Goleiro completo · sprite compartilhado"
+  },
+  "Posición": {
+    "es": "Posición",
+    "en": "Position",
+    "pt": "Posição"
+  },
+  "Precarga de banderas inválida.": {
+    "es": "Precarga de banderas inválida.",
+    "en": "Invalid flag preload.",
+    "pt": "Pré-carregamento de bandeiras inválido."
+  },
+  "Precarga de rótulos inválida.": {
+    "es": "Precarga de rótulos inválida.",
+    "en": "Invalid label preload.",
+    "pt": "Pré-carregamento de rótulos inválido."
+  },
+  "Prepara un recorte válido antes de aplicar.": {
+    "es": "Prepara un recorte válido antes de aplicar.",
+    "en": "Prepare a valid trim before applying.",
+    "pt": "Prepare um recorte válido antes de aplicar."
+  },
+  "Preparando proyecto…": {
+    "es": "Preparando proyecto…",
+    "en": "Preparing project…",
+    "pt": "Preparando projeto…"
+  },
+  "Previsualización del nombre pequeño": {
+    "es": "Previsualización del nombre pequeño",
+    "en": "Small name preview",
+    "pt": "Prévia do nome pequeno"
+  },
+  "Previsualización del nombre rojo y amarillo": {
+    "es": "Previsualización del nombre rojo y amarillo",
+    "en": "Red and yellow name preview",
+    "pt": "Prévia do nome vermelho e amarelo"
+  },
+  "Previsualizar ROM": {
+    "es": "Previsualizar ROM",
+    "en": "Preview ROM",
+    "pt": "Prévia da ROM"
+  },
+  "Proyecto": {
+    "es": "Proyecto",
+    "en": "Project",
+    "pt": "Projeto"
+  },
+  "Proyecto no compatible.": {
+    "es": "Proyecto no compatible.",
+    "en": "Unsupported project.",
+    "pt": "Projeto não compatível."
+  },
+  "Proyecto y cambios": {
+    "es": "Proyecto y cambios",
+    "en": "Project and changes",
+    "pt": "Projeto e alterações"
+  },
+  "Prueba la ROM con los cambios aplicados al proyecto. El motor de EmulatorJS se descarga al abrir este menú y requiere internet.": {
+    "es": "Prueba la ROM con los cambios aplicados al proyecto. El motor de EmulatorJS se descarga al abrir este menú y requiere internet.",
+    "en": "Test the ROM with the project's changes applied. The EmulatorJS engine downloads when you open this menu and requires internet.",
+    "pt": "Teste a ROM com as alterações do projeto aplicadas. O motor do EmulatorJS é baixado ao abrir este menu e requer internet."
+  },
+  "Puntero antiguo inválido.": {
+    "es": "Puntero antiguo inválido.",
+    "en": "Invalid legacy pointer.",
+    "pt": "Ponteiro antigo inválido."
+  },
+  "Puntero de bandera inválido.": {
+    "es": "Puntero de bandera inválido.",
+    "en": "Invalid flag pointer.",
+    "pt": "Ponteiro de bandeira inválido."
+  },
+  "Puntero de rótulo inválido.": {
+    "es": "Puntero de rótulo inválido.",
+    "en": "Invalid label pointer.",
+    "pt": "Ponteiro de rótulo inválido."
+  },
+  "Puntuación del nombre rojo de Czech Rep.": {
+    "es": "Puntuación del nombre rojo de Czech Rep.",
+    "en": "Czech Rep. red name punctuation",
+    "pt": "Pontuação do nome vermelho de Czech Rep."
+  },
+  "ROM Editor": {
+    "es": "ROM Editor",
+    "en": "ROM editor",
+    "pt": "Editor de ROM"
+  },
+  "ROM cargada. Pulsa «Iniciar juego» en la pantalla.": {
+    "es": "ROM cargada. Pulsa «Iniciar juego» en la pantalla.",
+    "en": "ROM loaded. Press “Start game” on the screen.",
+    "pt": "ROM carregada. Pressione «Iniciar jogo» na tela."
+  },
+  "ROM no compatible. Abre ISS (USA) o ISS Deluxe (USA).": {
+    "es": "ROM no compatible. Abre ISS (USA) o ISS Deluxe (USA).",
+    "en": "Unsupported ROM. Open ISS (USA) or ISS Deluxe (USA).",
+    "pt": "ROM não compatível. Abra ISS (USA) ou ISS Deluxe (USA)."
+  },
+  "Recargar ROM modificada": {
+    "es": "Recargar ROM modificada",
+    "en": "Reload modified ROM",
+    "pt": "Recarregar ROM modificada"
+  },
+  "Recommended IDE setup:": {
+    "es": "Recommended IDE setup:",
+    "en": "Recommended IDE setup:",
+    "pt": "Configuração de IDE recomendada:"
+  },
+  "Recorte convertido para la ROM": {
+    "es": "Recorte convertido para la ROM",
+    "en": "Trim converted for the ROM",
+    "pt": "Recorte convertido para a ROM"
+  },
+  "Recorte normalizado y convertido a BRR:": {
+    "es": "Recorte normalizado y convertido a BRR:",
+    "en": "Trim normalized and converted to BRR:",
+    "pt": "Recorte normalizado e convertido para BRR:"
+  },
+  "Rectángulo": {
+    "es": "Rectángulo",
+    "en": "Rectangle",
+    "pt": "Retângulo"
+  },
+  "Recurso compartido: editar sus tiles afecta a todos los equipos que usan este sprite.": {
+    "es": "Recurso compartido: editar sus tiles afecta a todos los equipos que usan este sprite.",
+    "en": "Shared resource: editing its tiles affects all teams using this sprite.",
+    "pt": "Recurso compartilhado: editar seus tiles afeta todas as equipes que usam este sprite."
+  },
+  "Recurso desconocido.": {
+    "es": "Recurso desconocido.",
+    "en": "Unknown resource.",
+    "pt": "Recurso desconhecido."
+  },
+  "Recurso o tamaño no permitido: {0}.": {
+    "es": "Recurso o tamaño no permitido: {0}.",
+    "en": "Resource or size not allowed: {0}.",
+    "pt": "Recurso ou tamanho não permitido: {0}."
+  },
+  "Recurso transmitido por fragmentos: necesita conservar el protocolo SPC700.": {
+    "es": "Recurso transmitido por fragmentos: necesita conservar el protocolo SPC700.",
+    "en": "Resource streamed in segments: the SPC700 protocol must be preserved.",
+    "pt": "Recurso transmitido por trechos: é necessário preservar o protocolo SPC700."
+  },
+  "Reemplazo WAV deshabilitado.": {
+    "es": "Reemplazo WAV deshabilitado.",
+    "en": "WAV replacement disabled.",
+    "pt": "Substituição WAV desabilitada."
+  },
+  "Referencia de jugador de estrellas inválida.": {
+    "es": "Referencia de jugador de estrellas inválida.",
+    "en": "Invalid all-star player reference.",
+    "pt": "Referência de jogador de estrelas inválida."
+  },
+  "Rehacer dibujo": {
+    "es": "Rehacer dibujo",
+    "en": "Redo drawing",
+    "pt": "Refazer desenho"
+  },
+  "Reintentar guardado": {
+    "es": "Reintentar guardado",
+    "en": "Retry saving",
+    "pt": "Tentar salvar novamente"
+  },
+  "Relleno": {
+    "es": "Relleno",
+    "en": "Fill",
+    "pt": "Preenchimento"
+  },
+  "Repetir preview": {
+    "es": "Repetir preview",
+    "en": "Loop preview",
+    "pt": "Repetir prévia"
+  },
+  "Resolución del rótulo inválida.": {
+    "es": "Resolución del rótulo inválida.",
+    "en": "Invalid label resolution.",
+    "pt": "Resolução do rótulo inválida."
+  },
+  "Resolución gráfica inválida.": {
+    "es": "Resolución gráfica inválida.",
+    "en": "Invalid graphic resolution.",
+    "pt": "Resolução gráfica inválida."
+  },
+  "Restaurar": {
+    "es": "Restaurar",
+    "en": "Restore",
+    "pt": "Restaurar"
+  },
+  "Restaurar ambos nombres de este equipo": {
+    "es": "Restaurar ambos nombres de este equipo",
+    "en": "Restore both names for this team",
+    "pt": "Restaurar os dois nomes desta equipe"
+  },
+  "Restaurar formación": {
+    "es": "Restaurar formación",
+    "en": "Restore formation",
+    "pt": "Restaurar formação"
+  },
+  "Restaurar muestra": {
+    "es": "Restaurar muestra",
+    "en": "Restore sample",
+    "pt": "Restaurar amostra"
+  },
+  "Restaurar nombre grande del equipo": {
+    "es": "Restaurar nombre grande del equipo",
+    "en": "Restore large team name",
+    "pt": "Restaurar nome grande da equipe"
+  },
+  "Restaurar original": {
+    "es": "Restaurar original",
+    "en": "Restore original",
+    "pt": "Restaurar original"
+  },
+  "Restaurar recurso en ROM": {
+    "es": "Restaurar recurso en ROM",
+    "en": "Restore resource in ROM",
+    "pt": "Restaurar recurso na ROM"
+  },
+  "Restaurar todo": {
+    "es": "Restaurar todo",
+    "en": "Restore all",
+    "pt": "Restaurar tudo"
+  },
+  "Resultado de cuantización": {
+    "es": "Resultado de cuantización",
+    "en": "Quantization result",
+    "pt": "Resultado da quantização"
+  },
+  "Resumen": {
+    "es": "Resumen",
+    "en": "Overview",
+    "pt": "Resumo"
+  },
+  "Rótulo de la ROM": {
+    "es": "Rótulo de la ROM",
+    "en": "ROM label",
+    "pt": "Rótulo da ROM"
+  },
+  "Rótulo del equipo": {
+    "es": "Rótulo del equipo",
+    "en": "Team label",
+    "pt": "Rótulo da equipe"
+  },
+  "Rótulo fuera de su espacio reservado.": {
+    "es": "Rótulo fuera de su espacio reservado.",
+    "en": "Label outside its reserved space.",
+    "pt": "Rótulo fora do espaço reservado."
+  },
+  "Rótulos de equipo independientes": {
+    "es": "Rótulos de equipo independientes",
+    "en": "Independent team labels",
+    "pt": "Rótulos de equipe independentes"
+  },
+  "SUPERSTAR SOCCER 2": {
+    "es": "SUPERSTAR SOCCER 2",
+    "en": "SUPERSTAR SOCCER 2",
+    "pt": "SUPERSTAR SOCCER 2"
+  },
+  "Se copian etiqueta, posiciones y roles de una formación original. Revisa que las posiciones de tus jugadores sean adecuadas; la plantilla no cambia automáticamente.": {
+    "es": "Se copian etiqueta, posiciones y roles de una formación original. Revisa que las posiciones de tus jugadores sean adecuadas; la plantilla no cambia automáticamente.",
+    "en": "Labels, positions and roles are copied from an original formation. Check that your players' positions are appropriate; the roster does not change automatically.",
+    "pt": "São copiados rótulo, posições e funções de uma formação original. Verifique se as posições dos jogadores são adequadas; o elenco não muda automaticamente."
+  },
+  "Se requiere un archivo WAV RIFF PCM.": {
+    "es": "Se requiere un archivo WAV RIFF PCM.",
+    "en": "A RIFF PCM WAV file is required.",
+    "pt": "É necessário um arquivo WAV RIFF PCM."
+  },
+  "Se seleccionó un fragmento que cabe en la ROM. Puedes moverlo para conservar la parte que prefieras.": {
+    "es": "Se seleccionó un fragmento que cabe en la ROM. Puedes moverlo para conservar la parte que prefieras.",
+    "en": "A segment that fits in the ROM has been selected. Move it to keep the part you prefer.",
+    "pt": "Foi selecionado um trecho que cabe na ROM. Você pode movê-lo para manter a parte que preferir."
+  },
+  "Selecciona un recorte dentro del audio.": {
+    "es": "Selecciona un recorte dentro del audio.",
+    "en": "Select a trim within the audio.",
+    "pt": "Selecione um recorte dentro do áudio."
+  },
+  "Seleccionar / mover": {
+    "es": "Seleccionar / mover",
+    "en": "Select / move",
+    "pt": "Selecionar / mover"
+  },
+  "Seleccionar equipo": {
+    "es": "Seleccionar equipo",
+    "en": "Select team",
+    "pt": "Selecionar equipe"
+  },
+  "Seleccionar gráfico": {
+    "es": "Seleccionar gráfico",
+    "en": "Select graphic",
+    "pt": "Selecionar gráfico"
+  },
+  "Seleccionar jugadores visibles": {
+    "es": "Seleccionar jugadores visibles",
+    "en": "Select visible players",
+    "pt": "Selecionar jogadores visíveis"
+  },
+  "Selección:": {
+    "es": "Selección:",
+    "en": "Selection:",
+    "pt": "Seleção:"
+  },
+  "Siguiente": {
+    "es": "Siguiente",
+    "en": "Next",
+    "pt": "Próximo"
+  },
+  "Sin cabecera SMC": {
+    "es": "Sin cabecera SMC",
+    "en": "No SMC header",
+    "pt": "Sem cabeçalho SMC"
+  },
+  "Sin cambios de dibujo": {
+    "es": "Sin cambios de dibujo",
+    "en": "No drawing changes",
+    "pt": "Sem alterações no desenho"
+  },
+  "Sin modificaciones. La exportación será idéntica al archivo original.": {
+    "es": "Sin modificaciones. La exportación será idéntica al archivo original.",
+    "en": "No modifications. The export will be identical to the original file.",
+    "pt": "Sem modificações. A exportação será idêntica ao arquivo original."
+  },
+  "Slot": {
+    "es": "Slot",
+    "en": "Slot",
+    "pt": "Slot"
+  },
+  "Solo se permiten formaciones originales verificadas.": {
+    "es": "Solo se permiten formaciones originales verificadas.",
+    "en": "Only verified original formations are allowed.",
+    "pt": "Somente formações originais verificadas são permitidas."
+  },
+  "Solo se puede cambiar la puntuación de Czech Rep.": {
+    "es": "Solo se puede cambiar la puntuación de Czech Rep.",
+    "en": "Only Czech Rep. punctuation can be changed.",
+    "pt": "Somente a pontuação de Czech Rep. pode ser alterada."
+  },
+  "Sprite de nombre grande inválido.": {
+    "es": "Sprite de nombre grande inválido.",
+    "en": "Invalid large-name sprite.",
+    "pt": "Sprite de nome grande inválido."
+  },
+  "Subir imagen y convertir a pixel art": {
+    "es": "Subir imagen y convertir a pixel art",
+    "en": "Upload image and convert to pixel art",
+    "pt": "Enviar imagem e converter em pixel art"
+  },
+  "Subir o arrastrar un audio": {
+    "es": "Subir o arrastrar un audio",
+    "en": "Upload or drag an audio file",
+    "pt": "Enviar ou arrastar um áudio"
+  },
+  "Super Star Soccer": {
+    "es": "Super Star Soccer",
+    "en": "Super Star Soccer",
+    "pt": "Super Star Soccer"
+  },
+  "Tamaño gráfico inválido.": {
+    "es": "Tamaño gráfico inválido.",
+    "en": "Invalid graphic size.",
+    "pt": "Tamanho gráfico inválido."
+  },
+  "Tamaño, región o formato de ROM no compatible. Se requiere la versión USA LoROM.": {
+    "es": "Tamaño, región o formato de ROM no compatible. Se requiere la versión USA LoROM.",
+    "en": "Unsupported ROM size, region or format. The USA LoROM version is required.",
+    "pt": "Tamanho, região ou formato de ROM não compatível. É necessária a versão USA LoROM."
+  },
+  "Tiene finales intermedios: estructura de reproducción pendiente.": {
+    "es": "Tiene finales intermedios: estructura de reproducción pendiente.",
+    "en": "Has intermediate endings: playback structure still pending.",
+    "pt": "Tem finais intermediários: estrutura de reprodução pendente."
+  },
+  "Tiles entrelazados incompletos.": {
+    "es": "Tiles entrelazados incompletos.",
+    "en": "Incomplete interleaved tiles.",
+    "pt": "Tiles entrelaçados incompletos."
+  },
+  "Tipo 1 / local": {
+    "es": "Tipo 1 / local",
+    "en": "Type 1 / home",
+    "pt": "Tipo 1 / mandante"
+  },
+  "Tipo 2 / visitante": {
+    "es": "Tipo 2 / visitante",
+    "en": "Type 2 / away",
+    "pt": "Tipo 2 / visitante"
+  },
+  "Todas las posiciones": {
+    "es": "Todas las posiciones",
+    "en": "All positions",
+    "pt": "Todas as posições"
+  },
+  "Uniforme modificado": {
+    "es": "Uniforme modificado",
+    "en": "Modified uniform",
+    "pt": "Uniforme modificado"
+  },
+  "Uniforme original": {
+    "es": "Uniforme original",
+    "en": "Original uniform",
+    "pt": "Uniforme original"
+  },
+  "Uniformes y portero": {
+    "es": "Uniformes y portero",
+    "en": "Uniforms and goalkeeper",
+    "pt": "Uniformes e goleiro"
+  },
+  "Usa letras A–Z, puntos y espacios.": {
+    "es": "Usa letras A–Z, puntos y espacios.",
+    "en": "Use A–Z letters, periods and spaces.",
+    "pt": "Use letras A–Z, pontos e espaços."
+  },
+  "Usar resultado": {
+    "es": "Usar resultado",
+    "en": "Use result",
+    "pt": "Usar resultado"
+  },
+  "Valor de {0} inválido ({1}–{2}).": {
+    "es": "Valor de {0} inválido ({1}–{2}).",
+    "en": "Invalid {0} value ({1}–{2}).",
+    "pt": "Valor de {0} inválido ({1}–{2})."
+  },
+  "Valor para cambio múltiple": {
+    "es": "Valor para cambio múltiple",
+    "en": "Value for bulk edit",
+    "pt": "Valor para edição em lote"
+  },
+  "Ver atributos": {
+    "es": "Ver atributos",
+    "en": "View attributes",
+    "pt": "Ver atributos"
+  },
+  "Ver audio completo": {
+    "es": "Ver audio completo",
+    "en": "View full audio",
+    "pt": "Ver áudio completo"
+  },
+  "Vista a tamaño original": {
+    "es": "Vista a tamaño original",
+    "en": "Original-size view",
+    "pt": "Visualização no tamanho original"
+  },
+  "Vite Documentation": {
+    "es": "Vite Documentation",
+    "en": "Vite documentation",
+    "pt": "Documentação do Vite"
+  },
+  "Voces y muestras BRR extraídas del archivo abierto. La velocidad de previsualización es ajustable; la música secuenciada requiere el motor SPC700.": {
+    "es": "Voces y muestras BRR extraídas del archivo abierto. La velocidad de previsualización es ajustable; la música secuenciada requiere el motor SPC700.",
+    "en": "Voices and BRR samples extracted from the open file. Preview speed is adjustable; sequenced music requires the SPC700 engine.",
+    "pt": "Vozes e amostras BRR extraídas do arquivo aberto. A velocidade da prévia é ajustável; a música sequenciada requer o motor SPC700."
+  },
+  "Voltear ↔": {
+    "es": "Voltear ↔",
+    "en": "Flip ↔",
+    "pt": "Inverter ↔"
+  },
+  "Voltear ↕": {
+    "es": "Voltear ↕",
+    "en": "Flip ↕",
+    "pt": "Inverter ↕"
+  },
+  "Vue 3 Documentation": {
+    "es": "Vue 3 Documentation",
+    "en": "Vue 3 documentation",
+    "pt": "Documentação do Vue 3"
+  },
+  "WAV truncado.": {
+    "es": "WAV truncado.",
+    "en": "Truncated WAV.",
+    "pt": "WAV truncado."
+  },
+  "WAV, MP3, M4A, OGG o FLAC · conversión automática": {
+    "es": "WAV, MP3, M4A, OGG o FLAC · conversión automática",
+    "en": "WAV, MP3, M4A, OGG or FLAC · automatic conversion",
+    "pt": "WAV, MP3, M4A, OGG ou FLAC · conversão automática"
+  },
+  "Web ISSD Studio": {
+    "es": "Web ISSD Studio",
+    "en": "Web ISSD Studio",
+    "pt": "Web ISSD Studio"
+  },
+  "Zoom": {
+    "es": "Zoom",
+    "en": "Zoom",
+    "pt": "Zoom"
+  },
+  "bytes BRR disponibles ·": {
+    "es": "bytes BRR disponibles ·",
+    "en": "BRR bytes available ·",
+    "pt": "bytes BRR disponíveis ·"
+  },
+  "bytes disponibles": {
+    "es": "bytes disponibles",
+    "en": "bytes available",
+    "pt": "bytes disponíveis"
+  },
+  "bytes. El espacio restante se rellena con silencio. Escucha el resultado antes de aplicarlo.": {
+    "es": "bytes. El espacio restante se rellena con silencio. Escucha el resultado antes de aplicarlo.",
+    "en": "bytes. Remaining space is filled with silence. Listen to the result before applying it.",
+    "pt": "bytes. O espaço restante é preenchido com silêncio. Ouça o resultado antes de aplicar."
+  },
+  "caracteres A–Z, puntos y espacios.": {
+    "es": "caracteres A–Z, puntos y espacios.",
+    "en": "A–Z characters, periods and spaces.",
+    "pt": "caracteres A–Z, pontos e espaços."
+  },
+  "centro": {
+    "es": "centro",
+    "en": "center",
+    "pt": "centro"
+  },
+  "centro derecha": {
+    "es": "centro derecha",
+    "en": "center right",
+    "pt": "centro direita"
+  },
+  "centro izquierda": {
+    "es": "centro izquierda",
+    "en": "center left",
+    "pt": "centro esquerda"
+  },
+  "count is:": {
+    "es": "count is:",
+    "en": "count is:",
+    "pt": "contagem:"
+  },
+  "derecha": {
+    "es": "derecha",
+    "en": "right",
+    "pt": "direita"
+  },
+  "drop": {
+    "es": "drop",
+    "en": "Drop file",
+    "pt": "Soltar arquivo"
+  },
+  "equipos ·": {
+    "es": "equipos ·",
+    "en": "teams ·",
+    "pt": "equipes ·"
+  },
+  "izquierda": {
+    "es": "izquierda",
+    "en": "left",
+    "pt": "esquerda"
+  },
+  "muestras BRR. Las modificaciones se guardan por hash de la ROM original.": {
+    "es": "muestras BRR. Las modificaciones se guardan por hash de la ROM original.",
+    "en": "BRR samples. Changes are saved by the original ROM's hash.",
+    "pt": "amostras BRR. As modificações são salvas pelo hash da ROM original."
+  },
+  "px ·": {
+    "es": "px ·",
+    "en": "px ·",
+    "pt": "px ·"
+  },
+  "px · A–Z, puntos y espacios.": {
+    "es": "px · A–Z, puntos y espacios.",
+    "en": "px · A–Z, periods and spaces.",
+    "pt": "px · A–Z, pontos e espaços."
+  },
+  "recursos modificados": {
+    "es": "recursos modificados",
+    "en": "modified resources",
+    "pt": "recursos modificados"
+  },
+  "s de capacidad": {
+    "es": "s de capacidad",
+    "en": "s capacity",
+    "pt": "s de capacidade"
+  },
+  "s disponibles ·": {
+    "es": "s disponibles ·",
+    "en": "s available ·",
+    "pt": "s disponíveis ·"
+  },
+  "s ·": {
+    "es": "s ·",
+    "en": "s ·",
+    "pt": "s ·"
+  },
+  "to test hot module replacement.": {
+    "es": "to test hot module replacement.",
+    "en": "to test hot module replacement.",
+    "pt": "para testar a substituição de módulos em tempo real."
+  },
+  "y se ajusta a los colores compatibles con la ROM. El índice 0 representa transparencia.": {
+    "es": "y se ajusta a los colores compatibles con la ROM. El índice 0 representa transparencia.",
+    "en": "and fitted to ROM-compatible colors. Index 0 represents transparency.",
+    "pt": "e ajustado às cores compatíveis com a ROM. O índice 0 representa transparência."
+  },
+  "{0} píxeles ajustados a la paleta. Revisa el resultado antes de aplicar.": {
+    "es": "{0} píxeles ajustados a la paleta. Revisa el resultado antes de aplicar.",
+    "en": "{0} pixels adjusted to the palette. Review the result before applying.",
+    "pt": "{0} pixels ajustados à paleta. Revise o resultado antes de aplicar."
+  },
+  "· 0x": {
+    "es": "· 0x",
+    "en": "· 0x",
+    "pt": "· 0x"
+  },
+  "¿Abrir el proyecto importado y reemplazar su guardado local?": {
+    "es": "¿Abrir el proyecto importado y reemplazar su guardado local?",
+    "en": "Open the imported project and replace its local save?",
+    "pt": "Abrir o projeto importado e substituir seu salvamento local?"
+  },
+  "¿Reemplazar los 20 jugadores de {0} por la plantilla de {1}? Los gráficos y el equipo no se duplican.": {
+    "es": "¿Reemplazar los 20 jugadores de {0} por la plantilla de {1}? Los gráficos y el equipo no se duplican.",
+    "en": "Replace the 20 players of {0} with the roster from {1}? Graphics and the team are not duplicated.",
+    "pt": "Substituir os 20 jogadores de {0} pelo elenco de {1}? Os gráficos e a equipe não são duplicados."
+  },
+  "¿Restaurar todos los recursos de la ROM original? Puedes deshacer la operación.": {
+    "es": "¿Restaurar todos los recursos de la ROM original? Puedes deshacer la operación.",
+    "en": "Restore all resources from the original ROM? You can undo this operation.",
+    "pt": "Restaurar todos os recursos da ROM original? Você pode desfazer a operação."
+  },
+  "Índice de paleta inválido.": {
+    "es": "Índice de paleta inválido.",
+    "en": "Invalid palette index.",
+    "pt": "Índice de paleta inválido."
+  },
+  "Índice {0}: {1}": {
+    "es": "Índice {0}: {1}",
+    "en": "Index {0}: {1}",
+    "pt": "Índice {0}: {1}"
+  },
+  "índices ·": {
+    "es": "índices ·",
+    "en": "indices ·",
+    "pt": "índices ·"
+  },
+  "↶ Deshacer": {
+    "es": "↶ Deshacer",
+    "en": "↶ Undo",
+    "pt": "↶ Desfazer"
+  },
+  "↷ Rehacer": {
+    "es": "↷ Rehacer",
+    "en": "↷ Redo",
+    "pt": "↷ Refazer"
+  },
+  "Cabeza de {0}, pelo {1}": {
+    "es": "Cabeza de {0}, pelo {1}",
+    "en": "Head of {0}, hair {1}",
+    "pt": "Cabeça de {0}, cabelo {1}"
+  },
+  "Piel de {0}: {1}": {
+    "es": "Piel de {0}: {1}",
+    "en": "Skin of {0}: {1}",
+    "pt": "Pele de {0}: {1}"
+  },
+  "segundos": {
+    "es": "segundos",
+    "en": "seconds",
+    "pt": "segundos"
+  },
+  "s": {
+    "es": "s",
+    "en": "s",
+    "pt": "s"
+  },
+  "VSCode": {
+    "es": "VSCode",
+    "en": "VSCode",
+    "pt": "VSCode"
+  },
+  "Volar": {
+    "es": "Volar",
+    "en": "Volar",
+    "pt": "Volar"
+  },
+  "Edit": {
+    "es": "Edit",
+    "en": "Edit",
+    "pt": "Edite"
+  },
+  "components/HelloWorld.vue": {
+    "es": "components/HelloWorld.vue",
+    "en": "components/HelloWorld.vue",
+    "pt": "components/HelloWorld.vue"
+  },
+  "Color {0}": {
+    "es": "Color {0}",
+    "en": "Color {0}",
+    "pt": "Cor {0}"
+  },
+  "Nuevo color {0}: {1}": {
+    "es": "Nuevo color {0}: {1}",
+    "en": "New color {0}: {1}",
+    "pt": "Nova cor {0}: {1}"
+  },
+  "DF": {
+    "es": "DF",
+    "en": "DF",
+    "pt": "DEF"
+  },
+  "MF": {
+    "es": "MF",
+    "en": "MF",
+    "pt": "MEI"
+  },
+  "FW": {
+    "es": "FW",
+    "en": "FW",
+    "pt": "ATA"
+  },
+  "Orden": {
+    "es": "Orden",
+    "en": "Order",
+    "pt": "Ordem"
+  },
+  "seleccionados": {
+    "es": "seleccionados",
+    "en": "selected",
+    "pt": "selecionados"
+  },
+  "Atributos": {
+    "es": "Atributos",
+    "en": "Attributes",
+    "pt": "Atributos"
+  },
+  "Seleccionar {0}": {
+    "es": "Seleccionar {0}",
+    "en": "Select {0}",
+    "pt": "Selecionar {0}"
+  },
+  "Pelo {0}": {
+    "es": "Pelo {0}",
+    "en": "Hair {0}",
+    "pt": "Cabelo {0}"
+  },
+  "Edita un color de paleta; puede afectar varios jugadores": {
+    "es": "Edita un color de paleta; puede afectar varios jugadores",
+    "en": "Edit a palette color; may affect multiple players",
+    "pt": "Edite uma cor da paleta; pode afetar vários jogadores"
+  },
+  "composite": {
+    "es": "composite",
+    "en": "composite",
+    "pt": "composite"
+  },
+  "bpp": {
+    "es": "bpp",
+    "en": "bpp",
+    "pt": "bpp"
+  },
+  "Foto global de la pantalla principal. Puedes dibujar o importar una imagen usando sus colores originales. Las cinco fotos comparten espacio comprimido; el dibujo debe caber en los bytes disponibles.": {
+    "es": "Foto global de la pantalla principal. Puedes dibujar o importar una imagen usando sus colores originales. Las cinco fotos comparten espacio comprimido; el dibujo debe caber en los bytes disponibles.",
+    "en": "Global main screen photo. Draw or import an image using its original colors. The five photos share compressed space; the drawing must fit in the available bytes.",
+    "pt": "Foto global da tela principal. Você pode desenhar ou importar uma imagem usando suas cores originais. As cinco fotos compartilham espaço comprimido; o desenho deve caber nos bytes disponíveis."
+  },
+  "Hasta": {
+    "es": "Hasta",
+    "en": "Up to",
+    "pt": "Até"
+  },
+  "Hz": {
+    "es": "Hz",
+    "en": "Hz",
+    "pt": "Hz"
+  },
+  "SHA-256:": {
+    "es": "SHA-256:",
+    "en": "SHA-256:",
+    "pt": "SHA-256:"
+  },
+  "bytes": {
+    "es": "bytes",
+    "en": "bytes",
+    "pt": "bytes"
+  },
+  "Estilo {0}": {
+    "es": "Estilo {0}",
+    "en": "Style {0}",
+    "pt": "Estilo {0}"
+  },
+  "El audio supera la capacidad de {0} muestras.": {
+    "es": "El audio supera la capacidad de {0} muestras.",
+    "en": "The audio exceeds the capacity of {0} samples.",
+    "pt": "O áudio excede a capacidade de {0} amostras."
+  },
+  "Audio · {0}": {
+    "es": "Audio · {0}",
+    "en": "Audio · {0}",
+    "pt": "Áudio · {0}"
+  },
+  "Audio normalizado · {0}": {
+    "es": "Audio normalizado · {0}",
+    "en": "Normalized audio · {0}",
+    "pt": "Áudio normalizado · {0}"
+  },
+  "Pelo {0} · atlas compartido": {
+    "es": "Pelo {0} · atlas compartido",
+    "en": "Hair {0} · shared atlas",
+    "pt": "Cabelo {0} · atlas compartilhado"
+  },
+  "Foto {0} de portada · {1}": {
+    "es": "Foto {0} de portada · {1}",
+    "en": "Title photo {0} · {1}",
+    "pt": "Foto {0} da tela inicial · {1}"
+  },
+  "Nombre · equipo {0}, jugador {1}": {
+    "es": "Nombre · equipo {0}, jugador {1}",
+    "en": "Name · team {0}, player {1}",
+    "pt": "Nome · equipe {0}, jogador {1}"
+  },
+  "Atributos · equipo {0}, jugador {1}": {
+    "es": "Atributos · equipo {0}, jugador {1}",
+    "en": "Attributes · team {0}, player {1}",
+    "pt": "Atributos · equipe {0}, jogador {1}"
+  },
+  "Intercambio dorsal · equipo {0}, jugador {1}": {
+    "es": "Intercambio dorsal · equipo {0}, jugador {1}",
+    "en": "Shirt number swap · team {0}, player {1}",
+    "pt": "Troca de número · equipe {0}, jogador {1}"
+  },
+  "Conflicto entre {0} y {1}.": {
+    "es": "Conflicto entre {0} y {1}.",
+    "en": "Conflict between {0} and {1}.",
+    "pt": "Conflito entre {0} e {1}."
+  },
+  "Este slot admite hasta {0} caracteres A–Z, puntos y espacios.": {
+    "es": "Este slot admite hasta {0} caracteres A–Z, puntos y espacios.",
+    "en": "This slot allows up to {0} A–Z characters, periods and spaces.",
+    "pt": "Este slot aceita até {0} caracteres A–Z, pontos e espaços."
+  },
+  "Los nombres grandes requieren {0} bytes; hay {1}. Prueba otro nombre.": {
+    "es": "Los nombres grandes requieren {0} bytes; hay {1}. Prueba otro nombre.",
+    "en": "Large names require {0} bytes; {1} are available. Try another name.",
+    "pt": "Os nomes grandes precisam de {0} bytes; há {1}. Tente outro nome."
+  },
+  "No se pudo preparar la ROM: {0}": {
+    "es": "No se pudo preparar la ROM: {0}",
+    "en": "Could not prepare the ROM: {0}",
+    "pt": "Não foi possível preparar a ROM: {0}"
+  },
+  "No se pudo restaurar el guardado: {0}": {
+    "es": "No se pudo restaurar el guardado: {0}",
+    "en": "Could not restore the save: {0}",
+    "pt": "Não foi possível restaurar o salvamento: {0}"
+  },
+  "Color de paleta · {0}": {
+    "es": "Color de paleta · {0}",
+    "en": "Palette color · {0}",
+    "pt": "Cor da paleta · {0}"
+  },
+  "{0} audios normalizados. Puedes deshacer este cambio.": {
+    "es": "{0} audios normalizados. Puedes deshacer este cambio.",
+    "en": "{0} audio samples normalized. You can undo this change.",
+    "pt": "{0} áudios normalizados. Você pode desfazer esta alteração."
+  },
+  "Idioma": {
+    "es": "Idioma",
+    "en": "Language",
+    "pt": "Idioma"
+  },
+  "Guardado: {0}": {
+    "es": "Guardado: {0}",
+    "en": "Saved: {0}",
+    "pt": "Salvo: {0}"
+  },
+  "Iniciar juego": {
+    "es": "Iniciar juego",
+    "en": "Start game",
+    "pt": "Iniciar jogo"
+  },
+  "Preparando ROM modificada…": {
+    "es": "Preparando ROM modificada…",
+    "en": "Preparing modified ROM…",
+    "pt": "Preparando ROM modificada…"
+  },
+  "No se pudo cargar el motor SNES. Revisa tu conexión y vuelve a intentarlo.": {
+    "es": "No se pudo cargar el motor SNES. Revisa tu conexión y vuelve a intentarlo.",
+    "en": "Could not load the SNES engine. Check your connection and try again.",
+    "pt": "Não foi possível carregar o motor SNES. Verifique sua conexão e tente novamente."
+  },
+  "acceleration": {
+    "es": "Aceleración",
+    "en": "Acceleration",
+    "pt": "Aceleração"
+  },
+  "speed": {
+    "es": "Velocidad",
+    "en": "Speed",
+    "pt": "Velocidade"
+  },
+  "shotPower": {
+    "es": "Potencia de tiro",
+    "en": "Shot power",
+    "pt": "Potência do chute"
+  },
+  "curl": {
+    "es": "Efecto",
+    "en": "Curve",
+    "pt": "Efeito"
+  },
+  "balance": {
+    "es": "Equilibrio",
+    "en": "Balance",
+    "pt": "Equilíbrio"
+  },
+  "intelligence": {
+    "es": "Inteligencia",
+    "en": "Intelligence",
+    "pt": "Inteligência"
+  },
+  "dribbling": {
+    "es": "Regate",
+    "en": "Dribbling",
+    "pt": "Drible"
+  },
+  "jump": {
+    "es": "Salto",
+    "en": "Jump",
+    "pt": "Salto"
+  },
+  "energy": {
+    "es": "Energía",
+    "en": "Energy",
+    "pt": "Energia"
+  },
+  "no": {
+    "es": "Dorsal",
+    "en": "Shirt number",
+    "pt": "Número da camisa"
+  },
+  "name": {
+    "es": "Nombre",
+    "en": "Name",
+    "pt": "Nome"
+  },
+  "position": {
+    "es": "Posición",
+    "en": "Position",
+    "pt": "Posição"
+  },
+  "hair": {
+    "es": "Pelo",
+    "en": "Hair",
+    "pt": "Cabelo"
+  },
+  "skin": {
+    "es": "Piel",
+    "en": "Skin",
+    "pt": "Pele"
+  },
+  "Italy": {
+    "es": "Italia",
+    "en": "Italy",
+    "pt": "Itália"
+  },
+  "Holland": {
+    "es": "Países Bajos",
+    "en": "Netherlands",
+    "pt": "Países Baixos"
+  },
+  "England": {
+    "es": "Inglaterra",
+    "en": "England",
+    "pt": "Inglaterra"
+  },
+  "Norway": {
+    "es": "Noruega",
+    "en": "Norway",
+    "pt": "Noruega"
+  },
+  "Spain": {
+    "es": "España",
+    "en": "Spain",
+    "pt": "Espanha"
+  },
+  "Ireland": {
+    "es": "Irlanda",
+    "en": "Ireland",
+    "pt": "Irlanda"
+  },
+  "Portugal": {
+    "es": "Portugal",
+    "en": "Portugal",
+    "pt": "Portugal"
+  },
+  "Denmark": {
+    "es": "Dinamarca",
+    "en": "Denmark",
+    "pt": "Dinamarca"
+  },
+  "Germany": {
+    "es": "Alemania",
+    "en": "Germany",
+    "pt": "Alemanha"
+  },
+  "France": {
+    "es": "Francia",
+    "en": "France",
+    "pt": "França"
+  },
+  "Belgium": {
+    "es": "Bélgica",
+    "en": "Belgium",
+    "pt": "Bélgica"
+  },
+  "Sweden": {
+    "es": "Suecia",
+    "en": "Sweden",
+    "pt": "Suécia"
+  },
+  "Romania": {
+    "es": "Rumanía",
+    "en": "Romania",
+    "pt": "Romênia"
+  },
+  "Bulgaria": {
+    "es": "Bulgaria",
+    "en": "Bulgaria",
+    "pt": "Bulgária"
+  },
+  "Russia": {
+    "es": "Rusia",
+    "en": "Russia",
+    "pt": "Rússia"
+  },
+  "Swiss": {
+    "es": "Suiza",
+    "en": "Switzerland",
+    "pt": "Suíça"
+  },
+  "Greece": {
+    "es": "Grecia",
+    "en": "Greece",
+    "pt": "Grécia"
+  },
+  "Croatia": {
+    "es": "Croacia",
+    "en": "Croatia",
+    "pt": "Croácia"
+  },
+  "Austria": {
+    "es": "Austria",
+    "en": "Austria",
+    "pt": "Áustria"
+  },
+  "Wales": {
+    "es": "Gales",
+    "en": "Wales",
+    "pt": "País de Gales"
+  },
+  "Scotland": {
+    "es": "Escocia",
+    "en": "Scotland",
+    "pt": "Escócia"
+  },
+  "N.Ireland": {
+    "es": "Irlanda del Norte",
+    "en": "Northern Ireland",
+    "pt": "Irlanda do Norte"
+  },
+  "Poland": {
+    "es": "Polonia",
+    "en": "Poland",
+    "pt": "Polônia"
+  },
+  "Japan": {
+    "es": "Japón",
+    "en": "Japan",
+    "pt": "Japão"
+  },
+  "S.Korea": {
+    "es": "Corea del Sur",
+    "en": "South Korea",
+    "pt": "Coreia do Sul"
+  },
+  "Turkey": {
+    "es": "Turquía",
+    "en": "Turkey",
+    "pt": "Turquia"
+  },
+  "Nigeria": {
+    "es": "Nigeria",
+    "en": "Nigeria",
+    "pt": "Nigéria"
+  },
+  "Cameroon": {
+    "es": "Camerún",
+    "en": "Cameroon",
+    "pt": "Camarões"
+  },
+  "Morocco": {
+    "es": "Marruecos",
+    "en": "Morocco",
+    "pt": "Marrocos"
+  },
+  "Brazil": {
+    "es": "Brasil",
+    "en": "Brazil",
+    "pt": "Brasil"
+  },
+  "Argentina": {
+    "es": "Argentina",
+    "en": "Argentina",
+    "pt": "Argentina"
+  },
+  "Colombia": {
+    "es": "Colombia",
+    "en": "Colombia",
+    "pt": "Colômbia"
+  },
+  "Mexico": {
+    "es": "México",
+    "en": "Mexico",
+    "pt": "México"
+  },
+  "U.S.A.": {
+    "es": "Estados Unidos",
+    "en": "United States",
+    "pt": "Estados Unidos"
+  },
+  "Uruguay": {
+    "es": "Uruguay",
+    "en": "Uruguay",
+    "pt": "Uruguai"
+  },
+  "Super Star": {
+    "es": "Superestrellas",
+    "en": "Super Star",
+    "pt": "Superestrelas"
+  },
+  "{0} segundos": {
+    "es": "{0} segundos",
+    "en": "{0} seconds",
+    "pt": "{0} segundos"
+  },
+  "File could not be read! Code={0}": {
+    "es": "No se pudo leer el archivo. Código={0}",
+    "en": "File could not be read! Code={0}",
+    "pt": "Não foi possível ler o arquivo. Código={0}"
+  },
+  "Pointer format{0}": {
+    "es": "Formato de puntero: {0}",
+    "en": "Pointer format{0}",
+    "pt": "Formato de ponteiro: {0}"
+  },
+  "Not implemented": {
+    "es": "No implementado",
+    "en": "Not implemented",
+    "pt": "Não implementado"
+  },
+  "Invalid color for char: {0}": {
+    "es": "Color inválido para el carácter: {0}",
+    "en": "Invalid color for char: {0}",
+    "pt": "Cor inválida para o caractere: {0}"
+  },
+  "Hair style code = {0}": {
+    "es": "Código de estilo de pelo = {0}",
+    "en": "Hair style code = {0}",
+    "pt": "Código de estilo de cabelo = {0}"
+  },
+  "Portada · 1995 KONAMI ALL RIGHTS RESERVED": {
+    "es": "Portada · 1995 KONAMI ALL RIGHTS RESERVED",
+    "en": "Title screen · 1995 KONAMI ALL RIGHTS RESERVED",
+    "pt": "Tela inicial · 1995 KONAMI ALL RIGHTS RESERVED"
+  },
+  "Portada · LICENSED BY NINTENDO": {
+    "es": "Portada · LICENSED BY NINTENDO",
+    "en": "Title screen · LICENSED BY NINTENDO",
+    "pt": "Tela inicial · LICENSED BY NINTENDO"
+  },
+  "Texto gráfico de la pantalla inicial. Puedes dibujar o importar una imagen; cada leyenda se modifica de forma independiente. Se conserva PRESS START.": {
+    "es": "Texto gráfico de la pantalla inicial. Puedes dibujar o importar una imagen; cada leyenda se modifica de forma independiente. Se conserva PRESS START.",
+    "en": "Title screen text graphic. Draw or import an image; each line can be changed independently. PRESS START is preserved.",
+    "pt": "Texto gráfico da tela inicial. Desenhe ou importe uma imagem; cada legenda pode ser modificada independentemente. PRESS START é preservado."
+  },
+  "Textos de portada · gráficos independientes": {
+    "es": "Textos de portada · gráficos independientes",
+    "en": "Title screen text · independent graphics",
+    "pt": "Textos da tela inicial · gráficos independentes"
+  },
+  "Configuración": {
+    "es": "Configuración",
+    "pt": "Configurações",
+    "en": "Settings"
+  },
+  "ALL STARS en la selección de equipos": {
+    "es": "ALL STARS en la selección de equipos",
+    "pt": "ALL STARS na seleção de equipes",
+    "en": "ALL STARS in team selection"
+  },
+  "Comportamiento de la ROM original": {
+    "es": "Comportamiento de la ROM original",
+    "pt": "Comportamento da ROM original",
+    "en": "Original ROM behavior"
+  },
+  "Siempre visible": {
+    "es": "Siempre visible",
+    "pt": "Sempre visível",
+    "en": "Always visible"
+  },
+  "Siempre oculto": {
+    "es": "Siempre oculto",
+    "pt": "Sempre oculto",
+    "en": "Always hidden"
+  },
+  "Esta opción modifica la ROM exportada. Siempre oculto también desactiva la página después del código de desbloqueo. Los seis equipos All-Star siguen disponibles para editar.": {
+    "es": "Esta opción modifica la ROM exportada. Siempre oculto también desactiva la página después del código de desbloqueo. Los seis equipos All-Star siguen disponibles para editar.",
+    "pt": "Esta opção modifica a ROM exportada. Sempre oculto também desativa a página após o código de desbloqueio. As seis equipes All-Star continuam disponíveis para edição.",
+    "en": "This option changes the exported ROM. Always hidden also disables the page after the unlock code. The six All-Star teams remain available to edit."
+  },
+  "Visibilidad de ALL STARS": {
+    "es": "Visibilidad de ALL STARS",
+    "pt": "Visibilidade de ALL STARS",
+    "en": "ALL STARS visibility"
+  },
+  "Código de selección de equipos no compatible.": {
+    "es": "Código de selección de equipos no compatible.",
+    "pt": "Código de seleção de equipes incompatível.",
+    "en": "Unsupported team selection code."
+  },
+  "Configuración de ALL STARS inválida.": {
+    "es": "Configuración de ALL STARS inválida.",
+    "pt": "Configuração de ALL STARS inválida.",
+    "en": "Invalid ALL STARS setting."
+  },
+  "Tile de grupo fuera de la fuente de selección.": {
+    "es": "Tile de grupo fuera de la fuente de selección.",
+    "pt": "Tile de grupo fora da fonte de seleção.",
+    "en": "Group tile outside the selection font."
+  },
+  "Rótulo de la selección de equipos. EUROPE 1–4 comparten las letras EUROPE; editar esas letras afecta a los cuatro títulos. Los demás títulos tienen tiles propios. Los cambios se guardan en un espacio reservado independiente de la fuente original.": {
+    "es": "Rótulo de la selección de equipos. EUROPE 1–4 comparten las letras EUROPE; editar esas letras afecta a los cuatro títulos. Los demás títulos tienen tiles propios. Los cambios se guardan en un espacio reservado independiente de la fuente original.",
+    "pt": "Título da seleção de equipes. EUROPE 1–4 compartilham as letras EUROPE; editar essas letras afeta os quatro títulos. Os demais títulos têm tiles próprios. As alterações usam um espaço reservado independente da fonte original.",
+    "en": "Team selection label. EUROPE 1–4 share the EUROPE letters; editing those letters affects all four titles. The other titles have their own tiles. Changes use reserved space separate from the original font."
+  },
+  "Texto del grupo": {
+    "es": "Texto del grupo",
+    "pt": "Texto do grupo",
+    "en": "Group text"
+  },
+  "Previsualización del grupo": {
+    "es": "Previsualización del grupo",
+    "pt": "Prévia do grupo",
+    "en": "Group preview"
+  },
+  "Aplicar texto del grupo a la ROM": {
+    "es": "Aplicar texto del grupo a la ROM",
+    "pt": "Aplicar texto do grupo à ROM",
+    "en": "Apply group text to ROM"
+  },
+  "El grupo admite hasta 15 letras A–Z, números, espacios, puntos o guiones.": {
+    "es": "El grupo admite hasta 15 letras A–Z, números, espacios, puntos o guiones.",
+    "pt": "O grupo aceita até 15 letras A–Z, números, espaços, pontos ou hífens.",
+    "en": "The group supports up to 15 A–Z letters, numbers, spaces, periods or hyphens."
+  },
+  "Textos de grupos inválidos.": {
+    "es": "Textos de grupos inválidos.",
+    "pt": "Textos de grupos inválidos.",
+    "en": "Invalid group texts."
+  },
+  "Textos de grupos": {
+    "es": "Textos de grupos",
+    "pt": "Textos de grupos",
+    "en": "Group texts"
+  },
+  "Fuente de grupos no compatible.": {
+    "es": "Fuente de grupos no compatible.",
+    "pt": "Fonte de grupos incompatível.",
+    "en": "Unsupported group font."
+  },
+  "Resolución de títulos de grupos inválida.": {
+    "es": "Resolución de títulos de grupos inválida.",
+    "pt": "Resolução dos títulos de grupos inválida.",
+    "en": "Invalid group title resolution."
+  },
+  "Fuente de grupos fuera del espacio reservado.": {
+    "es": "Fuente de grupos fuera del espacio reservado.",
+    "pt": "Fonte de grupos fora do espaço reservado.",
+    "en": "Group font exceeds reserved space."
+  },
+  "El espacio reservado para los grupos está ocupado.": {
+    "es": "El espacio reservado para los grupos está ocupado.",
+    "pt": "O espaço reservado para os grupos está ocupado.",
+    "en": "The space reserved for groups is occupied."
+  },
+  "Aplica o descarta el texto del grupo antes de guardar un dibujo.": {
+    "es": "Aplica o descarta el texto del grupo antes de guardar un dibujo.",
+    "pt": "Aplique ou descarte o texto do grupo antes de salvar um desenho.",
+    "en": "Apply or discard the group text before saving a drawing."
+  },
+  "Fondo rojo de portada": {
+    "es": "Fondo rojo de portada",
+    "pt": "Fundo vermelho da tela inicial",
+    "en": "Red title screen background"
+  },
+  "Fuente independiente de títulos de grupos": {
+    "es": "Fuente independiente de títulos de grupos",
+    "pt": "Fonte independente dos títulos de grupos",
+    "en": "Independent group title font"
+  },
+  "Restaurar títulos de grupos": {
+    "es": "Restaurar títulos de grupos",
+    "pt": "Restaurar títulos de grupos",
+    "en": "Restore group titles"
+  },
+  "Rótulo de la selección de equipos. Cada grupo tiene gráficos independientes: cambiar un título no modifica los demás. Los cambios se guardan en un espacio reservado separado de la fuente original.": {
+    "es": "Rótulo de la selección de equipos. Cada grupo tiene gráficos independientes: cambiar un título no modifica los demás. Los cambios se guardan en un espacio reservado separado de la fuente original.",
+    "pt": "Título da seleção de equipes. Cada grupo tem gráficos independentes: mudar um título não altera os demais. As alterações usam um espaço reservado separado da fonte original.",
+    "en": "Team selection label. Every group has independent graphics: changing one title leaves the others unchanged. Changes use reserved space separate from the original font."
+  },
+  "Grupos": {
+    "es": "Grupos",
+    "pt": "Grupos",
+    "en": "Groups"
+  },
+  "Agregar grupo": {
+    "es": "Agregar grupo",
+    "pt": "Adicionar grupo",
+    "en": "Add group"
+  },
+  "Restaurar grupos originales": {
+    "es": "Restaurar grupos originales",
+    "pt": "Restaurar grupos originais",
+    "en": "Restore original groups"
+  },
+  "Agrega o quita equipos en cada grupo. Un equipo puede participar en varios grupos.": {
+    "es": "Agrega o quita equipos en cada grupo. Un equipo puede participar en varios grupos.",
+    "pt": "Adicione ou remova equipes em cada grupo. Uma equipe pode participar de vários grupos.",
+    "en": "Add or remove teams in each group. A team can belong to multiple groups."
+  },
+  "En el juego, cada página muestra hasta seis equipos. Un grupo de ocho ocupa dos páginas con el mismo título. Los grupos vacíos se guardan, pero no aparecen en la selección.": {
+    "es": "En el juego, cada página muestra hasta seis equipos. Un grupo de ocho ocupa dos páginas con el mismo título. Los grupos vacíos se guardan, pero no aparecen en la selección.",
+    "pt": "No jogo, cada página mostra até seis equipes. Um grupo de oito ocupa duas páginas com o mesmo título. Grupos vazios são salvos, mas não aparecem na seleção.",
+    "en": "In the game, each page shows up to six teams. A group of eight uses two pages with the same title. Empty groups are saved but do not appear in team selection."
+  },
+  "Nombre del grupo": {
+    "es": "Nombre del grupo",
+    "pt": "Nome do grupo",
+    "en": "Group name"
+  },
+  "Quitar grupo": {
+    "es": "Quitar grupo",
+    "pt": "Remover grupo",
+    "en": "Remove group"
+  },
+  "equipos en el grupo": {
+    "es": "equipos en el grupo",
+    "pt": "equipes no grupo",
+    "en": "teams in group"
+  },
+  "Quitar equipo": {
+    "es": "Quitar equipo",
+    "pt": "Remover equipe",
+    "en": "Remove team"
+  },
+  "Este grupo todavía no tiene equipos.": {
+    "es": "Este grupo todavía no tiene equipos.",
+    "pt": "Este grupo ainda não tem equipes.",
+    "en": "This group has no teams yet."
+  },
+  "Agregar o elegir equipos": {
+    "es": "Agregar o elegir equipos",
+    "pt": "Adicionar ou escolher equipes",
+    "en": "Add or choose teams"
+  },
+  "Equipos del grupo": {
+    "es": "Equipos del grupo",
+    "pt": "Equipes do grupo",
+    "en": "Group teams"
+  },
+  "Buscar equipo": {
+    "es": "Buscar equipo",
+    "pt": "Buscar equipe",
+    "en": "Search teams"
+  },
+  "equipos seleccionados": {
+    "es": "equipos seleccionados",
+    "pt": "equipes selecionadas",
+    "en": "teams selected"
+  },
+  "Guardar equipos del grupo": {
+    "es": "Guardar equipos del grupo",
+    "pt": "Salvar equipes do grupo",
+    "en": "Save group teams"
+  },
+  "Controlado por el editor de Grupos": {
+    "es": "Controlado por el editor de Grupos",
+    "pt": "Controlado pelo editor de Grupos",
+    "en": "Controlled by the Groups editor"
+  },
+  "La selección usa los grupos configurados. Restaura los grupos originales para cambiar la visibilidad de ALL STARS.": {
+    "es": "La selección usa los grupos configurados. Restaura los grupos originales para cambiar la visibilidad de ALL STARS.",
+    "pt": "A seleção usa os grupos configurados. Restaure os grupos originais para alterar a visibilidade de ALL STARS.",
+    "en": "Team selection uses the configured groups. Restore the original groups to change ALL STARS visibility."
+  },
+  "Grupos inválidos.": {
+    "es": "Grupos inválidos.",
+    "pt": "Grupos inválidos.",
+    "en": "Invalid groups."
+  },
+  "Se permiten entre 1 y 16 grupos.": {
+    "es": "Se permiten entre 1 y 16 grupos.",
+    "pt": "São permitidos de 1 a 16 grupos.",
+    "en": "Between 1 and 16 groups are allowed."
+  },
+  "Equipos de grupo inválidos.": {
+    "es": "Equipos de grupo inválidos.",
+    "pt": "Equipes de grupo inválidas.",
+    "en": "Invalid group teams."
+  },
+  "Debe quedar al menos un equipo en los grupos.": {
+    "es": "Debe quedar al menos un equipo en los grupos.",
+    "pt": "Deve permanecer pelo menos uma equipe nos grupos.",
+    "en": "At least one team must remain in the groups."
+  },
+  "Código de grupos fuera de rango.": {
+    "es": "Código de grupos fuera de rango.",
+    "pt": "Código de grupos fora do intervalo.",
+    "en": "Group code out of range."
+  },
+  "Grupos y equipos": {
+    "es": "Grupos y equipos",
+    "pt": "Grupos e equipes",
+    "en": "Groups and teams"
+  },
+  "Páginas de grupos": {
+    "es": "Páginas de grupos",
+    "pt": "Páginas de grupos",
+    "en": "Group pages"
+  },
+  "Código de grupos no compatible.": {
+    "es": "Código de grupos no compatible.",
+    "pt": "Código de grupos incompatível.",
+    "en": "Unsupported group code."
+  },
+  "Restaurar grupos": {
+    "es": "Restaurar grupos",
+    "pt": "Restaurar grupos",
+    "en": "Restore groups"
+  },
+  "Código de grupos no compatible: {0}.": {
+    "es": "Código de grupos no compatible: {0}.",
+    "pt": "Código de grupos incompatível: {0}.",
+    "en": "Unsupported group code: {0}."
+  },
+  "Texto de portada": {
+    "es": "Texto de portada",
+    "en": "Title screen text",
+    "pt": "Texto da tela inicial"
+  },
+  "caracteres: A–Z, números, espacios, puntos, guiones o ©.": {
+    "es": "caracteres: A–Z, números, espacios, puntos, guiones o ©.",
+    "en": "characters: A–Z, numbers, spaces, periods, hyphens or ©.",
+    "pt": "caracteres: A–Z, números, espaços, pontos, hífens ou ©."
+  },
+  "Previsualización del texto de portada": {
+    "es": "Previsualización del texto de portada",
+    "en": "Title screen text preview",
+    "pt": "Prévia do texto da tela inicial"
+  },
+  "Aplicar texto de portada a la ROM": {
+    "es": "Aplicar texto de portada a la ROM",
+    "en": "Apply title screen text to ROM",
+    "pt": "Aplicar texto da tela inicial à ROM"
+  },
+  "Usa letras A–Z, números, espacios, puntos, guiones o ©.": {
+    "es": "Usa letras A–Z, números, espacios, puntos, guiones o ©.",
+    "en": "Use letters A–Z, numbers, spaces, periods, hyphens or ©.",
+    "pt": "Use letras A–Z, números, espaços, pontos, hífens ou ©."
+  },
+  "El texto de portada admite hasta {0} caracteres.": {
+    "es": "El texto de portada admite hasta {0} caracteres.",
+    "en": "Title screen text supports up to {0} characters.",
+    "pt": "O texto da tela inicial aceita até {0} caracteres."
+  },
+  "Textos de portada inválidos.": {
+    "es": "Textos de portada inválidos.",
+    "en": "Invalid title screen texts.",
+    "pt": "Textos da tela inicial inválidos."
+  },
+  "Aplica o descarta el texto de portada antes de guardar un dibujo.": {
+    "es": "Aplica o descarta el texto de portada antes de guardar un dibujo.",
+    "en": "Apply or discard the title screen text before saving a drawing.",
+    "pt": "Aplique ou descarte o texto da tela inicial antes de salvar um desenho."
+  },
+  "Columnas de banderas": {
+    "es": "Columnas de banderas",
+    "en": "Flag columns",
+    "pt": "Colunas de bandeiras"
+  },
+  "3 columnas · 2 filas": {
+    "es": "3 columnas · 2 filas",
+    "en": "3 columns · 2 rows",
+    "pt": "3 colunas · 2 linhas"
+  },
+  "4 columnas · 1 fila": {
+    "es": "4 columnas · 1 fila",
+    "en": "4 columns · 1 row",
+    "pt": "4 colunas · 1 linha"
+  },
+  "La ROM exportada usa esta distribución. Los grupos se dividen en páginas de seis o cuatro equipos según la opción elegida.": {
+    "es": "La ROM exportada usa esta distribución. Los grupos se dividen en páginas de seis o cuatro equipos según la opción elegida.",
+    "en": "The exported ROM uses this layout. Groups are split into pages of six or four teams depending on your choice.",
+    "pt": "A ROM exportada usa esta disposição. Os grupos são divididos em páginas de seis ou quatro equipes conforme a opção escolhida."
+  },
+  "En el juego, cada página muestra hasta cuatro equipos en una fila. Cambia la distribución en Configuración. Los grupos vacíos no aparecen en la selección.": {
+    "es": "En el juego, cada página muestra hasta cuatro equipos en una fila. Cambia la distribución en Configuración. Los grupos vacíos no aparecen en la selección.",
+    "en": "Each page in the game shows up to four teams in one row. Change the layout in Settings. Empty groups do not appear in team selection.",
+    "pt": "Cada página no jogo mostra até quatro equipes em uma linha. Altere a disposição em Configurações. Grupos vazios não aparecem na seleção."
+  },
+  "En el juego, cada página muestra hasta seis equipos en dos filas. Cambia la distribución en Configuración. Los grupos vacíos no aparecen en la selección.": {
+    "es": "En el juego, cada página muestra hasta seis equipos en dos filas. Cambia la distribución en Configuración. Los grupos vacíos no aparecen en la selección.",
+    "en": "Each page in the game shows up to six teams in two rows. Change the layout in Settings. Empty groups do not appear in team selection.",
+    "pt": "Cada página no jogo mostra até seis equipes em duas linhas. Altere a disposição em Configurações. Grupos vazios não aparecem na seleção."
+  },
+  "Inicio · Logo de Konami": {
+    "es": "Inicio · Logo de Konami",
+    "en": "Startup · Konami logo",
+    "pt": "Início · Logo da Konami"
+  },
+  "Inicio · Pantalla posterior a Konami": {
+    "es": "Inicio · Pantalla posterior a Konami",
+    "en": "Startup · Screen after Konami",
+    "pt": "Início · Tela após a Konami"
+  },
+  "Pantalla inicial de 256 × 224. Puedes dibujar o importar una imagen. Se conservan los efectos de la introducción y las paletas originales; cada bloque de 8 × 8 usa una paleta. Las imágenes con demasiado detalle pueden superar el espacio disponible.": {
+    "es": "Pantalla inicial de 256 × 224. Puedes dibujar o importar una imagen. Se conservan los efectos de la introducción y las paletas originales; cada bloque de 8 × 8 usa una paleta. Las imágenes con demasiado detalle pueden superar el espacio disponible.",
+    "en": "256 × 224 startup screen. Draw or import an image. The intro effects and original palettes are preserved; each 8 × 8 block uses one palette. Highly detailed images may exceed the available space.",
+    "pt": "Tela inicial de 256 × 224. Desenhe ou importe uma imagem. Os efeitos da introdução e as paletas originais são preservados; cada bloco de 8 × 8 usa uma paleta. Imagens muito detalhadas podem exceder o espaço disponível."
+  },
+  "Cargador de pantalla inicial no compatible.": {
+    "es": "Cargador de pantalla inicial no compatible.",
+    "en": "Unsupported startup screen loader.",
+    "pt": "Carregador de tela inicial incompatível."
+  },
+  "Gráficos de pantalla inicial inválidos.": {
+    "es": "Gráficos de pantalla inicial inválidos.",
+    "en": "Invalid startup screen graphics.",
+    "pt": "Gráficos de tela inicial inválidos."
+  },
+  "Mapa de pantalla inicial inválido.": {
+    "es": "Mapa de pantalla inicial inválido.",
+    "en": "Invalid startup screen tilemap.",
+    "pt": "Mapa de tela inicial inválido."
+  },
+  "La pantalla inicial debe medir 256 × 224.": {
+    "es": "La pantalla inicial debe medir 256 × 224.",
+    "en": "The startup screen must measure 256 × 224.",
+    "pt": "A tela inicial deve medir 256 × 224."
+  },
+  "Pantalla inicial desconocida.": {
+    "es": "Pantalla inicial desconocida.",
+    "en": "Unknown startup screen.",
+    "pt": "Tela inicial desconhecida."
+  },
+  "El espacio reservado para la pantalla inicial está ocupado.": {
+    "es": "El espacio reservado para la pantalla inicial está ocupado.",
+    "en": "The reserved startup screen space is occupied.",
+    "pt": "O espaço reservado para a tela inicial está ocupado."
+  },
+  "La imagen supera los tiles disponibles. Reduce el detalle o usa un fondo uniforme.": {
+    "es": "La imagen supera los tiles disponibles. Reduce el detalle o usa un fondo uniforme.",
+    "en": "The image exceeds the available tiles. Reduce detail or use a solid background.",
+    "pt": "A imagem excede os tiles disponíveis. Reduza os detalhes ou use um fundo uniforme."
+  },
+  "La imagen supera el espacio comprimido disponible. Reduce el detalle.": {
+    "es": "La imagen supera el espacio comprimido disponible. Reduce el detalle.",
+    "en": "The image exceeds the available compressed space. Reduce detail.",
+    "pt": "A imagem excede o espaço comprimido disponível. Reduza os detalhes."
+  },
+  "Pantalla inicial fuera de su espacio reservado.": {
+    "es": "Pantalla inicial fuera de su espacio reservado.",
+    "en": "Startup screen exceeds its reserved space.",
+    "pt": "Tela inicial fora do espaço reservado."
+  },
+  "Los gráficos auxiliares de la introducción fueron alterados.": {
+    "es": "Los gráficos auxiliares de la introducción fueron alterados.",
+    "en": "The auxiliary intro graphics were altered.",
+    "pt": "Os gráficos auxiliares da introdução foram alterados."
+  },
+  "Referencia gráfica inválida en la pantalla inicial.": {
+    "es": "Referencia gráfica inválida en la pantalla inicial.",
+    "en": "Invalid graphics reference in the startup screen.",
+    "pt": "Referência gráfica inválida na tela inicial."
+  },
+  "Restaurar pantalla inicial": {
+    "es": "Restaurar pantalla inicial",
+    "en": "Restore startup screen",
+    "pt": "Restaurar tela inicial"
+  },
+  "Menú principal": {
+    "es": "Menú principal",
+    "en": "Main menu",
+    "pt": "Menu principal"
+  },
+  "Edita los rótulos de las ocho opciones y los gráficos del menú. Cada opción conserva su función en el juego.": {
+    "es": "Edita los rótulos de las ocho opciones y los gráficos del menú. Cada opción conserva su función en el juego.",
+    "en": "Edit the eight option labels and menu graphics. Each option keeps its function in the game.",
+    "pt": "Edite os rótulos das oito opções e os gráficos do menu. Cada opção mantém sua função no jogo."
+  },
+  "Previsualización del menú principal": {
+    "es": "Previsualización del menú principal",
+    "en": "Main menu preview",
+    "pt": "Prévia do menu principal"
+  },
+  "Selecciona una opción para ver su estado resaltado.": {
+    "es": "Selecciona una opción para ver su estado resaltado.",
+    "en": "Select an option to see it highlighted.",
+    "pt": "Selecione uma opção para vê-la destacada."
+  },
+  "Primera línea": {
+    "es": "Primera línea",
+    "en": "First line",
+    "pt": "Primeira linha"
+  },
+  "Segunda línea": {
+    "es": "Segunda línea",
+    "en": "Second line",
+    "pt": "Segunda linha"
+  },
+  "Fuente original: ACDEGIKLMNOPRSTWY, espacios y guiones. Hasta 112 píxeles por línea; I y W utilizan más sprites.": {
+    "es": "Fuente original: ACDEGIKLMNOPRSTWY, espacios y guiones. Hasta 112 píxeles por línea; I y W utilizan más sprites.",
+    "en": "Original font: ACDEGIKLMNOPRSTWY, spaces and hyphens. Up to 112 pixels per line; I and W use more sprites.",
+    "pt": "Fonte original: ACDEGIKLMNOPRSTWY, espaços e hífens. Até 112 pixels por linha; I e W usam mais sprites."
+  },
+  "Aplicar rótulo a la ROM": {
+    "es": "Aplicar rótulo a la ROM",
+    "en": "Apply label to ROM",
+    "pt": "Aplicar rótulo à ROM"
+  },
+  "Restaurar esta opción": {
+    "es": "Restaurar esta opción",
+    "en": "Restore this option",
+    "pt": "Restaurar esta opção"
+  },
+  "Editar gráficos del menú": {
+    "es": "Editar gráficos del menú",
+    "en": "Edit menu graphics",
+    "pt": "Editar gráficos do menu"
+  },
+  "Las letras y el panel son compartidos: dibujar aquí modifica todos sus usos. El gráfico debe caber en su espacio comprimido original.": {
+    "es": "Las letras y el panel son compartidos: dibujar aquí modifica todos sus usos. El gráfico debe caber en su espacio comprimido original.",
+    "en": "Letters and panel are shared: drawing here changes all their uses. The graphic must fit its original compressed space.",
+    "pt": "As letras e o painel são compartilhados: desenhar aqui altera todos os seus usos. O gráfico deve caber no espaço comprimido original."
+  },
+  "Menú principal · letras grandes compartidas": {
+    "es": "Menú principal · letras grandes compartidas",
+    "en": "Main menu · shared large letters",
+    "pt": "Menu principal · letras grandes compartilhadas"
+  },
+  "Menú principal · panel compartido": {
+    "es": "Menú principal · panel compartido",
+    "en": "Main menu · shared panel",
+    "pt": "Menu principal · painel compartilhado"
+  },
+  "Menú principal · fondo azul": {
+    "es": "Menú principal · fondo azul",
+    "en": "Main menu · blue background",
+    "pt": "Menu principal · fundo azul"
+  },
+  "Usa las letras disponibles del menú: ACDEGIKLMNOPRSTWY, espacios y guiones.": {
+    "es": "Usa las letras disponibles del menú: ACDEGIKLMNOPRSTWY, espacios y guiones.",
+    "en": "Use the available menu letters: ACDEGIKLMNOPRSTWY, spaces and hyphens.",
+    "pt": "Use as letras disponíveis do menu: ACDEGIKLMNOPRSTWY, espaços e hífens."
+  },
+  "Cada línea debe caber en 112 píxeles.": {
+    "es": "Cada línea debe caber en 112 píxeles.",
+    "en": "Each line must fit within 112 pixels.",
+    "pt": "Cada linha deve caber em 112 pixels."
+  },
+  "Esta opción admite {0} sprites; la letra I utiliza dos.": {
+    "es": "Esta opción admite {0} sprites; la letra I utiliza dos.",
+    "en": "This option allows {0} sprites; the letter I uses two.",
+    "pt": "Esta opção permite {0} sprites; a letra I usa dois."
+  },
+  "Aplica o descarta el texto del menú antes de guardar un dibujo.": {
+    "es": "Aplica o descarta el texto del menú antes de guardar un dibujo.",
+    "en": "Apply or discard the menu text before saving a drawing.",
+    "pt": "Aplique ou descarte o texto do menu antes de salvar um desenho."
+  },
+  "Fuente ampliada: A–Z, espacios y guiones. Hasta 112 píxeles por línea.": {
+    "es": "Fuente ampliada: A–Z, espacios y guiones. Hasta 112 píxeles por línea.",
+    "en": "Extended font: A–Z, spaces and hyphens. Up to 112 pixels per line.",
+    "pt": "Fonte ampliada: A–Z, espaços e hífens. Até 112 pixels por linha."
+  },
+  "Usa letras A–Z, espacios y guiones.": {
+    "es": "Usa letras A–Z, espacios y guiones.",
+    "en": "Use letters A–Z, spaces and hyphens.",
+    "pt": "Use letras A–Z, espaços e hífens."
+  },
+  "El menú admite hasta 128 sprites visibles en total. Acorta otro rótulo.": {
+    "es": "El menú admite hasta 128 sprites visibles en total. Acorta otro rótulo.",
+    "en": "The menu supports up to 128 visible sprites in total. Shorten another label.",
+    "pt": "O menu permite até 128 sprites visíveis no total. Encurte outro rótulo."
+  },
+  "La imagen está armada como en el juego. Los píxeles reutilizados cambian en todas sus apariciones; el borde sombreado sirve de referencia.": {
+    "es": "La imagen está armada como en el juego. Los píxeles reutilizados cambian en todas sus apariciones; el borde sombreado sirve de referencia.",
+    "en": "The image is assembled as in the game. Reused pixels change in every appearance; the shaded border serves as a reference.",
+    "pt": "A imagem está montada como no jogo. Pixels reutilizados mudam em todas as suas aparições; a borda sombreada serve de referência."
+  }
+}

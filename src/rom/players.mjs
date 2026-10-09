@@ -1,5 +1,5 @@
 import { word, loRom } from './binary.mjs';
-import { deluxeAttributes } from './deluxe.mjs';
+import { deluxeAttributes, deluxePlayerNameOffset } from './deluxe.mjs';
 export const POSITIONS={1:'Portero',2:'Defensa',3:'Medio defensivo',4:'Mediocampo',5:'Medio ofensivo',6:'Delantero'};
 export const STATS=['acceleration','speed','shotPower','curl','balance','intelligence','dribbling','jump','energy'];
 export function encodeName(name) {
@@ -13,8 +13,8 @@ export function encodeName(name) {
   });return bytes;
 }
 export function playerOffsets(rom,team,index) {
-  if(!Number.isInteger(team)||team<0||team>=36||!Number.isInteger(index)||index<0||index>=20) throw new Error('Jugador inválido.');
-  return {name:loRom(0x870000|word(rom,0x38138+team*2))+index*8,attributes:0x50000+team*140+index*7};
+  if(!Number.isInteger(team)||team<0||team>=42||!Number.isInteger(index)||index<0||index>=20) throw new Error('Jugador inválido.');
+  return {name:deluxePlayerNameOffset(rom,team,index),attributes:0x50000+team*140+index*7};
 }
 export function playerPatches(rom,team,index,changes,swapNumber=true) {
   const offsets=playerOffsets(rom,team,index), patches=[];

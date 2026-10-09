@@ -9,27 +9,27 @@ const count = ref(0)
 </script>
 
 <template>
-  <h1>{{ msg }}</h1>
+  <h1>{{ $t(msg) }}</h1>
 
   <p>
-    Recommended IDE setup:
-    <a href="https://code.visualstudio.com/" target="_blank">VSCode</a>
+    {{ $t("Recommended IDE setup:") }}
+    <a href="https://code.visualstudio.com/" target="_blank">{{ $t("VSCode") }}</a>
     +
-    <a href="https://github.com/johnsoncodehk/volar" target="_blank">Volar</a>
+    <a href="https://github.com/johnsoncodehk/volar" target="_blank">{{ $t("Volar") }}</a>
   </p>
 
   <p>
     <a href="https://vitejs.dev/guide/features.html" target="_blank">
-      Vite Documentation
+      {{ $t("Vite Documentation") }}
     </a>
     |
-    <a href="https://v3.vuejs.org/" target="_blank">Vue 3 Documentation</a>
+    <a href="https://v3.vuejs.org/" target="_blank">{{ $t("Vue 3 Documentation") }}</a>
   </p>
 
-  <button type="button" @click="count++">count is: {{ count }}</button>
+  <button type="button" @click="count++">{{ $t("count is:") }} {{ $t(count) }}</button>
   <p>
-    Edit
-    <code>components/HelloWorld.vue</code> to test hot module replacement.
+    {{ $t("Edit") }}
+    <code>{{ $t("components/HelloWorld.vue") }}</code> {{ $t("to test hot module replacement.") }}
   </p>
 </template>
 

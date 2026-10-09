@@ -110,6 +110,14 @@ The logo editor reconstructs graphics using original tiles, tilemaps and palette
 
 Compressed graphics must fit within the available ROM storage space.
 
+**Startup screens**
+
+In **Gráficos**, select **Inicio · Logo de Konami** or **Inicio · Pantalla posterior a Konami** to draw or import a replacement image for either screen independently. Both use a 256 × 224 canvas and their original SNES palettes. Imported images are adjusted to one palette per 8 × 8 tile. Scene-specific graphics and maps are relocated into verified free ROM space; the original animation helpers and other scenes retain their native data. Undo/redo, project recovery, reopening an exported ROM and restoring each screen independently are supported. Detailed images may exceed the available unique tiles or compressed storage; the editor rejects them without applying a partial change. The original intro timing and effects remain in place; this edits the two images, rather than introducing a new animation sequence.
+
+**Title screen notices**
+
+In **Gráficos**, select **Portada · 1995 KONAMI ALL RIGHTS RESERVED** or **Portada · LICENSED BY NINTENDO** to edit the notice with a text input and live preview, or draw or import a replacement image. Text inputs support A–Z, digits, spaces, periods, hyphens and © (up to 40 and 26 characters respectively); applied text is retained when reopening a project or exported ROM. The editable strips measure 240 × 8 and 160 × 8 pixels and retain the title's original palette. Each notice has independent tiles, so repeated letters can be edited freely without changing the other notice or PRESS START. Applying changes reserves verified free ROM space; undo, project recovery and restoring either notice are supported.
+
 ## 👕 Uniform & Color Editor
 
 Customize team appearance using original SNES BGR555 palettes.
@@ -141,6 +149,8 @@ ISSD Studio can inspect, preview, export and partially replace the game's origin
 - Support 8-bit and 16-bit PCM.
 - Support mono and stereo input.
 - Convert WAV audio into SNES-compatible BRR.
+- Automatically normalize each selected clip to a common active-signal RMS level before BRR encoding, with soft peak limiting. Silence stays silent and unused storage stays padded with zeros.
+- Normalize all previously applied audio replacements together with **Normalizar audios modificados**; the operation supports undo and preserves playback markers. Game event volumes and DSP envelopes still affect the final audible level.
 - Preview converted samples before applying.
 - Replace 69 of the 76 original samples within their fixed storage allocations.
 
@@ -185,6 +195,21 @@ Exporting a project without modifications produces a ROM identical to the origin
 6. Export the modified ROM.
 
 ROM files are not included or distributed with this project.
+
+### Test the edited ROM
+
+Open **Emulador** in the editor menu to load a validated export of the current
+project, including its applied changes and updated checksum. Click **Iniciar
+juego** inside the screen to start SNES emulation. The emulator uses
+[EmulatorJS](https://emulatorjs.org/docs/systems/snes/) and downloads its runtime
+from the EmulatorJS CDN, so internet access is required.
+
+Use **Recargar ROM modificada** after making further edits or undoing changes;
+this restarts the game with the latest ROM. Pending graphic/audio previews must
+be applied to become part of the ROM. **Detener**, leaving the emulator menu,
+or opening another ROM stops the runtime. Pause, fullscreen, keyboard and
+gamepad settings are available in the emulator toolbar. SMC copier headers are
+removed from the emulator copy; exported downloads still preserve them.
 
 ### Local Development
 
@@ -261,7 +286,7 @@ Synthetic test vectors are used when original ROM files are unavailable.
 | JSON project import/export | ✅ Implemented |
 | Modified ROM export | ✅ Implemented |
 | Add, remove or reorder teams | ⏳ Research |
-| Main menu player photographs | ⏳ Planned |
+| Main menu player photographs | ✅ Five assembled 8bpp photos: drawing, image import and ROM export |
 | Team photographs | ⏳ Planned |
 | Emulator and hardware validation | ⏳ Pending |
 
@@ -269,7 +294,7 @@ Synthetic test vectors are used when original ROM files are unavailable.
 
 - The number of teams is currently fixed at 36 for ISS Deluxe USA.
 - Adding, deleting or reordering teams requires additional reverse engineering of executable code and references.
-- Main menu player photographs and team photographs are not yet editable.
+- Team photographs are not yet editable. The five title photos share one compressed block and its original palette; edits must fit in the available bytes.
 - Some compressed graphics have strict size limitations.
 - Shared graphic resources may affect multiple elements.
 - Custom team formations are not yet supported.
@@ -369,3 +394,43 @@ For the ISS Deluxe native editing tools, decompression research, audio decoding 
 ---
 
 **⚽ Web ISSD Studio — Bring your own version of International Superstar Soccer Deluxe to life!**
+
+### Idiomas de la interfaz
+
+El selector de idioma permite usar toda la interfaz en español, portugués o inglés. Se detecta inicialmente el idioma del navegador (español como respaldo) y la elección se conserva en `localStorage`. Las traducciones incluyen navegación, controles, avisos, validaciones, accesibilidad y etiquetas de equipos y atributos; los nombres editados y los datos binarios de la ROM se conservan.
+
+Los textos se centralizan en `src/i18n/messages.json`, con variantes `es`, `pt` y `en`. Los componentes usan `$t(texto)` y `$locale`; los mensajes dinámicos usan marcadores `{0}`, `{1}`, etc. `npm test` verifica que los tres idiomas estén completos y mantengan sus marcadores. El emulador recibe el idioma seleccionado; cambiarlo mientras está abierto reinicia la emulación con el nuevo idioma.
+
+### Títulos de grupos y gráficos de portada
+
+En Gráficos están disponibles los siete títulos originales de selección. Cada uno tiene un input de texto con previsualización al escribir y gráficos independientes, incluidos EUROPE 1–4. Configuración permite conservar, mostrar siempre u ocultar siempre la página ALL STARS en la ROM exportada.
+
+El jugador completo incluye las dos filas de tiles y las posiciones de sprites grandes. El fondo rojo de portada se puede editar por separado; borrar el logo completo también limpia las capas que tenía debajo. Los dos textos inferiores de portada tienen recursos independientes.
+
+El menú **Grupos** permite renombrar los siete grupos originales, agregar nuevos (hasta 16), quitar grupos y elegir sus equipos, incluidos grupos de cuatro u ocho. Los cambios se guardan en el proyecto y en la ROM exportada, con deshacer/rehacer y restauración. Los grupos vacíos no aparecen en el juego; debe quedar al menos un equipo. Un equipo puede pertenecer a varios grupos.
+
+En **Configuración → Columnas de banderas** se puede elegir **3 columnas · 2 filas** (hasta seis equipos por página) o **4 columnas · 1 fila** (hasta cuatro). La distribución modifica la pantalla nativa del juego, con banderas, nombres, cursor y flechas alineados. Los grupos mayores se dividen en páginas con el mismo título; uno de ocho equipos ocupa dos páginas en ambas opciones. La opción se guarda con el proyecto y admite deshacer/rehacer. Se adaptan los conteos, controles, búsqueda, paletas, banderas, rótulos y referencias de jugadores. El atlas de títulos conserva su capacidad de 1850 bytes comprimidos; un dibujo que la exceda se rechaza sin modificar el proyecto. Cuando se usan grupos personalizados, estos controlan la visibilidad de ALL STARS.
+
+Los equipos siguen siendo los 42 slots de la ROM (36 selecciones y seis All-Star). Chile, Perú, Bolivia y Ecuador requieren sustituir un slot existente; agregar grupos no crea selecciones nuevas. La ampliación a 48 selecciones distintas sigue pendiente. Las rutinas modificadas se verifican en pruebas de CPU de 16 bits y DMA, además de importación/exportación y checksum.
+
+### Main menu editor
+
+Open **Menú principal** to edit the eight option labels with a live assembled
+preview. Two text lines support **A–Z**, spaces and hyphens, up to 112 pixels per
+line. The original large glyphs are preserved; missing letters are added in
+the same palette. For example, **INICIAR / JUEGO** fits the first option.
+Changing a label retains its game action. Each option can be restored
+independently. Shared letters, panel and blue background also support drawing
+and image import. The panel is displayed as its complete 128 × 48 button and
+the blue background as its assembled 256 × 224 screen, with tile reuse and
+flips retained when saving. The global panel border is protected context.
+
+The expanded compressed font uses verified free bytes `$A4E17F..$A4EBFF`,
+uploading 144 tiles into the menu's OBJ bank. Expanded OAM uses
+`$AEE500..$AEE8FF` with 32 slots per option; `DATA_82F3AA` is updated in its
+original column order to address 64-byte WRAM frames. Unused sprites are
+clipped before OAM emission, and labels cannot exceed 128 visible sprites in
+total. Existing projects with the original layout remain supported. Project
+validation, undo/redo, local saving, recovery and ROM checksum export include
+these changes. `tests/main-menu.cjs` verifies A–Z, INICIAR/JUEGO, navigation
+pointers, padding, independence, restoration, import/export and pool isolation.

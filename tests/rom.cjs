@@ -41,7 +41,7 @@ global.Blob ||= require('buffer').Blob;
     let checked = 0;
     for (const [filename, game, count, squad] of [
       ['International Superstar Soccer (USA).sfc','iss',27,15],
-      ['International Superstar Soccer Deluxe (USA).sfc','issd',36,20],
+      ['International Superstar Soccer Deluxe (USA).sfc','issd',42,20],
     ]) {
       const file = path.resolve(__dirname, '../roms', filename);
       if (!fs.existsSync(file)) { console.log(`SKIP local ROM: ${filename}`); continue; }

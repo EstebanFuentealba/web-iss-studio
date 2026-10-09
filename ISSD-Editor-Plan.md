@@ -209,3 +209,106 @@ Límites adicionales: los nombres grandes comparten un bloque comprimido753bytes
 - [x] `flagPalettePatches` escribe los cuatro colores referenciados por DATA_81E7D8 y rechaza paletas compartidas con cualquier otro de los42slots. Pruebas verifican los35otros países, persistencia/exportación/restauración y cuantización.
 - [x] Imagen del usuario `Proyecto nuevo (1).png` (24×16) aplicada al slot Italy con blanco, azul, rojo y dorado. Guardado local contiene8patches (pool/punteros/cargadores y4colores), sin previsualización pendiente. Este cambio es solicitado por el usuario: conservarlo, no deshacerlo como prueba.
 - [x] UI: deshacer/rehacer dibujo restaura conjuntamente imagen y paleta. Evidencia `issd-italy-custom-palette.png`. Mantener límite4colores e indicar que imágenes con más tonos son reducidas.
+
+
+### Argentina: rótulo alineado y límite real — 9 octubre
+- [x] Sprites16×16 del nombre grande usan coordenadas centradas: restar4a x/y para situar su esquina. Argentina mezcla dos sprites con AR/GE (tiles224/202,attr26) con cinco letras de dos sprites8×8. Resultado9letras con12sprites, no6letras.
+- [x] `bigLabel.maxLetters` cuenta letras empaquetadas e individuales; UI conserva capacidad de la ROM original al cambiar a un nombre más corto. Renderer valida los bordes y muestra ARGENTINA completo/alineado.
+- [x] Escritura reutiliza parejas de letras verificadas en la fuente nativa. Selección mediante programación dinámica cuando hacen falta sprites16×16; si la combinación necesita más sprites que el slot o excede753bytes, se rechaza antes de escribir. No prometer9letras arbitrarias sin esa validación ni expandir memoria.
+- [x] Se conservan coordenadas/kerning existentes cuando la agrupación nativa admite el nuevo nombre. Espacios compactos junto a I pueden suprimirse para caber en32px; ARGENTINA cabe sin perder letras.
+- [x] Pruebas: Argentina9caracteres, alineación de los sprites AR/GE, cambiar a ARGENTINO, exportación/importación, otros35nombres intactos y restauración binariamente idéntica. UI muestra Hasta9 y ambos previews; prueba descartada sin aplicar. Evidencia `issd-argentina-label-preview.png`.
+- [ ] La selección de banderas en emulador quedó pendiente tras interrupción del usuario: `roms/ISSD-corregido.sfc` arrancó en OpenEmu, pero no se confirmó la pantalla de equipos. No declarar esa validación completada.
+
+### N. Ireland / Czech Rep.: referencia, banco y puntuación — 9 octubre
+- [x] Ambos campos admiten 10 caracteres contando puntos y espacios; el límite se conserva al reabrir la ROM.
+- [x] Czech Rep. corresponde al frame28, no37 (All American Star). El original incluye THE CZECH REP. Frame28: seis sprites, primero THE (tile234,attr26), cinco fragmentos del banco1 (217/219/221/223/239,attrs27/11).
+- [x] Renderer carga 9BA400 en tiles464–495 (VRAM7D00), además de fuente9DE13C tiles128–255 (VRAM6800). Respeta bit0 del atributo OAM y centro de sprites16×16.
+- [x] Reconocer N. IRELAND con punto nativo186 y espacio por posición; punto usa un sprite, espacio no necesita sprite; compactos de32×8 admiten puntuación y reducen separaciones solo cuando falta ancho.
+- [x] Renombrar Czech a CZECH REP. conserva fragmentos nativos y reemplaza THE por un sprite duplicado en idéntica posición a otro existente (tile217). Resultado visual sin THE; mantiene seis sprites y cabe en750/753bytes. No modifica fuente compartida ni los otros41frames.
+- [x] Pruebas de los dos nombres completos, N.IRELAND sin espacio, exportación/reapertura, recuperación de proyecto, restauración exacta, límites y otros35equipos intactos. Comparación directa de los píxeles CZECH contra el banco nativo.
+- [x] UI comprobada para ambos equipos: límite10 y previews pequeños/rojos. Evidencias issd-czech-label-preview.png e issd-n-ireland-label-preview.png. Previews descartados; proyecto del usuario conserva12recursos modificados.
+- Restricción vigente: diez caracteres es el máximo del campo; otras combinaciones siguen limitadas por sprites/font originales, ancho32px y bloque753bytes. Los errores de capacidad impiden aplicar/exportar cambios inválidos.
+
+### Dos textos independientes y equipos de estrellas — 9 octubre
+- [x] Dos inputs: nombre rojo/amarillo y nombre pequeño. Se llenan con el nombre actual y regeneran su propia imagen al escribir, sin botón previo. Preview separado del guardado; aplicar/descartar conserva atomicidad y bloqueo de exportación pendiente.
+- [x] Czech: original rojo THE CZECH REP., pequeño CZECH. El raster pequeño comprobado en ROM es 32×8, no38×8. El campo rojo admite14caracteres para incluir THE y puntuación. Se puede quitar/agregar THE y el punto conservando los fragmentos condensados originales.
+- [x] Punto de Czech: parche comprimido9BA400 restringido a píxeles120–122/11–13; validador impide cambiar el resto de la fuente. All American Stars permanece idéntico. Restauración de ambos textos incluye la puntuación.
+- [x] APIs separadas bigTeamNamePatches / smallTeamNamePatches. teamNameTexts conserva defaults nativos y reconoce compactos generados; dibujo libre no reconocido deja campo vacío y conserva imagen hasta edición explícita.
+- [x] Listar42equipos/840jugadores. Orden nativo36All Stars,37Euro Stars A,38Euro Stars B,39Asian Stars,40African Stars,41All American Stars. Frames grandes35/38/41/39/40/37 respectivamente.
+- [x] Plantillas de estrellas: CODE_A49C89 usa tablaA4F643 y registros de4bytes (equipo de origen×2, offset de jugador×8). Seguir las referencias para nombres, conservar atributos propios en8A8000+team×140. UI avisa que editar un nombre afecta a la selección de origen.
+- [x] Ampliar lectores/validadores/registros de formación, atributos, paletas y gráficos a42equipos. Banderas/rótulos reubicados ya tenían42slots. No solicitar cambios de paleta compartida cuando los colores siguen iguales.
+- [x] Pruebas: los42equipos se leen sin caracteres corruptos; nombres independientes, reapertura, dot sin afectar título americano, restauración exacta; atributos y banderas/rótulos individuales de los seis equipos ocultos.
+- [x] UI comprobada: THE CZECH REP / CHILE actualizados al escribir, African Stars con20jugadores. Evidencia issd-independent-names-preview.png. Previews descartados; cambios anteriores del usuario conservados.
+- Restricción: nuevas combinaciones de nombre rojo aún deben caber en sprites y753bytes. La visualización se actualiza también para combinaciones que no caben, mostrando error y deshabilitando aplicación.
+
+### Conversión automática y recorte de audio — 9 octubre
+- [x] parseWav acepta PCM8/16/24/32, float32/64, 1–8canales y WAVE_FORMAT_EXTENSIBLE PCM/float. Mezcla y satura a mono Int16, trata NaN/Infinity como silencio.
+- [x] decodeUploadedAudio usa parser local y fallback OfflineAudioContext.decodeAudioData para formatos soportados por el navegador (MP3/M4A/OGG/FLAC o WAV comprimido). Conversión local sin servidor; máximo50MB/10millones de muestras.
+- [x] AudioTrim.vue: upload o drop, onda, selección arrastrable, controles de extremos por puntero/teclado, tiempos numéricos, zoom y desplazamiento, ajuste a duración máxima según BRR/pitch, porcentaje de capacidad, escuchar/descartar.
+- [x] Recorte inicial automático que cabe en el slot. trimAudio selecciona muestras por tiempo; remuestreo a frecuencia del DSP y codificación BRR con padding seguro. Al cambiar pitch conserva el fragmento si cabe, o limita su duración.
+- [x] Importación con versión para descartar decodificaciones antiguas al cambiar de ROM/muestra/sección. Exportación bloquea source/draft pendiente. Previsualizar ROM conserva el recorte y etiqueta qué audio se está escuchando.
+- [x] Mantener restricciones existentes para música transmitida y loops SPC700 no verificados; estos slots no permiten reemplazo.
+- [x] UI probada con WAV estéreo float32 de2segundos y MP3: ambos convierten a PCM16mono. Arrastre final1.385→1.010s; mover bloque; recortar0.273–0.598s; zoom y23% de capacidad. Aplicar/restaurar regresó de13a12recursos del proyecto del usuario. MP3 de prueba descartado al concluir.
+- Evidencia: issd-audio-trim-preview.png. Tests ampliados a PCM24/32, float32/64, extensible, saturación, límites temporales y exportación/importación/restauración de audio convertido y ajustado.
+
+- [x] Cinco fotos de portada: tiles 8bpp A5CB7F, mapas por filas 81F61C/81F66E/81F6B1/81F6FF/81F740, paleta 89C3FA con 144 colores en CGRAM $20. Recursos individuales de izquierda a derecha debajo del logo, dibujo/importación y restauración individual conservando las demás fotos. Recompresión limitada al bloque original; no cambia mapas ni código.
+
+### TitleScreenNameDrop: permitir subir audio — 9 octubre
+- [x] Eliminar el bloqueo específico del banco BRR de portada conservando todos los bits END/LOOP por bloque y sus 22806 bytes. Los otros bancos sin protocolo verificado siguen restringidos.
+- [x] Referencia nativa: CODE_80C115 carga el banco en SPC $A66B; directorio con inicios en bloques 0/200/897/2000 y bucle en 103. No modificar palabra de longitud, directorio ni código de reproducción.
+- [x] Validación segmented-audio: rechazar marcas alteradas respecto a ROM original; decodificar preview completa atravesando finales intermedios. UI explica los cuatro fragmentos y el bucle inicial.
+- [x] Tests de reemplazo con audio sintético, marcas exactas, rechazo de END alterado, regiones vecinas intactas, exportación/importación y restauración exacta. npm test/build correctos.
+- [x] UI: seleccionar TitleScreenNameDrop, subir WAV float estéreo, convertir/recortar, aplicar (13 recursos), restaurar (12 recursos previos). Evidencia issd-title-audio-upload-preview.png.
+- Limitación: el preview reproduce el banco completo seguido; el juego activa sus fragmentos con eventos originales. No se cambian esos eventos ni su pitch. La reproducción del reemplazo en el juego no se verificó en emulador.
+
+### Grupos y composición de gráficos — 9 octubre
+- [x] Mostrar/ocultar ALL STARS en Configuración: modifica ambos conteos de páginas en 85A566, incluida la rama del desbloqueo. Modo original restaura los operandos de la ROM base.
+- [x] Siete títulos existentes en Gráficos con input de texto y preview al escribir. Letras A–Z, números, espacio, punto y guion; máximo 15 caracteres, ajustados al ancho gráfico. Guardado/restauración y recuperación del proyecto.
+- [x] Títulos independientes: atlas de 1792 bytes decodificados en AEEA00 (capacidad 1850), loader 828EEE y renderer de selección AEF200 (128 bytes), hook JSL 85AD3A. Cada título usa 16 tiles; las otras fuentes del menú quedan originales. Metadatos de nombres en AEE900, 116 bytes. Validación de código exacto, resolución, capacidad y espacio libre.
+- [x] Prueba del renderer con A/X/Y de 16 bits, direct page de sprite no cero, siete índices, dos filas BG3, contrato de la cola DMA 808E37 y bit de inhibición 1406. ROM de prueba arranca en EmulatorJS. La pantalla de selección con el renderer nuevo todavía no se comprobó visualmente dentro del juego.
+- [x] Jugador completo: incluir segunda fila DMA; sprites 16×16 usan centro menos 4 px; overlays transparentes conservan el propietario opaco inferior. Preview comprobado: 32×48, pierna/zapato alineados y sin píxel flotante sobre hombro.
+- [x] Fondo rojo de portada como recurso separado. Borrar el logo completo borra todas sus capas subyacentes; no deja la pincelada roja. Pruebas de composición con textos inferiores y espacios de grupos/portada independientes.
+- [x] Menú Grupos: CRUD de hasta 16 grupos, nombres y asignación de los 42 slots existentes, equipos repetidos entre grupos, grupos vacíos y restauración. Guardado, historial e importación/exportación atómicos.
+- [x] Selector nativo con páginas de hasta seis equipos, incluidas páginas incompletas: un grupo de ocho ocupa dos páginas con el mismo título. Datos en AEF300 (1024 bytes), rutinas/ceros DMA en AEF700 (768 bytes), tablas de equipos/conteos/títulos en AEFA00 (1536 bytes). Atlas dinámico de hasta 16 títulos, sujeto a su capacidad comprimida de 1850 bytes.
+- [x] Rutinas de navegación, búsqueda con fallback para equipos ausentes, selección, roster, paletas y cargas de banderas/rótulos adaptadas a cada página. Precarga de las 42 banderas independientes. Los slots ausentes se limpian mediante la cola DMA; ningún recurso WRAM se borra.
+- [x] Pruebas de ejecución 65816 con A/X/Y de 16 bits y DP no cero, páginas de 4/6/2/6 equipos, controles, paletas, DMA de banderas/nombres, 16 títulos, validación, historial y checksum. Migración estricta de versiones de desarrollo reconocidas, preservando los otros recursos guardados.
+- [ ] Pendiente: ampliar a 48 selecciones nacionales distintas. Los grupos ya se pueden crear/eliminar y admitir cuatro u ocho equipos, pero no se han creado slots nacionales adicionales.
+- Referencias para continuar: selección DATA81DA3F (42 índices duplicados), conteos 85A566, base de grupo 85AE79/85AF6F y búsqueda 85AF84, controles 85AE19/85AE50/85AE5F/85AE6B; copias de banderas 85AED7 y nombres 85AF2F, paletas 85AE84. Agregar equipos requiere también roster 80CF2A/878138, atributos 8A8000, formaciones 8BEF48, nombres grandes 98A526, precarga de banderas 82FB5D y rótulos 828F21. No presentar un editor de metadatos como una ampliación funcional del juego.
+
+### Corrección de paletas al alternar grupos — 9 octubre
+- [x] La cabecera del script de paletas ($2A, ejecutado por 80A91E/80A976) conservaba seis entradas mientras el bucle emitía cuatro o dos. El intérprete consumía el terminador y RAM residual como descriptores adicionales, alterando paletas ajenas a las banderas.
+- [x] Hook 85AE91 (6 bytes): generar el conteo real a partir de $1E y emitir la cabecera correspondiente. La lista y su terminador quedan sincronizados.
+- [x] Migrar exclusivamente los conjuntos de instrucciones anteriores reconocidos, conservando grupos, equipos y demás modificaciones del proyecto.
+- [x] Regresión con dos grupos de cuatro y 40 alternancias: paletas de banderas correctas, paletas de fondo/UI intactas, terminador consumido en el límite exacto. La prueba rechaza la cabecera antigua de seis entradas.
+
+### Menú principal — 2026-10-09
+
+- [x] Sección dedicada con las ocho opciones, dos líneas y previsualización de BG1/BG2/OAM.
+- [x] Edición de textos con las letras grandes nativas disponibles, límite de ancho y conteos originales por frame; se mantienen las funciones de juego.
+- [x] Restauración independiente de opciones, dibujo/importación de atlas compartido, panel y fondo azul.
+- [x] Relocalización de `COD_TopmostMainMenuText` ($989FB8) a $AEE500..$AEE8FF y puntero $828EA0; sin alterar referencias WRAM DATA_82F3AA ni reservar espacio de otros editores.
+- [x] Pruebas binarias, suite completa, build y flujo en Chrome: preview, aplicación, opciones independientes, undo/redo, validación, restauración y herramientas gráficas.
+- Límite actual: la fuente grande nativa no incluye todo el alfabeto. El editor indica ACDEGIKLMNOPRSTWY, espacios y guiones; no genera glifos ausentes.
+
+### Ampliación del alfabeto del menú principal — 2026-10-09
+
+- [x] A–Z completas; los tiles nativos se mantienen y se agregan B/F/H/J/Q/U/V/X/Z e I en un solo sprite, con paleta amarilla/roja original.
+- [x] «INICIAR / JUEGO» cabe en la primera opción y conserva sus textos tras exportar/importar y recargar.
+- [x] Fuente de 144 tiles, pool FREE_BYTES $A4E17F..$A4EBFF y puntero de DMA $828E58. Sin superponer editores de inicio, grupos o banderas.
+- [x] 32 slots por opción en WRAM; DATA_82F3AA conserva orden por columnas y avanza 64 bytes por frame, conforme al cargador nativo (conteo dentro del primer registro).
+- [x] Padding Y=127 fuera del rango admitido por el dibujante, evitando llenar los 128 OBJ con sprites invisibles; se valida el máximo global de sprites visibles.
+- [x] Los proyectos anteriores de 89 sprites siguen admitidos. Restaurar una opción preserva las otras; restaurar todo recupera la ROM original.
+- La restricción del alfabeto anotada en la etapa anterior queda resuelta. Se mantiene el ancho de 112 píxeles por línea.
+
+### Ancho visible de rótulos — 2026-10-09
+
+- [x] El ajuste usa los límites de píxeles opacos de la fuente actual, incluidos los fragmentos W/Y, en lugar de contar el avance/espacio posterior a la última letra.
+- [x] «INTER- / NACIONAL» ocupa 112 píxeles visibles y se admite sin escalar glifos. Los ocho textos originales también se pueden volver a generar.
+- [x] Pruebas de límites de panel, aplicación, undo/redo e importación/exportación para NACIONAL; build y verificación de interfaz con recarga.
+
+### Imágenes ensambladas del menú — 2026-10-09
+
+- [x] Panel compartido de 128 × 48, con marco, balón y SOCCER; se edita su atlas propio y el marco global se muestra como contexto protegido.
+- [x] Fondo azul ensamblado de 256 × 224 según el tilemap BG2 original, con logos y siluetas.
+- [x] El mapeo de píxeles respeta tiles reutilizados y flips. El dibujo se convierte al atlas comprimido original sin cambiar mapas ni recursos vecinos.
+- [x] Pruebas de round-trip sin cambios, propagación de píxeles compartidos, protección del marco, aislamiento, restauración, importación/exportación y build.

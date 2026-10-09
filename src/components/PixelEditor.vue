@@ -1,28 +1,28 @@
 <template>
   <section class="pixel-editor">
     <div class="toolbar">
-      <label>Herramienta <select v-model="tool"><option v-for="(label,key) in tools" :value="key" :key="key">{{ label }}</option></select></label>
-      <label>Zoom <input type="range" min="1" max="16" v-model.number="zoom" /></label>
-      <label><input type="checkbox" v-model="grid" /> Cuadrícula</label>
-      <button @click="undo" :disabled="!past.length" title="Deshacer dibujo">↶</button><button @click="redo" :disabled="!future.length" title="Rehacer dibujo">↷</button>
-      <button @click="flip(false)">Voltear ↔</button><button @click="flip(true)">Voltear ↕</button>
-      <button @click="copy" :disabled="!selection">Copiar selección</button><button @click="paste" :disabled="!clipboard">Pegar</button>
-      <button @click="restore">Restaurar original</button>
-      <button @click="exportPng">Exportar PNG</button><button @click="$refs.imageInput.click()">{{ flag ? 'Subir imagen y convertir a pixel art' : 'Importar imagen' }}</button><input ref="imageInput" class="image-input" type="file" accept="image/png,image/jpeg,image/webp,image/gif,image/bmp" @change="importPng" />
+      <label>{{ $t("Herramienta") }} <select v-model="tool"><option v-for="(label,key) in tools" :value="key" :key="key">{{ $t(label) }}</option></select></label>
+      <label>{{ $t("Zoom") }} <input type="range" min="1" max="16" v-model.number="zoom" /></label>
+      <label><input type="checkbox" v-model="grid" /> {{ $t("Cuadrícula") }}</label>
+      <button @click="undo" :disabled="!past.length" :title="$t(&quot;Deshacer dibujo&quot;)">↶</button><button @click="redo" :disabled="!future.length" :title="$t(&quot;Rehacer dibujo&quot;)">↷</button>
+      <button @click="flip(false)">{{ $t("Voltear ↔") }}</button><button @click="flip(true)">{{ $t("Voltear ↕") }}</button>
+      <button @click="copy" :disabled="!selection">{{ $t("Copiar selección") }}</button><button @click="paste" :disabled="!clipboard">{{ $t("Pegar") }}</button>
+      <button @click="restore">{{ $t("Restaurar original") }}</button>
+      <button @click="exportPng">{{ $t("Exportar PNG") }}</button><button @click="$refs.imageInput.click()">{{ $t(flag ? 'Subir imagen y convertir a pixel art' : 'Importar imagen') }}</button><input ref="imageInput" class="image-input" type="file" accept="image/png,image/jpeg,image/webp,image/gif,image/bmp" @change="importPng" />
     </div>
-    <div class="palette"><button v-for="(color,i) in draftColors" :key="i" :style="{background:color}" :class="{active:ink===i}" :disabled="i!==0 && color==='transparent'" :title="`Índice ${i}: ${color}`" :aria-label="`Color ${i}`" @click="ink=i">{{i}}</button></div>
-    <p>{{ width }} × {{ height }} px · {{ colors.length }} índices · {{ dirty ? 'Dibujo pendiente de aplicar' : 'Sin cambios de dibujo' }}</p>
-    <div class="canvas-scroll"><canvas ref="canvas" @pointerdown="down" @pointermove="move" @pointerup="up" @pointercancel="cancel" aria-label="Lienzo pixel art" /></div>
-    <p v-if="selection">Selección: {{selection.w}} × {{selection.h}}. Arrastra dentro para moverla; fuera para seleccionar otra región.</p>
-    <div class="previews"><figure><RomImage :matrix="original" :colors="originalColors || colors" label="Gráfico original" /><figcaption>Original</figcaption></figure><figure><RomImage :matrix="pixels" :colors="draftColors" label="Gráfico editado" /><figcaption>Edición</figcaption></figure><canvas ref="thumbnail" aria-label="Vista a tamaño original" /></div>
-    <button class="primary" @click="$emit('apply', clone(pixels), flag ? draftColors.slice() : null)" :disabled="!dirty">Aplicar gráfico a la ROM</button>
+    <div class="palette"><button v-for="(color,i) in draftColors" :key="i" :style="{background:color}" :class="{active:ink===i}" :disabled="i!==0 && color==='transparent'" :title="$t(`Índice ${i}: ${color}`)" :aria-label="$t(`Color ${i}`)" @click="ink=i">{{i}}</button></div>
+    <p>{{ $t(width) }} × {{ $t(height) }} {{ $t("px ·") }} {{ colors.length }} {{ $t("índices ·") }} {{ $t(dirty ? 'Dibujo pendiente de aplicar' : 'Sin cambios de dibujo') }}</p>
+    <div class="canvas-scroll"><canvas ref="canvas" @pointerdown="down" @pointermove="move" @pointerup="up" @pointercancel="cancel" :aria-label="$t(&quot;Lienzo pixel art&quot;)" /></div>
+    <p v-if="selection">{{ $t("Selección:") }} {{$t(selection.w)}} × {{$t(selection.h)}}{{ $t(". Arrastra dentro para moverla; fuera para seleccionar otra región.") }}</p>
+    <div class="previews"><figure><RomImage :matrix="original" :colors="originalColors || colors" :label="$t(&quot;Gráfico original&quot;)" /><figcaption>{{ $t("Original") }}</figcaption></figure><figure><RomImage :matrix="pixels" :colors="draftColors" :label="$t(&quot;Gráfico editado&quot;)" /><figcaption>{{ $t("Edición") }}</figcaption></figure><canvas ref="thumbnail" :aria-label="$t(&quot;Vista a tamaño original&quot;)" /></div>
+    <button class="primary" @click="$emit('apply', clone(pixels), flag ? draftColors.slice() : null)" :disabled="!dirty">{{ $t("Aplicar gráfico a la ROM") }}</button>
     <dialog ref="importDialog" v-if="importImage" class="import-dialog" @cancel="closeImport">
-      <h3>Convertir imagen a pixel art</h3><p>El recorte se redimensiona a {{width}} × {{height}} y se ajusta a los colores compatibles con la ROM. El índice 0 representa transparencia.</p>
-      <label v-if="flag"><input type="checkbox" v-model="useImagePalette" @change="convertImport" /> Cambiar la paleta de esta bandera con los colores de la imagen (máximo 4)</label><label v-for="key in ['x','y','w','h']" :key="key">{{key}} <input type="number" v-model.number="crop[key]" min="0" @change="convertImport" /></label>
-      <RomImage v-if="importPixels" :matrix="importPixels" :colors="importColors" label="Resultado de cuantización" />
-      <div v-if="flag" class="palette"><button v-for="(color,i) in importColors.slice(12,16)" :key="i" :style="{background:color}" :aria-label="`Nuevo color ${i+12}: ${color}`">{{i+12}}</button></div><p>{{ importInfo }}</p><button @click="acceptImport" :disabled="!importPixels">Usar resultado</button><button @click="closeImport">Cancelar</button>
+      <h3>{{ $t("Convertir imagen a pixel art") }}</h3><p>{{ $t("El recorte se redimensiona a") }} {{$t(width)}} × {{$t(height)}} {{ $t("y se ajusta a los colores compatibles con la ROM. El índice 0 representa transparencia.") }}</p>
+      <label v-if="flag"><input type="checkbox" v-model="useImagePalette" @change="convertImport" /> {{ $t("Cambiar la paleta de esta bandera con los colores de la imagen (máximo 4)") }}</label><label v-for="key in ['x','y','w','h']" :key="key">{{key}} <input type="number" v-model.number="crop[key]" min="0" @change="convertImport" /></label>
+      <RomImage v-if="importPixels" :matrix="importPixels" :colors="importColors" :label="$t(&quot;Resultado de cuantización&quot;)" />
+      <div v-if="flag" class="palette"><button v-for="(color,i) in importColors.slice(12,16)" :key="i" :style="{background:color}" :aria-label="$t(`Nuevo color ${i+12}: ${color}`)">{{i+12}}</button></div><p>{{ $t(importInfo) }}</p><button @click="acceptImport" :disabled="!importPixels">{{ $t("Usar resultado") }}</button><button @click="closeImport">{{ $t("Cancelar") }}</button>
     </dialog>
-    <p v-if="error || applyError" role="alert">{{error || applyError}}</p>
+    <p v-if="error || applyError" role="alert">{{$t(error || applyError)}}</p>
   </section>
 </template>
 <script>
@@ -30,7 +30,7 @@ import RomImage from './RomImage.vue';
 import {imagePalette} from '../rom/image-import.mjs';
 const clone=value=>value.map(row=>row.slice());
 export default {
-  components:{RomImage},props:{flag:Boolean,applyError:String,matrix:Array,editable:Array,highlightEditable:Boolean,original:Array,colors:Array,originalColors:Array},emits:['apply'],
+  components:{RomImage},props:{normalizeImage:Function,flag:Boolean,applyError:String,matrix:Array,editable:Array,highlightEditable:Boolean,original:Array,colors:Array,originalColors:Array},emits:['apply'],
   data(){return {pixels:clone(this.matrix),draftColors:this.colors.slice(),importColors:this.colors.slice(),useImagePalette:true,past:[],future:[],tool:'pencil',ink:Math.max(1,this.colors.findIndex((color,i)=>i>0&&color!=='transparent')),zoom:Math.min(6,Math.max(1,Math.floor(700/this.matrix[0].length))),grid:true,drag:null,selection:null,clipboard:null,importImage:null,importPixels:null,crop:{x:0,y:0,w:0,h:0},importInfo:'',error:'',tools:{pencil:'Lápiz',eraser:'Borrador',picker:'Cuentagotas',fill:'Relleno',line:'Línea',rect:'Rectángulo',select:'Seleccionar / mover'}};},
   computed:{width(){return this.pixels[0].length;},height(){return this.pixels.length;},dirty(){return JSON.stringify(this.pixels)!==JSON.stringify(this.matrix)||(this.flag&&JSON.stringify(this.draftColors)!==JSON.stringify(this.colors));}},
   watch:{importImage(value){if(value)this.$nextTick(()=>this.$refs.importDialog?.showModal());},matrix:{handler(value){this.pixels=clone(value);this.draftColors=this.colors.slice();this.past=[];this.future=[];this.selection=null;this.draw();},deep:true},pixels:{handler(){this.draw();},deep:true},zoom(){this.draw();},grid(){this.draw();},draftColors:{handler(){this.draw();},deep:true},colors:{handler(value){this.draftColors=value.slice();this.draw();},deep:true}},
@@ -64,7 +64,7 @@ if(ref==='canvas'&&this.grid&&z>=4){ctx.strokeStyle='#76899a66';ctx.lineWidth=0.
     convertImport(){const {x,y,w,h}=this.crop;this.importPixels=null;if(![x,y,w,h].every(Number.isFinite)||w<1||h<1||x<0||y<0||x+w>this.importImage.width||y+h>this.importImage.height){this.importInfo='El recorte debe estar dentro de la imagen.';return;}const canvas=document.createElement('canvas');canvas.width=this.width;canvas.height=this.height;const ctx=canvas.getContext('2d');ctx.imageSmoothingEnabled=false;ctx.drawImage(this.importImage,x,y,w,h,0,0,this.width,this.height);const data=ctx.getImageData(0,0,this.width,this.height).data;
       this.importColors=this.draftColors.slice();if(this.flag&&this.useImagePalette)this.importColors.splice(12,4,...imagePalette(data));
       const colors=this.importColors.map(c=>/^#[0-9a-f]{6}$/i.test(c)?[1,3,5].map(i=>parseInt(c.slice(i,i+2),16)):null);let changed=0;
-      this.importPixels=Array.from({length:this.height},(_,y)=>Array.from({length:this.width},(_,x)=>{const i=(y*this.width+x)*4;if(data[i+3]<128)return 0;let best=0,distance=Infinity;colors.forEach((c,index)=>{if(!c)return;const d=c.reduce((sum,v,k)=>sum+(v-data[i+k])**2,0);if(d<distance){best=index;distance=d;}});if(distance>0)changed++;return best;}));this.importInfo=`${changed} píxeles ajustados a la paleta. Revisa el resultado antes de aplicar.`;
+      this.importPixels=Array.from({length:this.height},(_,y)=>Array.from({length:this.width},(_,x)=>{const i=(y*this.width+x)*4;if(data[i+3]<128)return 0;let best=0,distance=Infinity;colors.forEach((c,index)=>{if(!c)return;const d=c.reduce((sum,v,k)=>sum+(v-data[i+k])**2,0);if(d<distance){best=index;distance=d;}});if(distance>0)changed++;return best;}));if(this.normalizeImage)this.importPixels=this.normalizeImage(this.importPixels);this.importInfo=`${changed} píxeles ajustados a la paleta. Revisa el resultado antes de aplicar.`;
     },acceptImport(){this.checkpoint();this.draftColors=this.importColors.slice();this.importPixels.forEach((row,y)=>row.forEach((v,x)=>this.paint({x,y},v)));this.closeImport();},closeImport(){this.importImage=null;this.importPixels=null;},
   }
 };

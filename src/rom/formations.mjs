@@ -3,7 +3,7 @@ export const FORMATION_LABELS=['4-5-1','4-4-2','4-3-3','4-2-4','3-5-2','3-4-3','
 export const FORMATION_ROLES={1:'Defensa',2:'Medio',3:'Delantero',5:'Defensa ofensivo',6:'Medio ofensivo'};
 // DATA_8BEF48, verified in issd_mod_rom.c and the cartridge disassembly.
 export function readFormation(rom,team) {
-  if(!Number.isInteger(team)||team<0||team>=36)throw new Error('Equipo inválido.');
+  if(!Number.isInteger(team)||team<0||team>=42)throw new Error('Equipo inválido.');
   const offset=loRom(0x8b0000|word(rom,0x5ef48+team*2));
   if(offset+31>rom.length)throw new Error('Formación fuera de la ROM.');
   const bytes=rom.slice(offset,offset+31),signed=v=>v>127?v-256:v;

@@ -1,4 +1,4 @@
-<template><canvas ref="canvas" :aria-label="label" role="img" :class="{ compact }" /></template>
+<template><canvas ref="canvas" :aria-label="$t(label)" role="img" :class="{ compact }" /></template>
 <script>
 export default {
   props: { matrix: Array, colors: Array, label: String, compact: Boolean },

@@ -3,7 +3,7 @@ import { flagBank, labelBank } from './graphics.mjs';
 import { deluxeAppearance } from './appearance.mjs';
 
 // Native team order verified by issd-native/ISSDNative/issd_mod_rom.c.
-export const DELUXE_TEAMS = ['Italy', 'Holland', 'England', 'Norway', 'Spain', 'Ireland', 'Portugal', 'Denmark', 'Germany', 'France', 'Belgium', 'Sweden', 'Romania', 'Bulgaria', 'Russia', 'Swiss', 'Greece', 'Croatia', 'Austria', 'Wales', 'Scotland', 'N.Ireland', 'Czech Rep.', 'Poland', 'Japan', 'S.Korea', 'Turkey', 'Nigeria', 'Cameroon', 'Morocco', 'Brazil', 'Argentina', 'Colombia', 'Mexico', 'U.S.A.', 'Uruguay'];
+export const DELUXE_TEAMS = ['Italy', 'Holland', 'England', 'Norway', 'Spain', 'Ireland', 'Portugal', 'Denmark', 'Germany', 'France', 'Belgium', 'Sweden', 'Romania', 'Bulgaria', 'Russia', 'Swiss', 'Greece', 'Croatia', 'Austria', 'Wales', 'Scotland', 'N.Ireland', 'Czech Rep.', 'Poland', 'Japan', 'S.Korea', 'Turkey', 'Nigeria', 'Cameroon', 'Morocco', 'Brazil', 'Argentina', 'Colombia', 'Mexico', 'U.S.A.', 'Uruguay', 'All Stars', 'Euro Stars A', 'Euro Stars B', 'Asian Stars', 'African Stars', 'All American Stars'];
 
 export function deluxeText(bytes) {
   return Array.from(bytes, byte => {
@@ -25,9 +25,8 @@ export function deluxeAttributes(bytes) {
 
 export function readDeluxeTeam(rom, index) {
   if (!Number.isInteger(index) || index < 0 || index >= DELUXE_TEAMS.length) throw new Error('Equipo inválido.');
-  const names = loRom(0x870000 | word(rom, 0x38138 + index * 2));
   const players = Array.from({ length: 20 }, (_, player) => {
-    const nameOffset = names + player * 8, attributeOffset = 0x50000 + index * 140 + player * 7;
+    const nameOffset = deluxePlayerNameOffset(rom,index,player), attributeOffset = 0x50000 + index * 140 + player * 7;
     const attributes = deluxeAttributes(rom.slice(attributeOffset, attributeOffset + 7));
     return { name: deluxeText(rom.slice(nameOffset, nameOffset + 8)), ...attributes, ...deluxeAppearance(rom, index, attributes) };
   });
@@ -41,5 +40,16 @@ export function readDeluxeTeam(rom, index) {
   colors.splice(12, 4, ...palette(rom, loRom(0x890000 | word(rom, 0xe7d8 + index * 2)) + 2, 4));
   const nameAddress = labelBank(rom)<<16 | word(rom, 0xe6c1 + index * 2);
   const teamMatrix = tiles(decompress(rom, loRom(nameAddress)), 2, 4);
-  return { name: DELUXE_TEAMS[index], players, flag, colors, teamMatrix, teamColors: ['transparent', '#ffffff', '#b8b8b8', '#555555'] };
+  return { name: DELUXE_TEAMS[index], sharedPlayerNames:index>=36, players, flag, colors, teamMatrix, teamColors: ['transparent', '#ffffff', '#b8b8b8', '#555555'] };
+}
+
+// CODE_A49C89 / DATA_A4F643: star teams assemble names from national squads.
+export function deluxePlayerNameOffset(rom,team,player){
+  if(team>=36){
+    const refs=loRom(0xa40000|word(rom,loRom(0xa4f643)+(team-36)*2))+player*4;
+    const source=word(rom,refs)/2,slot=word(rom,refs+2)/8;
+    if(!Number.isInteger(source)||source<0||source>=36||!Number.isInteger(slot)||slot<0||slot>=20)throw new Error('Referencia de jugador de estrellas inválida.');
+    return loRom(0x870000|word(rom,0x38138+source*2))+slot*8;
+  }
+  return loRom(0x870000|word(rom,0x38138+team*2))+player*8;
 }

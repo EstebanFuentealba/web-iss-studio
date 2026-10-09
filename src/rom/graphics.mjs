@@ -1,58 +1,13 @@
+import {bootScreenResources,bootScreenPatches} from './boot-screens.mjs';
+import {mainMenuGraphics} from './main-menu.mjs';
+import {compress} from './compression.mjs';
+export {compress} from './compression.mjs';
+import {hasCustomGroups,readGroups,groupPageTitles} from './groups.mjs';
 import { decompress, tiles, word, loRom, palette } from './binary.mjs';
+import { titleLegalResources, titleLegalPatches } from './title-legal.mjs';
 
-export function encodeTiles(matrix, bpp) {
-  const height = matrix.length, width = matrix[0]?.length;
-  if (![2,4,8].includes(bpp) || !height || height % 8 || !width || width % 8 || matrix.some(row => row.length !== width)) throw new Error('Dimensiones de tiles inválidas.');
-  const bytes = new Uint8Array(width * height * bpp / 8);
-  matrix.forEach((row,y) => row.forEach((pixel,x) => {
-    if (!Number.isInteger(pixel) || pixel < 0 || pixel >= 2 ** bpp) throw new Error('Índice de paleta inválido.');
-    const base = (Math.floor(y/8) * (width/8) + Math.floor(x/8)) * bpp * 8;
-    for (let p=0;p<bpp;p++) bytes[base + Math.floor(p/2)*16 + y%8*2 + p%2] |= ((pixel >>> p)&1) << (7-x%8);
-  }));
-  return bytes;
-}
-
-// Minimum-cost command selection, with bounded history search. The output is
-// validated by the existing decoder before any ROM write is permitted.
-export function compress(input, interleaved = false) {
-  const data = Uint8Array.from(input);
-  if (!data.length || data.length > 65536) throw new Error('Tamaño gráfico inválido.');
-  if (interleaved) {
-    if (data.length % 16) throw new Error('Tiles entrelazados incompletos.');
-    for (let i=0;i<data.length;i+=16) {
-      const group = data.slice(i,i+16);
-      for(let y=0;y<8;y++) { data[i+y]=group[y*2]; data[i+y+8]=group[y*2+1]; }
-    }
-  }
-  const candidates = [], history = new Map();
-  for(let i=0;i<data.length;i++) {
-    const key = data[i]*256 + (data[i+1] || 0), previous = history.get(key) || [];
-    candidates[i] = previous.filter(p => i-p<=1024);
-    previous.push(i); history.set(key,previous.filter(p=>i-p<=1024));
-  }
-  const cost = new Float64Array(data.length+1), command = new Array(data.length);
-  for(let i=data.length-1;i>=0;i--) {
-    cost[i]=Infinity;
-    const offer = (length,bytes) => { const c=bytes.length+cost[i+length]; if(c<cost[i]) {cost[i]=c;command[i]={length,bytes};} };
-    for(let n=1;n<=31 && i+n<=data.length;n++) offer(n,[0x80|n,...data.slice(i,i+n)]);
-    let run=1; while(run<257 && i+run<data.length && data[i+run]===data[i]) run++;
-    for(let n=2;n<=Math.min(run,33);n++) offer(n,[0xc0|(n-2),data[i]]);
-    if(data[i]===0) for(let n=2;n<=run;n++) offer(n,n<=32?[0xe0|(n-2)]:[0xff,n-2]);
-    let pairs=0; while(pairs<33 && i+pairs*2+1<data.length && data[i+pairs*2]===0) pairs++;
-    for(let n=2;n<=pairs;n++) offer(n*2,[0xa0|(n-2),...Array.from({length:n},(_,p)=>data[i+p*2+1])]);
-    for(const source of [...candidates[i], ...(i<1024?Array.from({length:33},(_,k)=>-k-1).filter(p=>p+1024>=i):[])]) {
-      let n=0; while(n<33 && i+n<data.length && (source+n<0?0:data[source+n])===data[i+n]) n++;
-      const address=(source+0x3df)&1023;
-      for(let length=2;length<=n;length++) offer(length,[((length-2)<<2)|(address>>>8),address&255]);
-    }
-  }
-  const output=[0,0]; for(let i=0;i<data.length;) {output.push(...command[i].bytes);i+=command[i].length;}
-  if(output.length>0x7fff) throw new Error('Bloque comprimido demasiado grande.');
-  output[0]=output.length&255; output[1]=(output.length>>>8)|(interleaved?0x80:0);
-  const result=Uint8Array.from(output), decoded=decompress(result,0);
-  if(decoded.length!==input.length || decoded.some((b,i)=>b!==input[i])) throw new Error('Falló la verificación de compresión.');
-  return result;
-}
+import {encodeTiles} from './encode-tiles.mjs';
+export {encodeTiles} from './encode-tiles.mjs';
 
 export function rgb555(hex) {
   if(!/^#[0-9a-f]{6}$/i.test(hex)) throw new Error('Color inválido.');
@@ -86,16 +41,14 @@ export function graphicResources(rom, team) {
   result.push(spriteResource(rom,'Jugador completo · sprite compartido',playerRanges,0x988472,112,kit,[0,1]));
   result.push(raw('Balón · atlas compartido',0x9a8000,0x9a8600,8));
   for(let hair=1;hair<=13;hair++) result.push(raw(`Pelo ${hair} · atlas compartido`,0x97cd58+(hair-1)*0x300,0x97cd58+hair*0x300,24));
-  // Compressed tile atlases, not assembled screens. Sprite graphics use 4bpp;
-  // player portraits are Mode 3 (8bpp); their tilemap/direct-color layout is separate.
-  result.push(titleLogo(rom));
+  result.push(...bootScreenResources(rom),...selectionGroupGraphics(rom),titleLogo(rom),titleLogo(rom,true),...titlePortraits(rom),...titleLegalResources(rom),...mainMenuGraphics(rom));
   return result;
 }
 
 export function graphicPatch(original, resource, matrix) {
   const bytes=encodeTiles(matrix,resource.bpp);
   if(bytes.length!==resource.decodedSize) throw new Error('La resolución debe conservarse.');
-  const capacity=resource.compressed?word(original,resource.offset)&0x7fff:resource.capacity;
+  const capacity=resource.id==='main-menu:font'?resource.capacity:resource.compressed?word(original,resource.offset)&0x7fff:resource.capacity;
   const encoded=resource.compressed?compress(bytes,resource.interleaved):bytes;
   if(encoded.length>capacity) throw new Error(`El gráfico necesita ${encoded.length} bytes; solo hay ${capacity}. Reduce detalle o restaura píxeles.`);
   const padded=Uint8Array.from(original.subarray(resource.offset,resource.offset+capacity));padded.set(encoded);
@@ -133,13 +86,13 @@ export function validateFlagStorage(rom,original) {
     if(bytes.length!==96||tiles(bytes,4,3).flat().some(p=>p!==0&&p<12))throw new Error('Formato de bandera inválido.');
   }
 }
-export function flagPatches(original,current,team,matrix,legacy=false) {
+export function flagPatches(original,current,team,matrix,legacy=false,force=false) {
   if(matrix.length!==16||matrix.some(row=>row.length!==24))throw new Error('La bandera debe medir 24 × 16.');
   const all=Array.from({length:42},(_,i)=>i===team?matrix:flagMatrix(legacy&&i>=36?original:current,i));
   if(all.some(m=>m.flat().some(p=>p!==0&&(!Number.isInteger(p)||p<12||p>15))))throw new Error('La bandera usa los colores 12–15 o transparencia.');
   const pristine=all.every((m,i)=>JSON.stringify(m)===JSON.stringify(flagMatrix(original,i)));
   const changes=FLAG_RULES.map(([id,offset,size])=>({id,offset,label:'Banderas independientes',bytes:Uint8Array.from(original.subarray(offset,offset+size))}));
-  if(!pristine || (flagBank(original)===0xaf&&word(original,loRom(0x87ad9a))!==0xfb5d)) {
+  if(force || !pristine || (flagBank(original)===0xaf&&word(original,loRom(0x87ad9a))!==0xfb5d)) {
     if(!((flagBank(original)===0xa7&&original.subarray(FLAG_POOL,FLAG_POOL+FLAG_POOL_SIZE).every(b=>b===255))||flagBank(original)===0xaf))throw new Error('La ROM no tiene libre el espacio verificado para las banderas.');
     if(flagBank(original)===0xa7&&!original.subarray(loRom(0x82fb5d),loRom(0x82fb5d)+508).every(b=>b===255))throw new Error('El espacio de precarga de banderas está ocupado.');
     all.forEach((m,i)=>[0,1].forEach(part=>{
@@ -168,8 +121,9 @@ function spriteResource(rom,label,ranges,address,start,colors,editableParts=[0,1
   if(sum!==start)throw new Error('Composición OAM no compatible.');
   const sprites=Array.from({length:data[3+frame]},(_,i)=>{
     const values=[0,1,2,3].map(p=>data[base+count*p+start+i]);
-    return {x:values[0]>127?values[0]-256:values[0],y:values[1]>127?values[1]-256:values[1],tile:values[2],attr:values[3],size:values[3]&16?16:8};
-  }).filter(s=>s.tile<parts[0].columns||(parts[2]&&s.tile===23)); // Render supplied pose tiles plus the jersey overlay.
+    const size=values[3]&16?16:8,adjust=size===16?4:0;
+    return {x:(values[0]>127?values[0]-256:values[0])-adjust,y:(values[1]>127?values[1]-256:values[1])-adjust,tile:values[2],attr:values[3],size};
+  }).filter(s=>s.tile<parts[0].columns||(s.tile>=16&&s.tile<16+parts[1].columns)||(parts[2]&&s.tile===23)); // Render supplied pose tiles plus the jersey overlay.
   const left=Math.min(...sprites.map(s=>s.x)),top=Math.min(...sprites.map(s=>s.y)),width=Math.ceil((Math.max(...sprites.map(s=>s.x+s.size))-left)/8)*8,height=Math.ceil((Math.max(...sprites.map(s=>s.y+s.size))-top)/8)*8;
   const matrix=Array.from({length:height},()=>Array(width).fill(0)),owners=matrix.map(row=>row.map(()=>null));
   // The first OAM entry wins at overlapping opaque pixels, as on SNES.
@@ -177,21 +131,26 @@ function spriteResource(rom,label,ranges,address,start,colors,editableParts=[0,1
     const fx=s.attr&64?s.size-1-x:x,fy=s.attr&128?s.size-1-y:y,tile=s.tile+Math.floor(fx/8)+Math.floor(fy/8)*16,part=parts[2]&&tile===23?2:tile>=16?1:0,t=part===2?0:tile%16;
     if(t>=parts[part].columns)continue;
     const sx=t*8+fx%8,sy=fy%8,px=s.x-left+x,py=s.y-top+y,pixel=strips[part][sy][sx];
-    if(pixel||!owners[py][px]||part===2){if(pixel||!owners[py][px])matrix[py][px]=pixel;owners[py][px]={part,x:sx,y:sy};}
+    if(pixel||!owners[py][px]){matrix[py][px]=pixel;owners[py][px]={part,x:sx,y:sy};}
   }
   const editable=owners.map(row=>row.map(o=>!!o&&editableParts.includes(o.part)));
   return {id:editableParts.length===1?`detail-preview:${parts[2].offset}`:`sprite:${parts[0].offset}`,kind:'sprite',editableParts,editable,label,shared:true,bpp:4,columns:width/8,capacity:parts.reduce((n,p,i)=>n+(editableParts.includes(i)?p.capacity:0),0),parts,owners,matrix,colors};
 }
 export function graphicPatches(original,current,resource,matrix) {
+  if(resource.kind==='boot-screen')return bootScreenPatches(original,current,resource.id,matrix);
+  if(resource.kind==='title-legal')return titleLegalPatches(original,current,resource.id,matrix);
+  if(resource.kind==='group-label')return groupLabelPatches(original,current,resource,matrix);
   if(resource.kind==='flag')return flagPatches(original,current,resource.team,matrix);
   if(resource.kind==='label')return smallLabelPatches(original,current,resource.team,matrix);
-  if(!['sprite','composite'].includes(resource.kind))return [graphicPatch(original,resource,matrix)];
+  if(!['sprite','composite','portrait','group-label','menu-layer'].includes(resource.kind))return [graphicPatch(original,resource,matrix)];
   if(matrix.length!==resource.matrix.length||matrix.some(row=>row.length!==resource.matrix[0].length))throw new Error('La resolución debe conservarse.');
-  const strips=resource.parts.map(p=>tiles(p.compressed?decompress(current,p.offset):current.subarray(p.offset,p.offset+p.capacity),4,p.columns)),changed=new Map();
+  const strips=resource.parts.map(p=>tiles(p.compressed?decompress(current,p.offset):current.subarray(p.offset,p.offset+p.capacity),p.bpp,p.columns)),changed=new Map();
   matrix.forEach((row,y)=>row.forEach((pixel,x)=>{
-    if(!Number.isInteger(pixel)||pixel<0||pixel>=(resource.kind==='composite'?resource.colors.length:16))throw new Error('Índice de paleta inválido.');
+    if(!Number.isInteger(pixel)||pixel<0||pixel>=(resource.kind==='sprite'?16:resource.colors.length))throw new Error('Índice de paleta inválido.');
     if(pixel===resource.matrix[y][x])return;
+    if(resource.kind==='portrait'&&pixel!==0&&resource.colors[pixel]==='transparent')throw new Error('Color fuera de la paleta de las fotos.');
     const owner=resource.owners[y][x];if(!owner||resource.editable&&!resource.editable[y][x])throw new Error('Ese píxel queda fuera de la zona editable del recurso.');
+    if(resource.layers&&pixel===0){for(const layer of resource.layers[y][x]){const key=`${layer.part}:${layer.x}:${layer.y}`;if(changed.has(key)&&changed.get(key)!==0)throw new Error('El dibujo asigna colores distintos al mismo píxel reutilizado.');changed.set(key,0);strips[layer.part][layer.y][layer.x]=0;}return;}
     if(resource.kind==='composite')pixel=closestLayerColor(resource.colors,pixel,owner.paletteBase);
     const key=`${owner.part}:${owner.x}:${owner.y}`;
     if(changed.has(key)&&changed.get(key)!==pixel)throw new Error('El dibujo asigna colores distintos al mismo píxel reutilizado.');
@@ -200,6 +159,8 @@ export function graphicPatches(original,current,resource,matrix) {
   return resource.parts.flatMap((p,i)=>{
     if(resource.editableParts&&!resource.editableParts.includes(i))return [];
     const source=p.compressed?decompress(current,p.offset):current.subarray(p.offset,p.offset+p.capacity),encoded=encodeTiles(strips[i],p.bpp);
+    const pristine=p.compressed?decompress(original,p.offset):original.subarray(p.offset,p.offset+p.capacity);
+    if(encoded.length===pristine.length&&encoded.every((b,j)=>b===pristine[j]))return [{id:p.id,offset:p.offset,label:resource.label,bytes:Uint8Array.from(original.subarray(p.offset,p.offset+(p.compressed?word(original,p.offset)&0x7fff:p.capacity)))}];
     if(encoded.length===source.length&&encoded.every((b,j)=>b===source[j]))return [{id:p.id,offset:p.offset,label:resource.label,bytes:Uint8Array.from(current.subarray(p.offset,p.offset+(p.compressed?word(original,p.offset)&0x7fff:p.capacity)))}];
     return [graphicPatch(original,p,strips[i])];
   });
@@ -213,28 +174,58 @@ function closestLayerColor(colors,pixel,base) {
 }
 // Title: DATA_829975/829987, two BG tilemaps and direct OAM DATA_88ED58.
 // DATA_81F5FF positions the text object at ($60,$40), palette E0.
-function titleLogo(rom) {
+function titleLogo(rom,backgroundOnly=false) {
   const parts=[0xaa8000,0xaa8f56].map(address=>{const offset=loRom(address),data=decompress(rom,offset);return {id:`graphic:${offset}`,offset,capacity:word(rom,offset)&0x7fff,bpp:4,columns:1,compressed:true,interleaved:!!(word(rom,offset)&0x8000),decodedSize:data.length};});
   const strips=parts.map(p=>tiles(decompress(rom,p.offset),4,1));
   const colors=[...palette(rom,loRom(0x89c292),16),...palette(rom,loRom(0x89c2b4),16),...palette(rom,loRom(0x89c318),16)];colors[0]='transparent';colors[16]=colors[32]='transparent';
-  const matrix=Array.from({length:128},()=>Array(256).fill(1)),owners=matrix.map(row=>row.map(()=>null));
-  for(const address of [0xaa8d0c,0xaa8e61]) {
+  const matrix=Array.from({length:128},()=>Array(256).fill(1)),owners=matrix.map(row=>row.map(()=>null)),layers=matrix.map(row=>row.map(()=>[]));
+  for(const address of backgroundOnly?[0xaa8d0c]:[0xaa8d0c,0xaa8e61]) {
     const map=decompress(rom,loRom(address));
     for(let y=0;y<128;y++)for(let x=0;x<256;x++) {
       const entry=word(map,((y>>3)*32+(x>>3))*2),tile=entry&1023,xx=entry&0x4000?7-x%8:x%8,yy=entry&0x8000?7-y%8:y%8,base=((entry>>10)&7)*16,pixel=strips[0][tile*8+yy][xx];
+      if(tile!==1&&tile!==110)layers[y][x].push({part:0,x:xx,y:tile*8+yy,paletteBase:base});
       if(pixel){matrix[y][x]=base+pixel;if(tile!==1)owners[y][x]={part:0,x:xx,y:tile*8+yy,paletteBase:base};}
       else if(tile!==1&&tile!==110&&!owners[y][x])owners[y][x]={part:0,x:xx,y:tile*8+yy,paletteBase:base};
     }
   }
   const offset=loRom(0x88ed58);
-  for(let i=rom[offset]-1;i>=0;i--) {
+  for(let i=backgroundOnly?-1:rom[offset]-1;i>=0;i--) {
     let [y,x,tile,attr]=rom.subarray(offset+1+i*4,offset+5+i*4);x=96+(x>127?x-256:x);y=64+(y>127?y-256:y);const size=attr&16?16:8;
     for(let j=0;j<size;j++)for(let k=0;k<size;k++) {
       const fx=attr&64?size-1-k:k,fy=attr&128?size-1-j:j,t=tile+(fx>>3)+(fy>>3)*16,sx=fx%8,sy=t*8+fy%8,pixel=strips[1][sy][sx];
+      layers[y+j][x+k].push({part:1,x:sx,y:sy,paletteBase:32});
       if(pixel||!owners[y+j][x+k]){if(pixel)matrix[y+j][x+k]=32+pixel;owners[y+j][x+k]={part:1,x:sx,y:sy,paletteBase:32};}
     }
   }
-  return {id:'title-logo',kind:'composite',label:'Logo completo de portada',shared:true,bpp:8,columns:32,capacity:parts.reduce((n,p)=>n+p.capacity,0),parts,matrix,owners,editable:owners.map(row=>row.map(Boolean)),colors};
+  return {id:backgroundOnly?'title-background':'title-logo',kind:'composite',label:backgroundOnly?'Fondo rojo de portada':'Logo completo de portada',layers,editableParts:backgroundOnly?[0]:[0,1],shared:true,bpp:8,columns:32,capacity:parts.reduce((n,p)=>n+p.capacity,0),parts,matrix,owners,editable:owners.map(row=>row.map(Boolean)),colors};
+}
+
+// Mode 3 BG1 portraits: DATA_82996D uploads 232 8bpp tiles to VRAM $4000.
+// DATA_81F61C..81F740 are row scripts: FE starts a new tilemap address,
+// FF ends the script. DATA_81864E uploads 144 colors at CGRAM index $20.
+function titlePortraits(rom) {
+  const offset=loRom(0xa5cb7f),data=decompress(rom,offset);
+  const part={id:`graphic:${offset}`,offset,capacity:word(rom,offset)&0x7fff,bpp:8,columns:1,compressed:true,interleaved:!!(word(rom,offset)&0x8000),decodedSize:data.length};
+  const strip=tiles(data,8,1),colors=Array(256).fill('transparent');
+  colors.splice(32,144,...palette(rom,loRom(0x89c3fa),144));
+  // List in screen order, left to right, while retaining the game's tilemaps.
+  return [0x81f740,0x81f6ff,0x81f6b1,0x81f66e,0x81f61c].map((address,index)=>{
+    let cursor=loRom(address),position=word(rom,cursor);cursor+=2;
+    const entries=[];
+    while(rom[cursor]!==255) {
+      const tile=rom[cursor++];
+      if(tile===254){position=word(rom,cursor);cursor+=2;}
+      else {entries.push({x:position%32,y:position>>5,tile});position++;}
+    }
+    const left=Math.min(...entries.map(e=>e.x)),top=Math.min(...entries.map(e=>e.y));
+    const width=(Math.max(...entries.map(e=>e.x))-left+1)*8,height=(Math.max(...entries.map(e=>e.y))-top+1)*8;
+    const matrix=Array.from({length:height},()=>Array(width).fill(0)),owners=matrix.map(row=>row.map(()=>null));
+    for(const e of entries)for(let y=0;y<8;y++)for(let x=0;x<8;x++){
+      const px=(e.x-left)*8+x,py=(e.y-top)*8+y,sy=e.tile*8+y;
+      matrix[py][px]=strip[sy][x];owners[py][px]={part:0,x,y:sy};
+    }
+    return {id:`title-photo:${index}`,kind:'portrait',label:`Foto ${index+1} de portada · ${['izquierda','centro izquierda','centro','centro derecha','derecha'][index]}`,shared:true,bpp:8,columns:width/8,capacity:part.capacity,parts:[part],matrix,owners,editable:owners.map(row=>row.map(Boolean)),colors};
+  });
 }
 
 // Match labels: CODE_A49130 copies DATA_81E6B4, then reads DATA_81E6C1.
@@ -274,8 +265,77 @@ export function smallLabelPatches(original,current,team,matrix){
 }
 
 export function flagPalettePatches(rom,team,colors){
-  if(!Number.isInteger(team)||team<0||team>=36||colors.length!==16)throw new Error('Paleta de bandera inválida.');
+  if(!Number.isInteger(team)||team<0||team>=42||colors.length!==16)throw new Error('Paleta de bandera inválida.');
   const offset=loRom(0x890000|word(rom,0xe7d8+team*2))+2;
+  if(JSON.stringify(colors.slice(12,16))===JSON.stringify(palette(rom,offset,4)))return [];
   for(let other=0;other<42;other++)if(other!==team){const start=loRom(0x890000|word(rom,0xe7d8+other*2))+2;if(start<offset+8&&offset<start+8)throw new Error('La paleta de esta bandera está compartida y requiere reubicación.');}
   return colors.slice(12,16).map((color,i)=>({id:`palette:${offset+i*2}`,offset:offset+i*2,label:'Paleta de bandera independiente',bytes:rgb555(color)}));
+}
+
+
+// CODE_85AD25 -> CODE_858E4C: DATA_87C54F uses abstract glyph IDs,
+// translated through DATA_87C016. DATA_828EE0 loads the continent atlas
+// at VRAM $4E00 (BG3 2bpp base $4000).
+export function selectionGroupGraphics(rom,useNativeFont=false) {
+  const offset=useNativeFont?loRom(0x9eec78):groupFontOffset(rom),data=decompress(rom,offset);
+  const part={id:offset===GROUP_FONT_POOL?'groups:font':`graphic:${offset}`,offset,capacity:offset===GROUP_FONT_POOL?GROUP_FONT_CAPACITY:word(rom,offset)&0x7fff,bpp:2,columns:1,compressed:true,interleaved:!!(word(rom,offset)&0x8000),decodedSize:data.length};
+  const strip=tiles(data,2,1),names=useNativeFont?['EUROPE 1','EUROPE 2','EUROPE 3','EUROPE 4','ASIA-AFRICA','N.S.AMERICA','ALL STARS']:readGroups(rom).map(g=>g.name);
+  return names.map((name,index)=>{
+    const map=loRom(0x870000|word(rom,loRom(0x87c54f)+(index%7)*2)),matrix=Array.from({length:16},()=>Array(64).fill(0)),owners=matrix.map(row=>row.map(()=>null));
+    for(let i=0;i<16;i++){
+      const glyph=rom[map+i];if(offset!==GROUP_FONT_POOL&&!glyph)continue;
+      const tile=offset===GROUP_FONT_POOL?index*16+i:(word(rom,loRom(0x87c016)+glyph*2)&1023)-448;
+      if(tile<0||tile>=data.length/16){if(hasCustomGroups(rom)&&!useNativeFont)continue;throw new Error('Tile de grupo fuera de la fuente de selección.');}
+      for(let y=0;y<8;y++)for(let x=0;x<8;x++){
+        const px=i%8*8+x,py=(i>>3)*8+y,sy=tile*8+y;
+        matrix[py][px]=strip[sy][x];owners[py][px]={part:0,x,y:sy};
+      }
+    }
+    return {id:`selection-group:${index}`,kind:'group-label',label:name,shared:true,bpp:2,columns:8,capacity:GROUP_FONT_CAPACITY,parts:[part],matrix,owners,editable:owners.map(row=>row.map(Boolean)),colors:['transparent',...palette(rom,loRom(0x89e460)+2,3)]};
+  });
+}
+
+
+// Each title has sixteen independent 2bpp tiles. The selection-only renderer
+// writes these tiles to the original BG3 mirror and uses the game's DMA queue.
+// Storage is inside FREE_BYTES $AEE4EA..$AEFFFF, separate from bank $AF assets.
+export const GROUP_FONT_POOL=loRom(0xaeea00),GROUP_FONT_CAPACITY=1850;
+export const GROUP_FONT_LOADER=loRom(0x828ee0)+14;
+const GROUP_RENDERER=loRom(0xaef200),GROUP_RENDER_HOOK=loRom(0x85ad3a);
+export const GROUP_RULES=[['groups:font',GROUP_FONT_POOL,GROUP_FONT_CAPACITY],['groups:loader',GROUP_FONT_LOADER,3],['groups:renderer',GROUP_RENDERER,128],['groups:render-hook',GROUP_RENDER_HOOK,4]];
+function groupFontOffset(rom){return loRom(word(rom,GROUP_FONT_LOADER)|(rom[GROUP_FONT_LOADER+2]<<16));}
+function groupRenderer(rom){
+ const code=[];const emit=(...bytes)=>code.push(...bytes);
+ emit(0x0b,0xa5,0x42);if(hasCustomGroups(rom))emit(0x0a,0xaa,0xbf,groupPageTitles(rom)&255,(groupPageTitles(rom)>>>8)&255,groupPageTitles(rom)>>>16);emit(0x0a,0x0a,0x0a,0x0a,0x18,0x69,0xc0,0x21,0x48,0xa9,0,0,0x5b,0x68,0xa2,0x0c,0xe4);
+ const row=()=>{emit(0xa0,8,0);emit(0x9f,0,0,0x7f,0x1a,0xe8,0xe8,0x88,0xd0,0xf6);};
+ row();emit(0x48,0x8a,0x18,0x69,0x30,0,0xaa,0x68);row();
+ emit(0xad,6,0x14,0x89,0,1,0xd0,0);const skip=code.length-1;
+ emit(0xa9,0x7f,0,0x85,0,0xad,0xb0,0x1e,0x29,0xfc,0,0xeb,0x18,0x69,6,2,0xa8,0xa2,0x80,0,0xa9,0x0c,0xe4,0x22,0x37,0x8e,0x80);
+ code[skip]=code.length-skip-1;emit(0x2b,0x6b);
+ const bytes=new Uint8Array(128).fill(0xea);bytes.set(code);return bytes;
+}
+export function validateGroupStorage(rom,original){
+ const offset=groupFontOffset(rom),relocated=offset===GROUP_FONT_POOL;
+ if(offset!==groupFontOffset(original)&&!relocated)throw new Error('Fuente de grupos no compatible.');
+ if(decompress(rom,offset).length!==(relocated?Math.max(7,readGroups(rom).length)*256:992))throw new Error('Resolución de títulos de grupos inválida.');
+ if(relocated&&(word(rom,offset)&0x7fff)>GROUP_FONT_CAPACITY)throw new Error('Fuente de grupos fuera del espacio reservado.');
+ const hook=relocated?Uint8Array.of(0x22,0,0xf2,0xae):original.slice(GROUP_RENDER_HOOK,GROUP_RENDER_HOOK+4);
+ const renderer=relocated?groupRenderer(rom):original.slice(GROUP_RENDERER,GROUP_RENDERER+128);
+ if(hook.some((b,i)=>b!==rom[GROUP_RENDER_HOOK+i])||renderer.some((b,i)=>b!==rom[GROUP_RENDERER+i]))throw new Error('Renderizador de grupos no compatible.');
+}
+function groupLabelPatches(original,current,resource,matrix){
+ if(matrix.length!==16||matrix.some(row=>row.length!==64))throw new Error('La resolución debe conservarse.');
+ encodeTiles(matrix,2);
+ const index=Number(resource.id.split(':')[1]),all=selectionGroupGraphics(current).map((r,i)=>i===index?matrix:r.matrix),baseline=selectionGroupGraphics(original);
+ const patches=GROUP_RULES.map(([id,offset,size])=>({id,offset,label:resource.label,bytes:original.slice(offset,offset+size)}));
+ if(!hasCustomGroups(current)&&all.length===baseline.length&&all.every((m,i)=>JSON.stringify(m)===JSON.stringify(baseline[i].matrix)))return patches;
+ if(groupFontOffset(original)!==GROUP_FONT_POOL){
+  if(![0x22,0xa4,0x8d,0x85].every((b,i)=>original[GROUP_RENDER_HOOK+i]===b))throw new Error('Renderizador de grupos no compatible.');
+  for(const rule of [GROUP_RULES[0],GROUP_RULES[2]])if(original.slice(rule[1],rule[1]+rule[2]).some(b=>b!==255))throw new Error('El espacio reservado para los grupos está ocupado.');
+ }
+ const data=new Uint8Array(Math.max(7,all.length)*256);all.forEach((m,i)=>data.set(encodeTiles(m,2),i*256));
+ const encoded=compress(data,false);if(encoded.length>GROUP_FONT_CAPACITY)throw new Error('Fuente de grupos fuera del espacio reservado.');
+ patches[0].bytes.fill(255);patches[0].bytes.set(encoded);
+ patches[1].bytes=Uint8Array.of(0,0xea,0xae);patches[2].bytes=groupRenderer(current);patches[3].bytes=Uint8Array.of(0x22,0,0xf2,0xae);
+ return patches;
 }

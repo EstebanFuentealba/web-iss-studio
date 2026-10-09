@@ -1,11 +1,17 @@
+import {BOOT_SCREEN_RULES,validateBootScreens} from './boot-screens.mjs';
+import {MAIN_MENU_RULES,validateMainMenu} from './main-menu.mjs';
+import {GROUP_EDITOR_RULES,validateGroupEditor,upgradeGroupSelector} from './groups.mjs';
+import {GROUP_TEXT_RULES,validateGroupTexts} from './group-text.mjs';
+import {SELECTION_RULES,validateSelection} from './selection.mjs';
 import { openRom, word, loRom, decompress } from './binary.mjs';
+import { TITLE_LEGAL_RULES, validateTitleLegal, legacyTitleLegal, titleLegalResources, titleLegalPatches } from './title-legal.mjs';
 import { playerOffsets, playerPatches } from './players.mjs';
 import { deluxeAttributes, deluxeText, readDeluxeTeam } from './deluxe.mjs';
-import { graphicResources, FLAG_RULES, validateFlagStorage, flagBank, LABEL_RULES, labelBank, validateSmallLabelStorage, flagPatches, flagMatrix, smallLabelPatches, smallLabelMatrix } from './graphics.mjs';
+import { GROUP_RULES,validateGroupStorage,graphicResources, FLAG_RULES, validateFlagStorage, flagBank, LABEL_RULES, labelBank, validateSmallLabelStorage, flagPatches, flagMatrix, smallLabelPatches, smallLabelMatrix } from './graphics.mjs';
 import { AUDIO_SAMPLES, decodeBrr } from './audio.mjs';
 import { readFormation } from './formations.mjs';
 import { audioRegion } from './audio-edit.mjs';
-import {BIG_LABEL_ADDRESS,BIG_LABEL_ID,validateLabelLayout} from './team-labels.mjs';
+import {BIG_LABEL_ADDRESS,BIG_LABEL_ID,validateLabelLayout,CZECH_FONT_ADDRESS,validateCzechFont} from './team-labels.mjs';
 const internals=new WeakMap();
 const copyPatch=p=>({...p,bytes:Uint8Array.from(p.bytes)});
 const equal=(a,b)=>a.length===b.length && a.every((byte,i)=>byte===b[i]);
@@ -18,7 +24,7 @@ export async function romHash(bytes) {
 function allowedResources(rom) {
   const registry=new Map();
   const add=(id,offset,size,type,extra={})=>registry.set(id,{offset,size,type,...extra});
-  for(let team=0;team<36;team++) {
+  for(let team=0;team<42;team++) {
     const formation=readFormation(rom,team);add(formation.id,formation.offset,31,'formation');
     for(let i=0;i<20;i++) {
       const p=playerOffsets(rom,team,i);
@@ -36,13 +42,14 @@ function allowedResources(rom) {
     }
   }
   for(const resource of graphicResources(rom,0)) if(resource.shared || resource.label.includes('portada')) for(const part of resource.parts||[resource]) add(part.id,part.offset,part.capacity,part.compressed?'compressed':'raw',{decodedSize:part.decodedSize});
-  for(const [id,offset,size] of [...FLAG_RULES,...LABEL_RULES])add(id,offset,size,'relocated-storage');
+  for(const [id,offset,size] of [...FLAG_RULES,...LABEL_RULES,...SELECTION_RULES,...GROUP_RULES,...GROUP_TEXT_RULES,...GROUP_EDITOR_RULES,...TITLE_LEGAL_RULES,...MAIN_MENU_RULES,...BOOT_SCREEN_RULES])add(id,offset,size,'relocated-storage');
+  add(`czech-font:${loRom(CZECH_FONT_ADDRESS)}`,loRom(CZECH_FONT_ADDRESS),word(rom,loRom(CZECH_FONT_ADDRESS))&0x7fff,'czech-font');
   add(BIG_LABEL_ID,loRom(BIG_LABEL_ADDRESS),word(rom,loRom(BIG_LABEL_ADDRESS))&0x7fff,'team-labels');
   // Keep previously saved atlas/goalie projects readable after composing the UI.
   for(const [address,size] of [[0x98c5d4,8192],[0x8cfb57,256],[0x8cfc59,256]]){const offset=loRom(address);add(`graphic:${offset}`,offset,size,'raw');}
   for(const sample of AUDIO_SAMPLES) {
     const region=audioRegion(rom,sample);
-    if(!region.reason) add(`audio:${region.offset}`,region.offset,region.capacity,'audio');
+    if(!region.reason) add(`audio:${region.offset}`,region.offset,region.capacity,region.segmented?'segmented-audio':'audio');
   }
   return registry;
 }
@@ -72,12 +79,17 @@ export class RomProject {
         if(p.no<1||p.no>20||p.position<1||p.position>6||p.hair>13||p.skin>1||Object.entries(p).some(([k,v])=>!['no','position','hair','skin'].includes(k)&&v>10)) throw new Error('Atributos fuera del rango del juego.');
       }
       if(rule.type==='formation') {
-        const originalFormations=Array.from({length:36},(_,i)=>readFormation(original,i).bytes);
+        const originalFormations=Array.from({length:42},(_,i)=>readFormation(original,i).bytes);
         if(!originalFormations.some(bytes=>equal(bytes,patch.bytes))) throw new Error('Solo se permiten formaciones originales verificadas.');
       }
       if(rule.type==='palette' && patch.bytes[1]&0x80) throw new Error('Paleta BGR555 inválida.');
       if(rule.type==='compressed' && decompress(patch.bytes,0).length!==rule.decodedSize) throw new Error('Resolución gráfica inválida.');
+      if(rule.type==='czech-font')validateCzechFont(patch.bytes,original);
       if(rule.type==='team-labels')validateLabelLayout(decompress(patch.bytes,0),original);
+      if(rule.type==='segmented-audio') {
+        for(let i=0;i<patch.bytes.length;i+=9)if((patch.bytes[i]&3)!==(original[patch.offset+i]&3))throw new Error('Marcas BRR de los fragmentos alteradas.');
+        decodeBrr(patch.bytes,true);
+      }
       if(rule.type==='audio') {decodeBrr(patch.bytes);if(Array.from({length:patch.bytes.length/9},(_,i)=>patch.bytes[i*9]).some((h,i)=>(h&2)||(i<patch.bytes.length/9-1 && (h&1))) || !(patch.bytes.at(-9)&1)) throw new Error('Final BRR inválido.');}
     }
   }
@@ -92,14 +104,26 @@ export class RomProject {
     }
     this.validate([...next.values()]);
     const candidate=s.original.slice();for(const patch of next.values())candidate.set(patch.bytes,patch.offset);
+    if(changes.some(p=>p.id.startsWith('main-menu:')))validateMainMenu(candidate,s.original);
     if(changes.some(p=>p.id.startsWith('flags:')))validateFlagStorage(candidate,s.original);
     if(changes.some(p=>p.id.startsWith('labels:')))validateSmallLabelStorage(candidate,s.original);
-    for(let team=0;team<36;team++)if(new Set(Array.from({length:20},(_,i)=>candidate[0x50000+team*140+i*7+5])).size!==20)throw new Error('Los identificadores/dorsales de cada equipo deben ser únicos.');
+    if(changes.some(p=>p.id.startsWith('title-legal:')))validateTitleLegal(candidate,s.original);
+    if(changes.some(p=>p.id.startsWith('boot-')))validateBootScreens(candidate,s.original);
+    if(changes.some(p=>p.id.startsWith('group-editor:')||p.id.startsWith('selection:')))validateGroupEditor(candidate,s.original);
+    if(changes.some(p=>p.id.startsWith('selection:')))validateSelection(candidate,s.original);
+    if(changes.some(p=>p.id.startsWith('groups:')||p.id.startsWith('group-editor:')))validateGroupStorage(candidate,s.original);
+    if(changes.some(p=>p.id==='groups:text'))validateGroupTexts(candidate,s.original);
+    for(let team=0;team<42;team++)if(new Set(Array.from({length:20},(_,i)=>candidate[0x50000+team*140+i*7+5])).size!==20)throw new Error('Los identificadores/dorsales de cada equipo deben ser únicos.');
     if(JSON.stringify([...next])===JSON.stringify([...s.patches])) return false;
     s.undo.push(s.patches);s.undo=s.undo.slice(-100);s.redo=[];s.patches=next;this.updatedAt=new Date().toISOString();return true;
   }
   restorePatches(id) {
     const s=internals.get(this),rule=s.registry.get(id);if(!rule)throw new Error('Recurso desconocido.');
+    if(id.startsWith('group-editor:')||(id==='selection:all-stars'||id.startsWith('groups:'))&&this.patches.some(p=>p.id.startsWith('group-editor:')))return [...GROUP_EDITOR_RULES,...SELECTION_RULES,...GROUP_RULES,...GROUP_TEXT_RULES].map(([id,offset,size])=>({id,offset,bytes:s.original.slice(offset,offset+size),label:'Restaurar grupos'}));
+    if(id.startsWith('main-menu:'))return MAIN_MENU_RULES.map(([id,offset,size])=>({id,offset,bytes:s.original.slice(offset,offset+size),label:'Restaurar menú principal'}));
+    if(id.startsWith('title-legal:')&&legacyTitleLegal(s.original)){const notice=titleLegalResources(s.original)[0];return titleLegalPatches(s.original,s.original,notice.id,notice.matrix,notice.text,true);}
+    if(id.startsWith('boot-'))return BOOT_SCREEN_RULES.filter(([key])=>key.split(':')[0]===id.split(':')[0]).map(([id,offset,size])=>({id,offset,bytes:s.original.slice(offset,offset+size),label:'Restaurar pantalla inicial'}));
+    if(id.startsWith('title-legal:'))return TITLE_LEGAL_RULES.map(([id,offset,size])=>({id,offset,bytes:s.original.slice(offset,offset+size),label:'Textos de portada · gráficos independientes'}));
     if(rule.type==='attributes') {
       const relative=rule.offset-0x50000,team=Math.floor(relative/140),index=(relative%140)/7;
       return playerPatches(this.bytes(),team,index,deluxeAttributes(s.original.slice(rule.offset,rule.offset+7)));
@@ -113,13 +137,17 @@ export class RomProject {
   bytes() {const s=internals.get(this),bytes=s.original.slice();this.validate(this.patches);for(const p of s.patches.values()) bytes.set(p.bytes,p.offset);return bytes;}
   exportRom() {
     const s=internals.get(this),rom=this.bytes();
+    if(this.patches.some(p=>p.id.startsWith('group-editor:')))validateGroupEditor(rom,s.original);
+    if(this.patches.some(p=>p.id.startsWith('title-legal:')))validateTitleLegal(rom,s.original);
+    if(this.patches.some(p=>p.id.startsWith('boot-')))validateBootScreens(rom,s.original);
+    if(this.patches.some(p=>p.id.startsWith('main-menu:')))validateMainMenu(rom,s.original);
     // The checksum and its complement contribute a constant 510 to the sum.
     if(s.patches.size) {
       rom.set([255,255,0,0],0x7fdc);
       const checksum=rom.reduce((sum,byte)=>(sum+byte)&0xffff,0),complement=checksum^0xffff;
       rom.set([complement&255,complement>>>8,checksum&255,checksum>>>8],0x7fdc);
       openRom(rom);
-      for(let team=0;team<36;team++) readDeluxeTeam(rom,team);
+      for(let team=0;team<42;team++) readDeluxeTeam(rom,team);
     }
     const file=new Uint8Array(s.header.length+rom.length);file.set(s.header);file.set(rom,s.header.length);return file;
   }
@@ -128,7 +156,9 @@ export class RomProject {
     return {format:'issd-studio-project',version:1,hash:this.hash,updatedAt:this.updatedAt,original:base64(this.exportOriginal()),patches:this.patches.map(p=>({...p,bytes:base64(p.bytes)}))};
   }
   exportOriginal() {const s=internals.get(this),bytes=new Uint8Array(s.header.length+s.original.length);bytes.set(s.header);bytes.set(s.original,s.header.length);return bytes;}
-  static async create(bytes) {const project=new RomProject(bytes);project.hash=await romHash(project.exportOriginal());return project;}
+  static async create(bytes) {const project=new RomProject(bytes);project.hash=await romHash(project.exportOriginal());
+    if(legacyTitleLegal(project.original)){validateTitleLegal(project.original,project.original);const notice=titleLegalResources(project.original)[0];project.transaction(titleLegalPatches(project.original,project.original,notice.id,notice.matrix,notice.text,true));internals.get(project).undo=[];}
+    return project;}
   static async import(record) {
     if(record.format!=='issd-studio-project'||record.version!==1||typeof record.original!=='string'||record.original.length>3000000||!Array.isArray(record.patches)||record.patches.length>5000) throw new Error('Proyecto no compatible.');
     const project=await RomProject.create(unbase64(record.original));
@@ -156,6 +186,11 @@ export class RomProject {
       project.validate(patches);const candidate=project.original;for(const p of patches)candidate.set(p.bytes,p.offset);
       patches=[...patches.filter(p=>!p.id.startsWith('labels:')),...smallLabelPatches(project.original,candidate,0,smallLabelMatrix(candidate,0))];
     }
+    if(patches.some(p=>p.id.startsWith('title-legal:'))){
+      project.validate(patches);const candidate=project.original;for(const p of patches)candidate.set(p.bytes,p.offset);
+      if(legacyTitleLegal(candidate)){validateTitleLegal(candidate,project.original);const notice=titleLegalResources(candidate)[0];patches=[...patches.filter(p=>!p.id.startsWith('title-legal:')),...titleLegalPatches(project.original,candidate,notice.id,notice.matrix,notice.text,true)];}
+    }
+    patches=upgradeGroupSelector(project.original,patches);
     project.transaction(patches);
     internals.get(project).undo=[];project.updatedAt=record.updatedAt;return project;
   }

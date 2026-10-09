@@ -1,57 +1,61 @@
 <template>
+  <header>
+    <img src="/logo-issd-studio.png" width="150" :alt="$t('Web ISSD Studio')" />
+    <LanguageSelector />
+  </header>
   <main>
-    <h1>Web ISSD Studio</h1>
-    <label for="rom">Abrir ROM ISS / ISS Deluxe (USA)</label>
+    <label for="rom">{{ $t("Abrir ROM ISS / ISS Deluxe (USA)") }}</label>
     <input id="rom" type="file" accept=".sfc,.smc" @change="onChangeFile" :disabled="loading" />
-    <p v-if="loading" role="status">Leyendo ROM…</p>
-    <p v-if="error" role="alert" class="error">{{ error }}</p>
+    <p v-if="loading" role="status">{{ $t("Leyendo ROM…") }}</p>
+    <p v-if="error" role="alert" class="error">{{ $t(error) }}</p>
     <StudioEditor ref="editor" v-if="session?.game === 'issd'" :input="session.input" @import-rom="loadFile($event, true)" />
     <template v-if="session && session.game !== 'issd'">
-      <p>{{ session.label }} · {{ teams.length }} equipos · {{ session.headerSize ? 'Cabecera SMC detectada' : 'Sin cabecera SMC' }}</p>
-      <nav aria-label="Equipos">
-        <button @click="move(-1)" :disabled="loading">Anterior</button>
-        <select aria-label="Seleccionar equipo" :value="teamIndex" @change="selectTeam(Number($event.target.value))" :disabled="loading">
-          <option v-for="(name, index) in teams" :key="index" :value="index">{{ index + 1 }}. {{ name }}</option>
+      <p>{{ $t(session.label) }} · {{ teams.length }} {{ $t("equipos ·") }} {{ $t(session.headerSize ? 'Cabecera SMC detectada' : 'Sin cabecera SMC') }}</p>
+      <nav :aria-label="$t(&quot;Equipos&quot;)">
+        <button @click="move(-1)" :disabled="loading">{{ $t("Anterior") }}</button>
+        <select :aria-label="$t(&quot;Seleccionar equipo&quot;)" :value="teamIndex" @change="selectTeam(Number($event.target.value))" :disabled="loading">
+          <option v-for="(name, index) in teams" :key="index" :value="index">{{ index + 1 }}. {{ $t(name) }}</option>
         </select>
-        <button @click="move(1)" :disabled="loading">Siguiente</button>
+        <button @click="move(1)" :disabled="loading">{{ $t("Siguiente") }}</button>
       </nav>
       <section v-if="teamData">
-        <h2>{{ teamData.name }} <small>({{ teams[teamIndex] }})</small></h2>
+        <h2>{{ teamData.name }} <small>({{ $t(teams[teamIndex]) }})</small></h2>
         <div class="images">
-          <figure><RomImage :matrix="teamData.flag" :colors="teamData.colors" label="Bandera del equipo" /><figcaption>Bandera de la ROM</figcaption></figure>
-          <figure><RomImage :matrix="teamData.teamMatrix" :colors="teamData.teamColors" label="Rótulo del equipo" /><figcaption>Rótulo de la ROM</figcaption></figure>
+          <figure><RomImage :matrix="teamData.flag" :colors="teamData.colors" :label="$t(&quot;Bandera del equipo&quot;)" /><figcaption>{{ $t("Bandera de la ROM") }}</figcaption></figure>
+          <figure><RomImage :matrix="teamData.teamMatrix" :colors="teamData.teamColors" :label="$t(&quot;Rótulo del equipo&quot;)" /><figcaption>{{ $t("Rótulo de la ROM") }}</figcaption></figure>
         </div>
-        <h3>Jugadores ({{ teamData.players.length }})</h3>
+        <h3>{{ $t("Jugadores (") }}{{ teamData.players.length }})</h3>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>Dorsal</th><th>Nombre</th><th v-if="session.game === 'issd'">Posición</th><th>Pelo</th><th v-if="session.game === 'issd'">Piel</th><th>Datos</th></tr></thead>
+            <thead><tr><th>{{ $t("Dorsal") }}</th><th>{{ $t("Nombre") }}</th><th v-if="session.game === 'issd'">{{ $t("Posición") }}</th><th>{{ $t("Pelo") }}</th><th v-if="session.game === 'issd'">{{ $t("Piel") }}</th><th>{{ $t("Datos") }}</th></tr></thead>
             <tbody><tr v-for="(player, index) in teamData.players" :key="index">
-              <td>{{ player.no }}</td><td>{{ player.name }}</td><td v-if="session.game === 'issd'">{{ positions[player.position] || player.position }}</td>
-              <td><div class="appearance"><RomImage v-if="player.head" compact :matrix="player.head" :colors="player.headColors" :label="`Cabeza de ${player.name}, pelo ${player.hair}`" /><span>{{ player.hair }}</span></div></td>
-              <td v-if="session.game === 'issd'"><div class="appearance"><span class="skin-swatch" :style="{ backgroundColor: player.skinColor }" role="img" :aria-label="`Piel de ${player.name}: ${player.skinColor}`" :title="player.skinColor"></span><span>{{ player.skin }}</span></div></td>
-              <td><details><summary>Ver atributos</summary><pre>{{ JSON.stringify(playerAttributes(player), null, 2) }}</pre></details></td>
+              <td>{{ $t(player.no) }}</td><td>{{ player.name }}</td><td v-if="session.game === 'issd'">{{ $t(positions[player.position] || player.position) }}</td>
+              <td><div class="appearance"><RomImage v-if="player.head" compact :matrix="player.head" :colors="player.headColors" :label="$t(`Cabeza de ${player.name}, pelo ${player.hair}`)" /><span>{{ player.hair }}</span></div></td>
+              <td v-if="session.game === 'issd'"><div class="appearance"><span class="skin-swatch" :style="{ backgroundColor: player.skinColor }" role="img" :aria-label="$t(`Piel de ${player.name}: ${player.skinColor}`)" :title="$t(player.skinColor)"></span><span>{{ player.skin }}</span></div></td>
+              <td><details><summary>{{ $t("Ver atributos") }}</summary><pre>{{ JSON.stringify(playerAttributes(player), null, 2) }}</pre></details></td>
             </tr></tbody>
           </table>
         </div>
       </section>
       <section v-if="session.game === 'issd'" class="audio-section">
-        <h2>Audio de la ROM</h2>
-        <p>Voces y muestras BRR extraídas del archivo abierto. La velocidad de previsualización es ajustable; la música secuenciada requiere el motor SPC700.</p>
-        <label for="sample">Muestra</label>
+        <h2>{{ $t("Audio de la ROM") }}</h2>
+        <p>{{ $t("Voces y muestras BRR extraídas del archivo abierto. La velocidad de previsualización es ajustable; la música secuenciada requiere el motor SPC700.") }}</p>
+        <label for="sample">{{ $t("Muestra") }}</label>
         <select id="sample" v-model.number="sampleIndex" @change="clearAudio">
-          <option v-for="(sample, index) in audioSamples" :key="index" :value="index">{{ sample.name }}</option>
+          <option v-for="(sample, index) in audioSamples" :key="index" :value="index">{{ $t(sample.name) }}</option>
         </select>
-        <label for="rate">Frecuencia de previsualización</label>
-        <select id="rate" v-model.number="sampleRate" @change="clearAudio"><option :value="8000">8 kHz</option><option :value="16000">16 kHz</option><option :value="32000">32 kHz</option></select>
-        <button @click="prepareAudio">Cargar audio</button>
-        <p v-if="audioError" class="error" role="alert">{{ audioError }}</p>
-        <div v-if="audioUrl" class="audio-output"><audio :key="audioUrl" controls :src="audioUrl" /><a :href="audioUrl" :download="audioSamples[sampleIndex].name + '.wav'">Descargar WAV</a></div>
+        <label for="rate">{{ $t("Frecuencia de previsualización") }}</label>
+        <select id="rate" v-model.number="sampleRate" @change="clearAudio"><option :value="8000">{{ $t("8 kHz") }}</option><option :value="16000">{{ $t("16 kHz") }}</option><option :value="32000">{{ $t("32 kHz") }}</option></select>
+        <button @click="prepareAudio">{{ $t("Cargar audio") }}</button>
+        <p v-if="audioError" class="error" role="alert">{{ $t(audioError) }}</p>
+        <div v-if="audioUrl" class="audio-output"><audio :key="audioUrl" controls :src="audioUrl" /><a :href="audioUrl" :download="audioSamples[sampleIndex].name + '.wav'">{{ $t("Descargar WAV") }}</a></div>
       </section>
     </template>
   </main>
 </template>
 <script>
 import { markRaw } from 'vue';
+import LanguageSelector from '../components/LanguageSelector.vue';
 import RomImage from '../components/RomImage.vue';
 import StudioEditor from '../components/StudioEditor.vue';
 import Storage from '../utils/Storage';
@@ -59,7 +63,7 @@ import { openRom } from '../rom/binary.mjs';
 import { teamNames, readTeam } from '../rom/studio';
 import { AUDIO_SAMPLES, DEFAULT_SAMPLE_RATE, readAudioSample, wavBlob } from '../rom/audio.mjs';
 export default {
-  components: { RomImage, StudioEditor },
+  components: { RomImage, StudioEditor, LanguageSelector },
   data() {
     return {
       session: null, teamData: null, teams: [], teamIndex: 0, loading: false, error: '',
@@ -76,7 +80,7 @@ export default {
   },
   beforeUnmount() { this.loadVersion++; this.clearAudio(); },
   methods: {
-    playerAttributes({ head, headColors, skinColor, ...attributes }) { return attributes; },
+    playerAttributes({ head, headColors, skinColor, ...attributes }) { return Object.fromEntries(Object.entries(attributes).map(([key,value]) => [this.key,value])); },
     async loadFile(file, save = false) {
       const version = ++this.loadVersion;
       this.loading = true; this.error = ''; this.teamData = null; this.session = null; this.teams = []; this.clearAudio();
@@ -110,6 +114,13 @@ export default {
 </script>
 <style scoped>
 main { max-width: 1050px; margin: 32px auto; padding: 0 20px; font-family: system-ui, sans-serif; color: #172a40; }
+header { 
+  max-width: 1050px;
+  margin: 32px auto; padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+ }
 h1 { margin-bottom: 24px; } input, select, button { margin: 6px; padding: 8px; font: inherit; }
 button { cursor: pointer; } nav, .images, .audio-output { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 figure { margin: 12px 0; } figcaption { font-size: 13px; margin-top: 6px; } small { font-size: 14px; font-weight: normal; }

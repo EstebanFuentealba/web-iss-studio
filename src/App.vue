@@ -2,7 +2,7 @@
   <div>
     <router-view />
     <div v-bind="getRootProps()">
-      <div v-show="isDragActive">drop</div>
+      <div v-show="isDragActive">{{ $t("drop") }}</div>
     </div>
   </div>
 </template>
