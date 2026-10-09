@@ -49,7 +49,7 @@ using namespace std;
 
 int main() {
     cout << ":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::" << endl;
-    cout << ":: Web ISS Studio                                                        ::" << endl;
+    cout << ":: Web ISSD Studio                                                        ::" << endl;
     cout << ":: Version: 1.0                                                          ::" << endl;
     cout << ":: Author: Esteban Fuentealba                                            ::" << endl;
     cout << "::                                                                       ::" << endl;

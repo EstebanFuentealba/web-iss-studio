@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout WASM
-        uses: mymindstorm/setup-emsdk@master
+        uses: emscripten-core/setup-emsdk@v15
         
       - name: Checkout 🛎️
         uses: actions/checkout@v3

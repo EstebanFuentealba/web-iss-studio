@@ -1,345 +1,120 @@
 <template>
-  <div>
-    <strong>Open ROM</strong><br /><br />
-    <input type="file" id="rom" @change="onChangeFile" />
-  </div>
-  <br />
-  <br />
-  <div ref="preview">
-    <button type="button" @click="prev">Prev</button>
-    {{ teamName }} (<i>{{ team?.name }}</i
-    >)
-    <button type="button" @click="next">Next</button>
-    <div v-if="rgbs.length > 0" class="flex flex-row">
-      <div class="mr-4">
-        <span class="font-bold">Team Data</span>
-        <div class="flag flex flex-col">
-          <div
-            v-for="(row, index) in matrix"
-            :key="`row-${index}`"
-            class="flex flex-row"
-          >
-            <div
-              v-for="(col, index) in row"
-              :key="`col-${index}`"
-              class="square"
-              :style="{
-                backgroundColor: rgbs[0][col]?.toHex(),
-              }"
-            ></div>
-          </div>
+  <main>
+    <h1>Web ISSD Studio</h1>
+    <label for="rom">Abrir ROM ISS / ISS Deluxe (USA)</label>
+    <input id="rom" type="file" accept=".sfc,.smc" @change="onChangeFile" :disabled="loading" />
+    <p v-if="loading" role="status">Leyendo ROM…</p>
+    <p v-if="error" role="alert" class="error">{{ error }}</p>
+    <StudioEditor ref="editor" v-if="session?.game === 'issd'" :input="session.input" @import-rom="loadFile($event, true)" />
+    <template v-if="session && session.game !== 'issd'">
+      <p>{{ session.label }} · {{ teams.length }} equipos · {{ session.headerSize ? 'Cabecera SMC detectada' : 'Sin cabecera SMC' }}</p>
+      <nav aria-label="Equipos">
+        <button @click="move(-1)" :disabled="loading">Anterior</button>
+        <select aria-label="Seleccionar equipo" :value="teamIndex" @change="selectTeam(Number($event.target.value))" :disabled="loading">
+          <option v-for="(name, index) in teams" :key="index" :value="index">{{ index + 1 }}. {{ name }}</option>
+        </select>
+        <button @click="move(1)" :disabled="loading">Siguiente</button>
+      </nav>
+      <section v-if="teamData">
+        <h2>{{ teamData.name }} <small>({{ teams[teamIndex] }})</small></h2>
+        <div class="images">
+          <figure><RomImage :matrix="teamData.flag" :colors="teamData.colors" label="Bandera del equipo" /><figcaption>Bandera de la ROM</figcaption></figure>
+          <figure><RomImage :matrix="teamData.teamMatrix" :colors="teamData.teamColors" label="Rótulo del equipo" /><figcaption>Rótulo de la ROM</figcaption></figure>
         </div>
-        <br /><br />
-        <div class="flag flex flex-col">
-          <div
-            v-for="(row, index) in teamMatrix"
-            :key="`row-${index}`"
-            class="flex flex-row"
-          >
-            <div
-              v-for="(col, index) in row"
-              :key="`col-${index}`"
-              class="square"
-              :data-dev="col"
-              :style="{
-                backgroundColor: new TeamNameTilesColor(
-                  TeamNameTilesColor.getColors()[col]
-                ).toHex(),
-              }"
-            ></div>
-          </div>
+        <h3>Jugadores ({{ teamData.players.length }})</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Dorsal</th><th>Nombre</th><th v-if="session.game === 'issd'">Posición</th><th>Pelo</th><th v-if="session.game === 'issd'">Piel</th><th>Datos</th></tr></thead>
+            <tbody><tr v-for="(player, index) in teamData.players" :key="index">
+              <td>{{ player.no }}</td><td>{{ player.name }}</td><td v-if="session.game === 'issd'">{{ positions[player.position] || player.position }}</td>
+              <td><div class="appearance"><RomImage v-if="player.head" compact :matrix="player.head" :colors="player.headColors" :label="`Cabeza de ${player.name}, pelo ${player.hair}`" /><span>{{ player.hair }}</span></div></td>
+              <td v-if="session.game === 'issd'"><div class="appearance"><span class="skin-swatch" :style="{ backgroundColor: player.skinColor }" role="img" :aria-label="`Piel de ${player.name}: ${player.skinColor}`" :title="player.skinColor"></span><span>{{ player.skin }}</span></div></td>
+              <td><details><summary>Ver atributos</summary><pre>{{ JSON.stringify(playerAttributes(player), null, 2) }}</pre></details></td>
+            </tr></tbody>
+          </table>
         </div>
-        <br /><br />
-
-        <div class="flex flex-row">
-          <div
-            v-for="(color, index) in Object.keys(rgbs[0])"
-            :key="`color-${index}`"
-            class="color-block"
-            :style="{
-              backgroundColor: rgbs[0][color]?.toHex(),
-            }"
-          >
-            {{ color }}
-          </div>
-        </div>
-      </div>
-      <div class="ml-4">
-        <span>Players</span>
-        <pre>{{ JSON.stringify(players, null, 2) }}</pre>
-      </div>
-    </div>
-  </div>
+      </section>
+      <section v-if="session.game === 'issd'" class="audio-section">
+        <h2>Audio de la ROM</h2>
+        <p>Voces y muestras BRR extraídas del archivo abierto. La velocidad de previsualización es ajustable; la música secuenciada requiere el motor SPC700.</p>
+        <label for="sample">Muestra</label>
+        <select id="sample" v-model.number="sampleIndex" @change="clearAudio">
+          <option v-for="(sample, index) in audioSamples" :key="index" :value="index">{{ sample.name }}</option>
+        </select>
+        <label for="rate">Frecuencia de previsualización</label>
+        <select id="rate" v-model.number="sampleRate" @change="clearAudio"><option :value="8000">8 kHz</option><option :value="16000">16 kHz</option><option :value="32000">32 kHz</option></select>
+        <button @click="prepareAudio">Cargar audio</button>
+        <p v-if="audioError" class="error" role="alert">{{ audioError }}</p>
+        <div v-if="audioUrl" class="audio-output"><audio :key="audioUrl" controls :src="audioUrl" /><a :href="audioUrl" :download="audioSamples[sampleIndex].name + '.wav'">Descargar WAV</a></div>
+      </section>
+    </template>
+  </main>
 </template>
 <script>
-import { chunk } from "../utils/index";
-import Game from "../models/Game";
-import Team from "../models/Team";
-import FlagSnes4bpp from "../models/tiles/FlagSnes4bpp";
-import FlagColorRomHandler from "../models/FlagColorRomHandler";
-import FlagDesignRomHandler from "../handlers/FlagDesignRomHandler";
-import { Color as FlagDesignColor } from "../models/tiles/FlagDesign";
-import { Color as TeamNameTilesColor } from "../models/tiles/TeamNameTiles";
-import TeamNameRomHandler from "../handlers/TeamNameRomHandler";
-import TeamNameTextRomHandler from "../handlers/texts/TeamNameTextRomHandler";
-import TeamNameTilesRomHandler from "../handlers/TeamNameTilesRomHandler";
-import PlayerNameRomHandler from "../handlers/texts/PlayerNameRomHandler";
-import PlayerNumberRomHandler from "../handlers/texts/PlayerNumberRomHandler";
-import PlayerColorRomHandler from "../handlers/texts/PlayerColorRomHandler";
-import HairStyleRomHandler from "../handlers/texts/HairStyleRomHandler";
-import AbilitiesRomHandler from "../handlers/texts/AbilitiesRomHandler";
-import Storage from "../utils/Storage";
-import HairStyle from "../models/HairStyle";
+import { markRaw } from 'vue';
+import RomImage from '../components/RomImage.vue';
+import StudioEditor from '../components/StudioEditor.vue';
+import Storage from '../utils/Storage';
+import { openRom } from '../rom/binary.mjs';
+import { teamNames, readTeam } from '../rom/studio';
+import { AUDIO_SAMPLES, DEFAULT_SAMPLE_RATE, readAudioSample, wavBlob } from '../rom/audio.mjs';
 export default {
+  components: { RomImage, StudioEditor },
   data() {
     return {
-      TeamNameTilesColor,
-      offsetTop: "0x483e4",
-      offsetBottom: "0x4841a",
-      rom: null,
-      matrix: [],
-      teamMatrix: [],
-      players: [],
-      teamName: "",
-      rgbs: [],
-      team: new Team(Team.GERMANY),
-      storage: new Storage(),
+      session: null, teamData: null, teams: [], teamIndex: 0, loading: false, error: '',
+      storage: markRaw(new Storage()), audioSamples: AUDIO_SAMPLES, sampleIndex: AUDIO_SAMPLES.findIndex(s => s.name === 'TitleScreenNameDrop'),
+      sampleRate: DEFAULT_SAMPLE_RATE, audioUrl: '', audioError: '', loadVersion: 0,
+      positions: { 1: 'Portero', 2: 'Defensa', 3: 'Medio defensivo', 4: 'Mediocampo', 5: 'Medio ofensivo', 6: 'Delantero' },
     };
   },
   mounted() {
-    setTimeout(() => {
-      this.storage.init(() => {
-        this.storage.get(async (rom) => {
-          if (rom) {
-            this.rom = await this.$core.f(rom);
-            // this.findFlag();
-            // return;
-            this.renderFlag();
-            this.renderTeamName();
-            this.renderTeamPlayers();
-          }
-        });
-      });
-    }, 500);
+    const version = this.loadVersion;
+    this.storage.init(() => this.storage.get(file => {
+      if (file && version === this.loadVersion) this.loadFile(file);
+    }));
   },
+  beforeUnmount() { this.loadVersion++; this.clearAudio(); },
   methods: {
-    async findFlag() {
-      console.log("findFlag start");
-      for (let offset = 0; offset < this.rom.length; offset++) {
-        let bytes = await this.$core.d(`0x${offset.toString(16)}`);
-        if (
-          bytes.byteLength == 96 &&
-          bytes.filter((byte) => byte == 0x00).length != 96
-        ) {
-          console.log("finded", `0x${offset.toString(16)}`, bytes);
-        }
-      }
+    playerAttributes({ head, headColors, skinColor, ...attributes }) { return attributes; },
+    async loadFile(file, save = false) {
+      const version = ++this.loadVersion;
+      this.loading = true; this.error = ''; this.teamData = null; this.session = null; this.teams = []; this.clearAudio();
+      try {
+        const input = new Uint8Array(await file.arrayBuffer());
+        const session = { ...openRom(input), input };
+        const data = await readTeam(session, 0);
+        if (version !== this.loadVersion) return;
+        this.session = markRaw(session); this.teams = teamNames(session.game); this.teamIndex = 0; this.teamData = data;
+        if (save && this.storage.database) this.storage.set(file);
+      } catch (error) { if (version === this.loadVersion) this.error = error.message; }
+      finally { if (version === this.loadVersion) this.loading = false; }
     },
-    prev() {
-      this.team = this.team.previous();
-      this.renderFlag();
-      this.renderTeamName();
-      this.renderTeamPlayers();
+    onChangeFile(event) { const file = event.target.files?.[0]; if (file && (!this.$refs.editor || this.$refs.editor.allowNavigate())) this.loadFile(file, true); event.target.value = ''; },
+    move(step) { this.selectTeam((this.teamIndex + step + this.teams.length) % this.teams.length); },
+    async selectTeam(index) {
+      if (!this.session || this.loading) return;
+      this.loading = true; this.error = ''; this.teamData = null;
+      try { this.teamData = await readTeam(this.session, index); this.teamIndex = index; }
+      catch (error) { this.error = error.message; }
+      finally { this.loading = false; }
     },
-    next() {
-      this.team = this.team.next();
-      this.renderFlag();
-      this.renderTeamName();
-      this.renderTeamPlayers();
-    },
-    async renderTeamPlayers() {
-      let names = new PlayerNameRomHandler(this.rom).readFromRomAt(this.team);
-      let numbers = new PlayerNumberRomHandler(this.rom).readFromRomAt(
-        this.team
-      );
-      let colors = new PlayerColorRomHandler(this.rom).readFromRomAt(this.team);
-      let hairs = new HairStyleRomHandler(this.rom).readFromRomAt(this.team);
-      //  TODO:
-      let abilities = new AbilitiesRomHandler(this.rom).readFromRomAt(
-        this.team
-      );
-      this.players = names.reduce((acc, curr, index) => {
-          if (hairs[index].text == HairStyle.DREADLOCKS) {
-            alert("encontrado " + curr);
-          }
-          acc.push({
-            name: curr,
-            no: numbers[index],
-            color: colors[index],
-            hair: hairs[index].text,
-          });
-          return acc;
-        }, []);
-    },
-    async renderTeamName() {
-      let handler2 = new TeamNameTextRomHandler(this.rom);
-      this.teamName = handler2.readFromRomAt(this.team).toString();
-      let teamMatrix = await new TeamNameTilesRomHandler(
-        this.rom,
-        this.$core.d
-      ).readFromRomAt(this.team);
-      this.teamMatrix = teamMatrix.getMatrix();
-    },
-    async renderFlag() {
-      this.rgbs = new FlagColorRomHandler(this.rom, Game.ISS)
-        .readFromRomAt(this.team)
-        .getRgbs();
-      this.matrix = (
-        await new FlagDesignRomHandler(this.rom, this.$core.d).readFromRomAt(
-          this.team
-        )
-      ).getMatrix();
-    },
-    async onChangeFile({ target: { files } }) {
-      this.rom = await this.$core.f(files[0]);
-      this.storage.set(files[0]);
-      this.renderFlag();
-      this.renderTeamName();
-    },
-    readFlagPart(fileIn) {
-      let colors = this.bytesToMatrix(fileIn);
-      return colors;
-    },
-    bytesToMatrix(bytes) {
-      let tileData = [];
-      let tileInputArray = [];
-      let matrix = new Array(8).fill(new Array());
-      let binString = "";
-      let byte1 = 0,
-        byte2 = 0,
-        byte17 = 0,
-        byte18 = 0;
-
-      for (let startBlock = 0; startBlock <= 64; startBlock += 32) {
-        for (
-          let start = startBlock, bytesRead = 0;
-          start < startBlock + 32;
-          start++, bytesRead++
-        ) {
-          tileInputArray[bytesRead] = bytes.slice(start, start + 1);
-          for (let k = 0; k <= 7; k++) {
-            byte1 = tileInputArray[k * 2];
-            byte2 = tileInputArray[k * 2 + 1];
-            byte17 = tileInputArray[k * 2 + 16];
-            byte18 = tileInputArray[k * 2 + 17];
-
-            for (let l = 0; l <= 7; l++) {
-              binString = "";
-
-              if ((new Uint8Array(byte18) & (1 << l)) != 0) {
-                binString = binString + "1";
-              } else {
-                binString = binString + "0";
-              }
-              if ((new Uint8Array(byte17) & (1 << l)) != 0) {
-                binString = binString + "1";
-              } else {
-                binString = binString + "0";
-              }
-              if ((new Uint8Array(byte2) & (1 << l)) != 0) {
-                binString = binString + "1";
-              } else {
-                binString = binString + "0";
-              }
-              if ((new Uint8Array(byte1) & (1 << l)) != 0) {
-                binString = binString + "1";
-              } else {
-                binString = binString + "0";
-              }
-              let outputBitString = parseInt(binString, 2);
-              tileData[k * 8 + l] = FlagDesignColor.forCode(
-                parseInt(outputBitString.toString(10))
-              );
-            }
-          }
-        }
-
-        let chunks = chunk(tileData, 8);
-        chunks.forEach((row, rowIndex) => {
-          matrix[rowIndex] = row.concat(matrix[rowIndex]);
-        });
-      }
-
-      return matrix.map((row) => {
-        return row.reverse();
-      });
-    },
-    async getFlagPart(offset) {
-      let decompFile = await this.$core.d(offset);
-      return {
-        part: this.readFlagPart(decompFile),
-        decompFile,
-      };
-    },
-    async decompress() {
-      let { part: flagTop } = await this.getFlagPart(this.offsetTop);
-      let { part: flagBottom } = await this.getFlagPart(this.offsetBottom);
-      let matrix = new FlagSnes4bpp(flagTop, flagBottom).getMatrix();
-      let rgbs = new FlagColorRomHandler(this.rom, Game.ISS)
-        .readFromRomAt(this.team)
-        .getRgbs();
-
-      this.$refs.preview.innerHTML = `<div class="flag flex flex-col">${matrix
-        .map((row) => {
-          return `<div class="flex flex-row">${row
-            .map((col) => {
-              let color = rgbs[0][col];
-              if (color) {
-                return `<div class="square" style="background-color: ${color.toHex()}"></div>`;
-              }
-              return `<div class="square"></div>`;
-            })
-            .join(" ")}</div>
-            `;
-        })
-        .join("\n")}</div>
-        <br /><br />
-            <div class="flex flex-row">${Object.keys(rgbs[0])
-              .map((key) => {
-                return `<div class="color-block" style="background-color: ${rgbs[0][
-                  key
-                ].toHex()};">${key}</div>`;
-              })
-              .join("")}</div>`;
+    clearAudio() { if (this.audioUrl) URL.revokeObjectURL(this.audioUrl); this.audioUrl = ''; this.audioError = ''; },
+    prepareAudio() {
+      this.clearAudio();
+      try { this.audioUrl = URL.createObjectURL(wavBlob(readAudioSample(this.session.rom, this.audioSamples[this.sampleIndex]), this.sampleRate)); }
+      catch (error) { this.audioError = error.message; }
     },
   },
 };
 </script>
-<style lang="css">
-.flex {
-  display: flex;
-}
-.flex-col {
-  flex-direction: column;
-}
-.flex-row {
-  flex-direction: row;
-}
-.color-block {
-  border: 1px solid #eee;
-  margin-right: 5px;
-  color: white;
-  display: flex;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  width: 50px;
-  height: 50px;
-  font-size: 10px;
-}
-.square {
-  width: 10px;
-  height: 10px;
-  font-size: 8px;
-}
-.flag {
-  width: 240px;
-  border: 1px solid #eee;
-}
-.ml-4 {
-margin-left: 1rem;
-}
-.mr-4 {
-margin-right: 1rem;
-}
+<style scoped>
+main { max-width: 1050px; margin: 32px auto; padding: 0 20px; font-family: system-ui, sans-serif; color: #172a40; }
+h1 { margin-bottom: 24px; } input, select, button { margin: 6px; padding: 8px; font: inherit; }
+button { cursor: pointer; } nav, .images, .audio-output { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+figure { margin: 12px 0; } figcaption { font-size: 13px; margin-top: 6px; } small { font-size: 14px; font-weight: normal; }
+.error { color: #a32121; } table { border-collapse: collapse; width: 100%; } th, td { padding: 8px 14px; text-align: left; border-bottom: 1px solid #d4dce4; } th { background: #eaf0f6; }
+.table-wrap { overflow-x: auto; } pre { font-size: 12px; } summary { cursor: pointer; } .audio-section { margin: 32px 0; padding-top: 16px; border-top: 1px solid #d4dce4; } .audio-section label { display: inline-block; margin-left: 8px; }
+.appearance { display: flex; align-items: center; gap: 8px; }
+.skin-swatch { display: inline-block; width: 20px; height: 20px; flex: 0 0 20px; box-shadow: inset 0 0 0 1px #172a4033; }
 </style>
