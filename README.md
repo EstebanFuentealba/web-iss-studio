@@ -218,8 +218,8 @@ gamepad settings are available in the emulator toolbar. SMC copier headers are
 removed from the emulator copy; exported downloads still preserve them.
 
 **Panel de prueba** sends SNES button presses to player 1 or 2 with a selectable
-press duration. **Título → selector** navigates from PRESS START to the team
-selector; **Cancelar secuencia** stops a running shortcut and releases its inputs.
+press duration. **Guía para ir al selector** describes the native menu steps;
+**Cancelar secuencia** releases a pending button press.
 Name and save up to eight screens, then use **Ir a** to restore their exact game
 state. Screen bookmarks stay in memory for the loaded ROM and are cleared when
 reloading, stopping, or leaving the emulator.

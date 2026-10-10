@@ -15,10 +15,11 @@
         <label>{{ $t("Mando") }} <select v-model.number="controller"><option :value="0">1P</option><option :value="1">2P</option></select></label>
         <label>{{ $t("Duración") }} <select v-model.number="duration"><option :value="150">150 ms</option><option :value="500">500 ms</option><option :value="1500">1.5 s</option></select></label>
         <button @click="command('restart')" :disabled="!running || busy">{{ $t("Reiniciar juego") }}</button>
-        <button @click="command('title-selector')" :disabled="!running || busy">{{ $t("Título → selector") }}</button>
         <button v-if="busy" @click="command('cancel')">{{ $t("Cancelar secuencia") }}</button>
       </div>
-      <p class="hint">{{ $t("El acceso al selector parte de la pantalla PRESS START. Guarda otras pantallas para volver a ellas con un clic.") }}</p>
+      <details class="guide"><summary>{{ $t("Guía para ir al selector") }}</summary>
+        <p>{{ $t("Desde PRESS START: pulsa Start, luego A en OPEN GAME, A en el modo individual y A en 1P contra CPU. Espera a que aparezca cada menú antes de continuar.") }}</p>
+      </details>
       <div class="pad" :aria-label="$t('Mando SNES de prueba')">
         <div class="directions">
           <button class="up" @click="press(4)" :disabled="!running || busy" :aria-label="$t('Arriba')">↑</button>

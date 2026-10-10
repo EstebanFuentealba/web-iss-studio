@@ -87,13 +87,13 @@ console.log('PASS emulator languages: English and Portuguese runtime, start butt
   listeners.message({origin:'https://untrusted.example',source:parent,data:{type:'issd:emulator-command',id:3,action:'restart'}});assert.equal(restarts,0);
   command(3,'save-screen',{slot:1});await flush();command(4,'load-screen',{slot:1});await flush();assert.deepEqual(restored,[Uint8Array.of(9,8,7)]);
   command(5,'load-screen',{slot:9});await flush();assert.equal(reports.at(-1).ok,false);
-  command(6,'title-selector');command(7,'cancel');await flush();assert.deepEqual(inputs.slice(2),[[0,3,1],[0,3,0]]);
-  command(8,'title-selector');await flush();assert.deepEqual(inputs.slice(4).filter(i=>i[2]),[[0,3,1],[0,8,1],[0,8,1],[0,8,1]]);
+  command(6,'press',{player:0,index:3,duration:500});command(7,'cancel');await flush();assert.deepEqual(inputs.slice(2),[[0,3,1],[0,3,0]]);
+  command(8,'unknown');await flush();assert.equal(reports.at(-1).ok,false);
   command(9,'restart');await flush();assert.equal(restarts,1);command(9,'restart');await flush();assert.equal(restarts,1);
   editor.project.exportRom=()=>exported.slice();editor.$t=x=>x;editor.start();editor.running=true;
   editor.bookmarkName='EXTRA';editor.saveScreen();const pending=editor.pendingCommand;assert.equal(sent.at(-1)[0].action,'save-screen');
   editor.receive({origin,source:frame,data:{type:'issd:emulator-command-result',id:pending.id+1,ok:true}});assert.equal(editor.busy,true);
   editor.receive({origin,source:frame,data:{type:'issd:emulator-command-result',id:pending.id,ok:true}});assert.deepEqual(JSON.parse(JSON.stringify(editor.screens)),[{slot:1,name:'EXTRA'}]);assert.equal(editor.busy,false);
   editor.stop();assert.equal(editor.screens.length,0);assert.equal(editor.running,false);
-  console.log('PASS emulator test panel: controller pulse/release, bounded commands, cancellation, screen save/load, title navigation, origin checks and ROM lifecycle');
+  console.log('PASS emulator test panel: controller pulse/release, bounded commands, cancellation, screen save/load, origin checks and ROM lifecycle');
 })().catch(error=>{console.error(error);process.exitCode=1;});

@@ -3623,5 +3623,15 @@
     "es": "Reiniciar juego",
     "en": "Restart game",
     "pt": "Reiniciar jogo"
+  },
+  "Guía para ir al selector": {
+    "es": "Guía para ir al selector",
+    "en": "Guide to team selection",
+    "pt": "Guia para a seleção"
+  },
+  "Desde PRESS START: pulsa Start, luego A en OPEN GAME, A en el modo individual y A en 1P contra CPU. Espera a que aparezca cada menú antes de continuar.": {
+    "es": "Desde PRESS START: pulsa Start, luego A en OPEN GAME, A en el modo individual y A en 1P contra CPU. Espera a que aparezca cada menú antes de continuar.",
+    "en": "From PRESS START: press Start, then A on OPEN GAME, A on single game mode and A on 1P versus CPU. Wait for each menu to appear before continuing.",
+    "pt": "A partir de PRESS START: pressione Start, depois A em OPEN GAME, A no modo individual e A em 1P contra CPU. Espere cada menu aparecer antes de continuar."
   }
 }
