@@ -1,6 +1,7 @@
 // Each iframe owns one runtime. Removing it stops the core, sound and input handlers.
 (() => {
-  let romUrl = null;
+  let romUrl = null, running = false, busy = false, generation = 0, lastCommandId = 0;
+  const screens = new Map(), held = new Map();
   const messages = {
     es: { locale: 'es-ES', title: 'ISSD · Emulador SNES', preparing: 'Preparando ROM modificada…', start: 'Iniciar juego', error: 'No se pudo cargar el motor SNES. Revisa tu conexión y vuelve a intentarlo.' },
     pt: { locale: 'pt-BR', title: 'ISSD · Emulador SNES', preparing: 'Preparando ROM modificada…', start: 'Iniciar jogo', error: 'Não foi possível carregar o motor SNES. Verifique sua conexão e tente novamente.' },
@@ -20,6 +21,7 @@
     report('error', messages[language].error);
   };
   window.addEventListener('message', event => {
+    if(event.data?.type === 'issd:emulator-command'){handleCommand(event);return;}
     if (event.source !== parent || event.origin !== location.origin || event.data?.type !== 'issd:load-rom' || romUrl) return;
     language = Object.hasOwnProperty.call(messages, event.data.language) ? event.data.language : language;
     updateLanguage();
@@ -32,14 +34,55 @@
       EJS_language: messages[language].locale, EJS_color: '#176be0', EJS_backgroundColor: '#101820',
       EJS_startOnLoaded: false, EJS_startButtonName: messages[language].start, EJS_threads: false,
       EJS_disableLocalStorage: true, EJS_noAutoFocus: true,
-      EJS_ready: () => report('ready'), EJS_onGameStart: () => report('running'),
+      EJS_ready: () => report('ready'), EJS_onGameStart: () => { running = true; report('running'); },
     });
     const loader = document.createElement('script');
     loader.src = `${window.EJS_pathtodata}loader.js`;
     loader.onerror = fail;
     document.body.appendChild(loader);
   });
+  const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
+  const release = () => {
+    for(const key of held.keys()){const [player,index]=key.split(':').map(Number);window.EJS_emulator.gameManager.simulateInput(player,index,0);}
+    held.clear();
+  };
+  const pulse = async (manager,player,index,duration,token) => {
+    if(token !== generation)throw new Error('cancelled');
+    const key = `${player}:${index}`; held.set(key,token);manager.simulateInput(player,index,1);
+    try { await wait(duration); }
+    finally { if(held.get(key) === token){manager.simulateInput(player,index,0);held.delete(key);} }
+    if(token !== generation)throw new Error('cancelled');
+  };
+  const handleCommand = event => {
+    if(event.source !== parent || event.origin !== location.origin || event.data?.type !== 'issd:emulator-command')return;
+    const data=event.data,id=data.id;
+    if(!Number.isSafeInteger(id)||id<=lastCommandId)return;
+    lastCommandId=id;
+    const respond=ok=>parent.postMessage({type:'issd:emulator-command-result',id,ok},location.origin);
+    if(!running || !window.EJS_emulator?.gameManager){respond(false);return;}
+    if(data.action === 'cancel'){generation++;release();busy=false;respond(true);return;}
+    if(busy){respond(false);return;}
+    const manager=window.EJS_emulator.gameManager,token=++generation;busy=true;
+    (async()=>{
+      if(data.action === 'press'){
+        if(![0,1].includes(data.player)||![0,1,2,3,4,5,6,7,8,9,10,11].includes(data.index)||!Number.isInteger(data.duration)||data.duration<50||data.duration>1500)throw new Error('input');
+        await pulse(manager,data.player,data.index,data.duration,token);
+      }else if(data.action === 'title-selector'){
+        for(const index of [3,8,8,8]){await pulse(manager,0,index,150,token);await wait(3500);if(token!==generation)throw new Error('cancelled');}
+      }else if(data.action === 'restart')manager.restart();
+      else if(data.action === 'save-screen'){
+        if(!Number.isInteger(data.slot)||data.slot<1||data.slot>8)throw new Error('slot');
+        const bytes=await manager.getState();
+        if(token!==generation||!(bytes instanceof Uint8Array)||!bytes.length||bytes.length>16*1024*1024)throw new Error('state');
+        screens.set(data.slot,bytes.slice());
+      }else if(data.action === 'load-screen'){
+        if(!screens.has(data.slot))throw new Error('slot');
+        manager.loadState(screens.get(data.slot).slice());
+      }else throw new Error('command');
+      respond(true);
+    })().catch(()=>respond(false)).finally(()=>{if(token===generation)busy=false;});
+  };
   window.addEventListener('error', fail);
   window.addEventListener('unhandledrejection', fail);
-  window.addEventListener('pagehide', () => { if (romUrl) URL.revokeObjectURL(romUrl); });
+  window.addEventListener('pagehide', () => { generation++; if(running)release(); screens.clear(); if (romUrl) URL.revokeObjectURL(romUrl); });
 })();

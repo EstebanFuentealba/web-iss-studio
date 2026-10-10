@@ -1,3 +1,4 @@
+import {hasExtraTeams,EXTRA_BIG_LABEL_ADDRESS,EXTRA_BIG_LABEL_CAPACITY} from './team-count.mjs';
 import {decompress,loRom,word,tiles,palette} from './binary.mjs';
 import {compress,encodeTiles,graphicResources,graphicPatches,smallLabelPatches,smallLabelMatrix} from './graphics.mjs';
 // COD_BigTeamAndStadiumNames, 42 frames / 411 sprites, loaded at $7E4F02.
@@ -9,18 +10,25 @@ export const TEAM_LABEL_FRAMES=[14,15,16,0,2,3,4,6,12,5,8,10,7,11,9,13,1,36,18,2
 // USA cartridge letter capacities, verified from native glyphs and their frames.
 // Keep a slot's limit after saving/reopening a ROM with a shorter replacement.
 const TEAM_LABEL_CAPACITIES=[5,7,7,6,5,7,8,7,7,6,7,6,7,8,6,5,6,7,7,5,8,10,14,6,5,7,6,7,8,7,6,9,8,6,3,7,8,11,11,10,12,18];
-export function labelLayout(rom) {
-  const data=decompress(rom,loRom(BIG_LABEL_ADDRESS)),count=data[0],sprites=word(data,1),base=3+count;
-  if(count!==42||sprites!==411||data.length!==base+sprites*4)throw new Error('Formato de nombres grandes no compatible.');
+export function labelLayout(rom,expanded=false) {
+  const data=decompress(rom,loRom(hasExtraTeams(rom)?EXTRA_BIG_LABEL_ADDRESS:BIG_LABEL_ADDRESS)),count=data[0],sprites=word(data,1),base=3+count;
+  if(!([42,48].includes(count))||sprites!==(count===48?531:411)||data.length!==base+sprites*4)throw new Error('Formato de nombres grandes no compatible.');
+  if(expanded&&count===42)return extendedLabelLayout({data,sprites,base});
   return {data,sprites,base};
 }
+export function extendedLabelLayout(layout){
+ const data=new Uint8Array(3+48+531*4);data.set([48,19,2]);data.set(layout.data.slice(3,45),3);data.fill(20,45,51);
+ const f=labelFrame(layout,0);
+ for(let p=0;p<4;p++){data.set(layout.data.slice(layout.base+p*411,layout.base+(p+1)*411),51+p*531);for(let t=0;t<6;t++)for(let i=0;i<20;i++)data[51+p*531+411+t*20+i]=i<f.count?layout.data[layout.base+p*411+f.start+i]:[0,4,170,10][p];}
+ return {data,sprites:531,base:51};
+}
 export function labelFrame(layout,team) {
-  const frame=TEAM_LABEL_FRAMES[team];if(frame===undefined)throw new Error('Equipo inválido.');
+  const frame=team>=42&&team<48?team:TEAM_LABEL_FRAMES[team];if(frame===undefined)throw new Error('Equipo inválido.');
   let start=0;for(let i=0;i<frame;i++)start+=layout.data[3+i];
   return {frame,start,count:layout.data[3+frame]};
 }
 export function bigLabel(rom,team) {
-  const layout=labelLayout(rom),frame=labelFrame(layout,team),font=menuFont(rom);
+  const layout=labelLayout(rom,team>=42),frame=labelFrame(layout,team),font=menuFont(rom);
   const matrix=Array.from({length:24},()=>new Array(80).fill(0));
   for(let i=0;i<frame.count;i++) {
     const p=layout.base+frame.start+i,id=layout.data[p+layout.sprites*2],attr=layout.data[p+layout.sprites*3],size=attr&16?16:8,x0=layout.data[p]-(size===16?4:0),y0=layout.data[p+layout.sprites]-(size===16?4:0);
@@ -32,10 +40,10 @@ export function bigLabel(rom,team) {
     }
   }
   const colors=new Array(16).fill('transparent');colors.splice(1,11,...palette(rom,loRom(0x89e362),11));
-  return {matrix,colors,maxLetters:TEAM_LABEL_CAPACITIES[team]};
+  return {matrix,colors,maxLetters:TEAM_LABEL_CAPACITIES[team]||10};
 }
 export function validateLabelLayout(bytes,original) {
-  const baseline=labelLayout(original),n=baseline.sprites,base=baseline.base;
+  const baseline=labelLayout(original,bytes[0]===48),n=baseline.sprites,base=baseline.base;
   if(bytes.length!==baseline.data.length||bytes.slice(0,base).some((b,i)=>b!==baseline.data[i]))throw new Error('No se puede cambiar la cantidad de sprites de los nombres grandes.');
   for(let i=base;i<bytes.length;i++) if(bytes[i]!==baseline.data[i]) {
     const index=(i-base)%n,x=bytes[base+index],y=bytes[base+n+index],tile=bytes[base+n*2+index],attr=bytes[base+n*3+index];
@@ -56,7 +64,9 @@ export function bigTeamNamePatches(original,current,team,name) {
   const positions=[];let width=0;
   for(const c of name){positions.push(width);width+=c==='.'||c===' '?4:8;}
   const nativeLeft=Math.min(...Array.from({length:frame.count},(_,i)=>{const p=layout.base+frame.start+i;return layout.data[p]-(layout.data[p+layout.sprites*3]&16?4:0);}));
-  const left=Math.max(0,Math.min(nativeLeft,80-width));
+  // Added frames contain transparent padding at x=0. It is not a text
+  // anchor: center their text in the native 80-pixel name area instead.
+  const left=team>=42?Math.max(0,Math.floor((80-width)/2)):Math.max(0,Math.min(nativeLeft,80-width));
   const sprites=plans[0].parts.slice().reverse().flatMap(part=>part.text===' '?[]:part.text.length===2?[[left+positions[part.x]+4,8,part.tile,26]]:part.text==='.'?[[left+positions[part.x],12,186,10]]:[[left+positions[part.x],12,part.tile+16,10],[left+positions[part.x],4,part.tile,10]]);
   while(sprites.length<frame.count)sprites.push([left,4,170,10]);
   // Reuse native positions and paired glyphs whenever the new text fits the
@@ -65,7 +75,7 @@ export function bigTeamNamePatches(original,current,team,name) {
   for(let i=0;i<frame.count;i++){const p=layout.base+frame.start+i,tile=layout.data[p+layout.sprites*2],large=!!(layout.data[p+layout.sprites*3]&16);if(large||Array.from('ABCDEFGHIJKLMNOPQRSTUVWXYZ ',c=>tileFor(c)).includes(tile))groups.push({x:layout.data[p]-(large?4:0),large,i});}
   groups.sort((a,b)=>a.x-b.x);let cursor=0;const assignments=new Map();
   for(const group of groups){const text=name.slice(cursor,cursor+(group.large?2:1));if(group.large){const pair=pairs.find(p=>p.text===text);if(!pair){assignments.clear();break;}assignments.set(group.x,{tile:pair.tile,large:true});}else assignments.set(group.x,{tile:tileFor(text||' '),large:false});cursor+=group.large?2:1;}
-  if(name.includes('.')||Array.from({length:frame.count},(_,i)=>layout.data[layout.base+frame.start+i+layout.sprites*2]).includes(186)||Array.from({length:frame.count},(_,i)=>layout.data[layout.base+frame.start+i+layout.sprites*3]).some(a=>a&1))assignments.clear();
+  if(team>=42||name.includes('.')||Array.from({length:frame.count},(_,i)=>layout.data[layout.base+frame.start+i+layout.sprites*2]).includes(186)||Array.from({length:frame.count},(_,i)=>layout.data[layout.base+frame.start+i+layout.sprites*3]).some(a=>a&1))assignments.clear();
   if(nativeCzech&&name!==currentText){
     // CZECH REP. spans tile boundaries in the condensed menu font. Replace
     // the separate THE sprite with a duplicate at an existing glyph's position.
@@ -75,18 +85,18 @@ export function bigTeamNamePatches(original,current,team,name) {
       const p=layout.base+frame.start+i;
       if(i===5)for(let plane=0;plane<4;plane++)layout.data[p+plane*layout.sprites]=name.startsWith('THE ')?labelLayout(original).data[p+plane*layout.sprites]:layout.data[source+plane*layout.sprites];
     }
-  }else if(name!==currentText){
+  }else if(name!==currentText||team>=42){
     if(assignments.size&&cursor>=name.length)for(let i=0;i<frame.count;i++){const p=layout.base+frame.start+i,large=!!(layout.data[p+layout.sprites*3]&16),entry=assignments.get(layout.data[p]-(large?4:0));layout.data[p+layout.sprites*2]=entry.tile===170?170:entry.tile+(!large&&layout.data[p+layout.sprites]===12?16:0);}
     else for(let i=0;i<frame.count;i++)for(let plane=0;plane<4;plane++)layout.data[layout.base+frame.start+i+layout.sprites*plane]=sprites[i][plane];
   }
-  const offset=loRom(BIG_LABEL_ADDRESS),capacity=word(original,offset)&0x7fff;
+  const offset=loRom(hasExtraTeams(current)?EXTRA_BIG_LABEL_ADDRESS:BIG_LABEL_ADDRESS),capacity=hasExtraTeams(current)?EXTRA_BIG_LABEL_CAPACITY:word(original,offset)&0x7fff;
   validateLabelLayout(layout.data,original);
-  canonicalizeLabelFrames(layout,labelLayout(original));
-  const encoded=compressLabelLayout(layout,capacity),bytes=Uint8Array.from(original.subarray(offset,offset+capacity));
+  canonicalizeLabelFrames(layout,labelLayout(original,hasExtraTeams(current)));
+  const encoded=compressLabelLayout(layout,capacity),bytes=hasExtraTeams(current)?new Uint8Array(capacity).fill(255):Uint8Array.from(original.subarray(offset,offset+capacity));
   validateLabelLayout(layout.data,original);
   if(encoded.length>capacity)throw new Error(`Los nombres grandes requieren ${encoded.length} bytes; hay ${capacity}. Prueba otro nombre.`);
   bytes.set(encoded);
-  return [...(nativeCzech?czechPunctuationPatches(original,current,name.endsWith('.')):[]),{id:BIG_LABEL_ID,offset,label:`Nombre grande de selección · ${name}`,bytes}];
+  return [...(nativeCzech?czechPunctuationPatches(original,current,name.endsWith('.')):[]),{id:hasExtraTeams(current)?"teams:big-labels":BIG_LABEL_ID,offset,label:`Nombre grande de selección · ${name}`,bytes}];
 }
 export function smallTeamNamePatches(original,current,team,name){
   name=name.trim().toUpperCase();
@@ -98,12 +108,12 @@ export function renameTeamPatches(original,current,team,name){
   return [...smallTeamNamePatches(original,current,team,name),...big];
 }
 export function restoreTeamLabelPatches(original,current,team) {
-  const layout=labelLayout(current),baseline=labelLayout(original),frame=labelFrame(layout,team);
+  const layout=labelLayout(current),baseline=labelLayout(original,hasExtraTeams(current)),frame=labelFrame(layout,team);
   for(let p=0;p<4;p++)for(let i=0;i<frame.count;i++){const offset=layout.base+p*layout.sprites+frame.start+i;layout.data[offset]=baseline.data[offset];}
-  const offset=loRom(BIG_LABEL_ADDRESS),capacity=word(original,offset)&0x7fff,bytes=Uint8Array.from(original.subarray(offset,offset+capacity));
+  const offset=loRom(hasExtraTeams(current)?EXTRA_BIG_LABEL_ADDRESS:BIG_LABEL_ADDRESS),capacity=hasExtraTeams(current)?EXTRA_BIG_LABEL_CAPACITY:word(original,offset)&0x7fff,bytes=hasExtraTeams(current)?new Uint8Array(capacity).fill(255):Uint8Array.from(original.subarray(offset,offset+capacity));
   canonicalizeLabelFrames(layout,baseline);
   if(layout.data.some((b,i)=>b!==baseline.data[i])){const encoded=compressLabelLayout(layout,capacity);if(encoded.length>capacity)throw new Error('La restauración parcial supera el espacio del bloque de nombres.');bytes.set(encoded);}
-  return [...(team===22?czechPunctuationPatches(original,current,true):[]),...smallLabelPatches(original,current,team,smallLabelMatrix(original,team)),{id:BIG_LABEL_ID,offset,bytes,label:'Restaurar nombre grande del equipo'}];
+  return [...(team===22?czechPunctuationPatches(original,current,true):[]),...smallLabelPatches(original,current,team,smallLabelMatrix(original,team)),{id:hasExtraTeams(current)?"teams:big-labels":BIG_LABEL_ID,offset,bytes,label:'Restaurar nombre grande del equipo'}];
 }
 
 // Sprite order affects compression. Reorder only disjoint rectangles so OAM
@@ -189,11 +199,13 @@ function packedGlyphs(rom){
   return pairs;
 }
 export function frameText(rom,team){
-  const layout=labelLayout(rom),frame=labelFrame(layout,team),pairs=packedGlyphs(rom),letters=[];
+  const layout=labelLayout(rom,team>=42),frame=labelFrame(layout,team),pairs=packedGlyphs(rom),letters=[];
   if(team===22&&hasCzechGlyphs(layout,frame))return (Array.from({length:frame.count},(_,i)=>layout.data[layout.base+frame.start+i+layout.sprites*2]).includes(234)?'THE ':'')+'CZECH REP'+(tiles(decompress(rom,loRom(0x9ba400)),4,16).slice(11,14).some(row=>row.slice(120,123).some(Boolean))?'.':'');
   for(let i=0;i<frame.count;i++){const p=layout.base+frame.start+i,tile=layout.data[p+layout.sprites*2],attr=layout.data[p+layout.sprites*3];if(attr&1)return null;if(tile===186){letters.push({x:layout.data[p],text:'.'});continue;}if(attr&16){const pair=pairs.find(pair=>pair.tile===tile);if(!pair)return null;letters.push({x:layout.data[p]-4,text:pair.text});}else {const c=Array.from('ABCDEFGHIJKLMNOPQRSTUVWXYZ ',c=>({c,tile:tileFor(c)})).find(c=>c.tile===tile);if(c)letters.push({x:layout.data[p],text:c.c});}}
-  for(const letter of letters)if(letter.text==='.'&&letters.some(next=>next.x>letter.x)&&Math.min(...letters.filter(next=>next.x>letter.x).map(next=>next.x))-letter.x>=7)letter.text='. ';
-  return letters.filter(l=>l.text!==' '||!letters.some(other=>other.text!==' '&&other.x===l.x)).sort((a,b)=>a.x-b.x).map(l=>l.text).join('').trim();
+  if(team<42)for(const letter of letters)if(letter.text==='.'&&letters.some(next=>next.x>letter.x)&&Math.min(...letters.filter(next=>next.x>letter.x).map(next=>next.x))-letter.x>=7)letter.text='. ';
+  const ordered=letters.filter(l=>l.text!==' '||!letters.some(other=>other.text!==' '&&other.x===l.x)).sort((a,b)=>a.x-b.x);
+  if(team>=42)return ordered.map((letter,i)=>{const next=ordered[i+1],width=letter.text==='.'||letter.text===' '?4:letter.text.length*8,gap=next?Math.max(0,Math.floor((next.x-letter.x-width)/4)):0;return letter.text+' '.repeat(gap);}).join('').trim();
+  return ordered.map(l=>l.text).join('').trim();
 }
 
 function hasCzechGlyphs(layout,frame){
@@ -206,9 +218,9 @@ const SMALL_NAMES=['ITALY','HOLLAND','ENGLAND','NORWAY','SPAIN','IRELAND','PORTU
 const STAR_BIG_NAMES=['ALL STAR','EUROSTAR.A','EUROSTAR.B','ASIAN STAR','AFRICAN STAR','ALL AMERICAN STAR'];
 export function teamNameTexts(original,current,team){
   const small=smallLabelMatrix(current,team),baseline=smallLabelMatrix(original,team);
-  const a=labelLayout(original),b=labelLayout(current),frame=labelFrame(a,team);
+  const a=labelLayout(original,hasExtraTeams(current)),b=labelLayout(current),frame=labelFrame(a,team);
   const sameFrame=Array.from({length:4},(_,p)=>p).every(p=>Array.from({length:frame.count},(_,i)=>a.data[a.base+frame.start+i+p*a.sprites]).every((v,i)=>v===b.data[b.base+frame.start+i+p*b.sprites]));
-  return {small:JSON.stringify(small)===JSON.stringify(baseline)?SMALL_NAMES[team]:decodeCompactName(original,small),large:sameFrame&&team>=36?STAR_BIG_NAMES[team-36]:frameText(current,team)||''};
+  return {small:team<42&&JSON.stringify(small)===JSON.stringify(baseline)?SMALL_NAMES[team]:decodeCompactName(original,small),large:sameFrame&&team>=36&&team<42?STAR_BIG_NAMES[team-36]:frameText(current,team)||''};
 }
 function decodeCompactName(original,matrix){
   const glyphs=Array.from('ABCDEFGHIJKLMNOPQRSTUVWXYZ.',text=>{

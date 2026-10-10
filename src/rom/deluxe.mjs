@@ -1,3 +1,4 @@
+import {teamCount,hasExtraTeams,teamPointer,teamTable,attributeOffset as playerAttributeOffset} from './team-count.mjs';
 import { word, loRom, decompress, tiles, palette } from './binary.mjs';
 import { flagBank, labelBank } from './graphics.mjs';
 import { deluxeAppearance } from './appearance.mjs';
@@ -24,32 +25,32 @@ export function deluxeAttributes(bytes) {
 }
 
 export function readDeluxeTeam(rom, index) {
-  if (!Number.isInteger(index) || index < 0 || index >= DELUXE_TEAMS.length) throw new Error('Equipo inválido.');
+  if (!Number.isInteger(index) || index < 0 || index >= teamCount(rom)) throw new Error('Equipo inválido.');
   const players = Array.from({ length: 20 }, (_, player) => {
-    const nameOffset = deluxePlayerNameOffset(rom,index,player), attributeOffset = 0x50000 + index * 140 + player * 7;
+    const nameOffset = deluxePlayerNameOffset(rom,index,player), attributeOffset = playerAttributeOffset(rom,index,player);
     const attributes = deluxeAttributes(rom.slice(attributeOffset, attributeOffset + 7));
     return { name: deluxeText(rom.slice(nameOffset, nameOffset + 8)), ...attributes, ...deluxeAppearance(rom, index, attributes) };
   });
   // Original pointer tables in Routine_Macros_ISSD.asm: DATA_81E730,
   // DATA_81E7D8 and DATA_81E6C1. Palette record starts with a size word.
   const flag = [0, 2].flatMap(part => {
-    const address = flagBank(rom)<<16 | word(rom, 0xe730 + index * 4 + part);
+    const address = flagBank(rom)<<16 | word(rom,teamTable(rom,0xe730)+(hasExtraTeams(rom)||index<42?index:0)*4+part);
     return tiles(decompress(rom, loRom(address)), 4, 3);
   });
   const colors = new Array(16).fill('transparent');
-  colors.splice(12, 4, ...palette(rom, loRom(0x890000 | word(rom, 0xe7d8 + index * 2)) + 2, 4));
-  const nameAddress = labelBank(rom)<<16 | word(rom, 0xe6c1 + index * 2);
+  colors.splice(12, 4, ...palette(rom, loRom(0x890000 | teamPointer(rom,0xe7d8,index)) + 2, 4));
+  const nameAddress = labelBank(rom)<<16 | teamPointer(rom,0xe6c1,index);
   const teamMatrix = tiles(decompress(rom, loRom(nameAddress)), 2, 4);
-  return { name: DELUXE_TEAMS[index], sharedPlayerNames:index>=36, players, flag, colors, teamMatrix, teamColors: ['transparent', '#ffffff', '#b8b8b8', '#555555'] };
+  return { name: DELUXE_TEAMS[index]||`TEAM ${index+1}`, sharedPlayerNames:index>=36&&index<42, players, flag, colors, teamMatrix, teamColors: ['transparent', '#ffffff', '#b8b8b8', '#555555'] };
 }
 
 // CODE_A49C89 / DATA_A4F643: star teams assemble names from national squads.
 export function deluxePlayerNameOffset(rom,team,player){
-  if(team>=36){
+  if(team>=36&&team<42){
     const refs=loRom(0xa40000|word(rom,loRom(0xa4f643)+(team-36)*2))+player*4;
     const source=word(rom,refs)/2,slot=word(rom,refs+2)/8;
     if(!Number.isInteger(source)||source<0||source>=36||!Number.isInteger(slot)||slot<0||slot>=20)throw new Error('Referencia de jugador de estrellas inválida.');
     return loRom(0x870000|word(rom,0x38138+source*2))+slot*8;
   }
-  return loRom(0x870000|word(rom,0x38138+team*2))+player*8;
+  return loRom(0x870000|teamPointer(rom,0x38138,team))+player*8;
 }

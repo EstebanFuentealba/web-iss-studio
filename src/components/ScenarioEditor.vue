@@ -1,0 +1,50 @@
+<template>
+  <section class="scenario-editor">
+    <div class="toolbar"><h2>{{ $t('Scenarios') }}</h2><button :disabled="!modified.length||dirty" @click="$emit('restore-all')">{{ $t('Restaurar los 12 escenarios') }}</button></div>
+    <p>{{ $t('Edita los datos y la descripción de los 12 desafíos del juego.') }}</p>
+    <div class="scenario-layout">
+      <nav :aria-label="$t('Seleccionar escenario')"><button v-for="item in scenarios" :key="item.id" :class="{selected:index===item.index}" :aria-pressed="index===item.index" @click="choose(item.index)"><strong>{{ $t('Escenario') }} {{ item.index+1 }}{{ (modified.includes(item.id)||modified.includes(item.descriptionId)||modified.includes(item.difficultyId))?' •':'' }}</strong><span>{{ $t(teams[item.playerTeam]) }} {{ item.playerGoals }} – {{ item.opponentGoals }} {{ $t(teams[item.opponentTeam]) }}</span><small class="stars" :aria-label="$t('Estrellas de dificultad')">{{ '★'.repeat(item.difficulty) }}{{ '☆'.repeat(5-item.difficulty) }}</small><small>{{ item.minutes }}:{{ String(item.seconds).padStart(2,'0') }}</small></button></nav>
+      <div class="controls" :key="scenario.id">
+        <div class="toolbar"><h3>{{$t('Escenario')}} {{ index+1 }}</h3><button :disabled="!scenarioModified||dirty" @click="$emit('restore',index)">{{ $t('Restaurar escenario') }}</button></div>
+        <p class="summary-label">{{ $t('Rótulo en el juego') }}<code v-for="(line,i) in scenario.summary" :key="i">{{ line }}</code></p>
+        <fieldset><legend>{{ $t('Descripción del escenario') }}</legend>
+          <label>{{ $t('Texto que aparece en el juego') }}<textarea v-model="description" rows="6" cols="26" wrap="off" spellcheck="false" @input="descriptionError=''" /></label>
+          <p>{{ $t('Hasta 6 líneas de 26 caracteres. Respeta los saltos de línea; usa letras sin tildes.') }}</p>
+          <p v-if="descriptionError" role="alert" class="error">{{ $t(descriptionError) }}</p>
+          <div class="toolbar"><button :disabled="!dirty" @click="applyDescription">{{ $t('Aplicar descripción a la ROM') }}</button><button v-if="dirty" @click="discardDescription">{{ $t('Descartar cambios del texto') }}</button></div>
+        </fieldset>
+        <fieldset><legend>{{ $t('Dificultad del escenario') }}</legend><label>{{ $t('Estrellas de dificultad') }}<select :value="scenario.difficulty" @change="$emit('difficulty-change',index,Number($event.target.value))"><option v-for="value in 5" :key="value" :value="value">{{ '★'.repeat(value) }}{{ '☆'.repeat(5-value) }} ({{ value }}/5)</option></select></label><p>{{ $t('Las estrellas son una valoración fija del escenario. No cambian automáticamente ni modifican el nivel de la IA.') }}</p></fieldset>
+        <fieldset><legend>{{ $t('Tiempo restante') }}</legend><div class="fields"><label>{{ $t('Minutos') }}<input type="number" min="0" max="9" :value="scenario.minutes" @change="edit('minutes',$event)" /></label><label>{{ $t('Segundos') }}<input type="number" min="0" max="59" :value="scenario.seconds" @change="edit('seconds',$event)" /></label></div></fieldset>
+        <fieldset><legend>{{ $t('Equipos y marcador') }}</legend><div class="fields"><label v-for="field in teamFields" :key="field.key">{{ $t(field.label) }}<select :value="scenario[field.key]" @change="edit(field.key,$event)"><option v-for="(name,i) in teams" :key="i" :value="i">{{ $t(name) }}</option></select></label><label v-for="field in goalFields" :key="field.key">{{ $t(field.label) }}<input type="number" min="0" max="10" :value="scenario[field.key]" @change="edit(field.key,$event)" /></label></div></fieldset>
+        <fieldset><legend>{{ $t('Estadio y clima') }}</legend><div class="fields"><label>{{ $t('Estadio') }}<select :value="scenario.stadium" @change="edit('stadium',$event)"><option v-for="(name,i) in stadiums" :key="i" :value="i">{{ $t(name) }}</option><option v-if="!stadiums[scenario.stadium]" :value="scenario.stadium">{{ $t('Valor original') }} ({{ scenario.stadium }})</option></select></label><label>{{ $t('Clima') }}<select :value="scenario.weather" @change="edit('weather',$event)"><option v-for="[id,name] in weather" :key="id" :value="id">{{ $t(name) }}</option><option v-if="!weather.some(([id])=>id===scenario.weather)" :value="scenario.weather">{{ $t('Valor original') }} ({{ scenario.weather }})</option></select></label></div></fieldset>
+        <fieldset><legend>{{ $t('Condición inicial') }}</legend><label>{{ $t('Inicio de la jugada') }}<select :value="restart==='goal'?8:restart==='throw'?'native':scenario.start" @change="edit('start',$event)"><option v-if="restart==='throw'" value="native">{{ $t('Saque de banda original') }}</option><option v-for="[id,name] in starts" :key="id" :value="id">{{ $t(name) }}</option><option v-if="!starts.some(([id])=>id===scenario.start)" :value="scenario.start">{{ $t('Valor original') }} ({{ scenario.start }})</option></select></label></fieldset>
+        <fieldset><legend>{{ $t('Posición inicial de la pelota') }}</legend><ScenarioPitch :scenario="scenario" @change="$emit('change',index,$event)" /></fieldset>
+        <details><summary>{{ $t('Posición inicial · avanzado') }}</summary><p>{{ $t('Cada coordenada ocupa dos bytes: parte baja y alta. La cancha actualiza ambos; estos campos permiten editar los bytes originales (0–255).') }}</p><div class="fields"><label v-for="field in coordinates" :key="field.key">{{ $t(field.label) }}<input type="number" min="0" max="255" :disabled="automaticPosition" :value="scenario[field.key]" @change="edit(field.key,$event)" /></label><label>{{ $t('Código de inicio') }}<input type="number" min="0" max="255" :disabled="automaticPosition" :value="scenario.start" @change="edit('start',$event)" /></label></div></details>
+      </div>
+    </div>
+  </section>
+</template>
+<script>
+import {scenarioRestart,scenarioAutomaticPosition} from '../rom/scenario-position.mjs';
+import ScenarioPitch from './ScenarioPitch.vue';
+import {scenarioDescriptionLines} from '../rom/scenario-text.mjs';
+import {SCENARIO_WEATHER,SCENARIO_STADIUMS,SCENARIO_STARTS} from '../rom/scenarios.mjs';
+export default {
+  components:{ScenarioPitch},
+  props:{scenarios:Array,teams:Array,modified:Array},emits:['difficulty-change','change','description-change','restore','restore-all'],
+  data(){return {index:0,description:this.scenarios[0].description,descriptionError:'',weather:SCENARIO_WEATHER,stadiums:SCENARIO_STADIUMS,starts:SCENARIO_STARTS,
+    teamFields:[{key:'playerTeam',label:'Equipo del jugador'},{key:'opponentTeam',label:'Equipo rival'}],
+    goalFields:[{key:'playerGoals',label:'Goles del jugador'},{key:'opponentGoals',label:'Goles del rival'}],
+    coordinates:[{key:'x',label:'X · byte alto'},{key:'y',label:'Y · byte alto'},{key:'ballX',label:'X · byte bajo'},{key:'ballY',label:'Y · byte bajo'}]};},
+  computed:{restart(){return scenarioRestart(this.scenario);},automaticPosition(){return !!scenarioAutomaticPosition(this.scenario);},scenario(){return this.scenarios[this.index];},dirty(){return this.description!==this.scenario.description;},scenarioModified(){return this.modified.includes(this.scenario.id)||this.modified.includes(this.scenario.descriptionId)||this.modified.includes(this.scenario.difficultyId);}},
+  watch:{'scenario.description'(value){this.description=value;this.descriptionError='';}},
+  methods:{
+    choose(index){if(this.index===index)return;if(this.dirty&&!confirm(this.$t('Hay una previsualización que todavía no se aplicó a la ROM. ¿Descartar esa previsualización?')))return;this.index=index;this.description=this.scenarios[index].description;this.descriptionError='';},
+    discardDescription(){this.description=this.scenario.description;this.descriptionError='';},
+    applyDescription(){try{scenarioDescriptionLines(this.description);const lines=scenarioDescriptionLines(this.description).map(line=>line.trimEnd());while(lines.length&&!lines.at(-1))lines.pop();this.description=lines.join('\n');this.descriptionError='';this.$emit('description-change',this.index,this.description);}catch(e){this.descriptionError=e.message;}},
+    edit(field,event){if(event.target.value.trim()===''||!event.target.checkValidity()){event.target.value=this.scenario[field];return;}this.$emit('change',this.index,{[field]:Number(event.target.value)});this.$nextTick(()=>{event.target.value=this.scenario[field];});}},
+};
+</script>
+<style scoped>
+.toolbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.toolbar h2,.toolbar h3{margin-right:auto}.scenario-layout{display:grid;grid-template-columns:260px minmax(0,1fr);gap:20px;margin-top:20px}nav{display:flex;flex-direction:column;gap:6px}nav button{display:flex;flex-direction:column;gap:5px;text-align:left;background:white;padding:12px}nav .stars{color:#b67c00;letter-spacing:2px}nav span,nav small{font-size:12px;color:#526579}nav .selected{border-color:#176be0;background:#edf3ff}.controls{background:white;border:1px solid #d4dce4;border-radius:10px;padding:20px;align-self:start}.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}label{display:flex;flex-direction:column;gap:6px}fieldset{border:1px solid #d4dce4;border-radius:8px;margin:16px 0;padding:16px}legend{font-weight:600}button,input,select,textarea{font:inherit;padding:8px;border:1px solid #bbc8d6;border-radius:5px;min-width:0}button{cursor:pointer}button:disabled{opacity:.45;cursor:default}.summary-label code{display:block;white-space:pre-wrap;font-size:13px;margin-top:5px}.summary-label{padding:10px;background:#edf3ff;border-radius:6px}textarea{box-sizing:border-box;width:100%;resize:vertical;font-family:monospace;line-height:1.6}.error{color:#a12828}summary{cursor:pointer;padding:12px 0}@media(max-width:850px){.scenario-layout{grid-template-columns:1fr}nav{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}}@media(max-width:500px){.fields{grid-template-columns:1fr}.controls{padding:12px}}
+</style>

@@ -1,3 +1,4 @@
+import {teamCount} from './team-count.mjs';
 import {GROUP_LAYOUT_RULES,groupLayoutPatches} from './groups-layout.mjs';
 import {loRom} from './binary.mjs';
 
@@ -31,19 +32,19 @@ export function readGroups(rom){
   if(end<1||raw.slice(end).some(Boolean)||n>42||rom.slice(offset+17+n,offset+59).some(b=>b!==255))throw new Error('Grupos inválidos.');
   return {name:String.fromCharCode(...raw.slice(0,end)),teams:Array.from(rom.slice(offset+17,offset+17+n))};
  });
- validateGroups(groups);return groups;
+ validateGroups(groups,teamCount(rom));return groups;
 }
-export function validateGroups(groups){
+export function validateGroups(groups,limit=42){
  if(!Array.isArray(groups)||groups.length<1||groups.length>MAX_GROUPS)throw new Error('Se permiten entre 1 y 16 grupos.');
  for(const group of groups){
   if(typeof group.name!=='string'||! /^[A-Z0-9][A-Z0-9 .-]{0,14}$/.test(group.name))throw new Error('El grupo admite hasta 15 letras A–Z, números, espacios, puntos o guiones.');
-  if(!Array.isArray(group.teams)||group.teams.length>42||new Set(group.teams).size!==group.teams.length||group.teams.some(i=>!Number.isInteger(i)||i<0||i>=42))throw new Error('Equipos de grupo inválidos.');
+  if(!Array.isArray(group.teams)||group.teams.length>42||new Set(group.teams).size!==group.teams.length||group.teams.some(i=>!Number.isInteger(i)||i<0||i>=limit))throw new Error('Equipos de grupo inválidos.');
  }
  if(!groups.some(g=>g.teams.length))throw new Error('Debe quedar al menos un equipo en los grupos.');
 }
-export function groupDataPatch(groups,columns=3){
+export function groupDataPatch(groups,columns=3,limit=42){
  if(![3,4].includes(columns))throw new Error('Selecciona 3 o 4 columnas.');
- validateGroups(groups);const [id,offset,size]=GROUP_EDITOR_RULES[0],bytes=new Uint8Array(size).fill(255);
+ validateGroups(groups,limit);const [id,offset,size]=GROUP_EDITOR_RULES[0],bytes=new Uint8Array(size).fill(255);
  bytes.set([71,82,80,83,1,groups.length,columns===4?4:0,0]);
  groups.forEach((g,i)=>{const p=8+i*59;bytes.fill(0,p,p+16);bytes.set(Array.from(g.name,c=>c.charCodeAt(0)),p);bytes[p+16]=g.teams.length;bytes.set(g.teams,p+17);});
  return {id,offset,bytes,label:'Grupos y equipos'};
@@ -89,7 +90,7 @@ export function groupSelectorPatches(original,groups,legacy={}){
  const pages=groupPages(groups,columns),code=selectorCode(pages,legacy),tables=new Uint8Array(1536).fill(255),tableStart=loRom(GROUP_TEAM_TABLE);
  const putWord=(address,n)=>{const p=loRom(address)-tableStart;tables[p]=n&255;tables[p+1]=n>>>8;};
  pages.forEach((p,i)=>{tables.set(p.teams.map(t=>t*2),i*stride);putWord(counts+i*2,p.teams.length);putWord(titles+i*2,p.group);});
- const values=new Map([['data',groupDataPatch(groups,columns).bytes],['code',code.bytes],['tables',tables]]);
+ const values=new Map([['data',groupDataPatch(groups,columns,legacy.teamLimit||42).bytes],['code',code.bytes],['tables',tables]]);
  const call=n=>{const a=code.addresses[n];return [0x22,a&255,a>>>8&255,a>>>16];};
  values.set('base',[...call('base'),0x60]);
  for(const id of ['palette-table','flag-table','label-table'])values.set(id,legacy.directRead?[0xbf,0,0xfa,0xae,0xea,0xea]:[...call('read'),0xea,0xea]);
@@ -111,7 +112,7 @@ export function validateGroupEditor(rom,original){
   return;
  }
  const groups=readGroups(rom);
- for(const patch of groupSelectorPatches(original,groups,{columns:groupColumns(rom)}))if(patch.bytes.some((b,i)=>rom[patch.offset+i]!==b))throw new Error(`Código de grupos no compatible: ${patch.id}.`);
+ for(const patch of groupSelectorPatches(original,groups,{columns:groupColumns(rom),teamLimit:teamCount(rom)}))if(patch.bytes.some((b,i)=>rom[patch.offset+i]!==b))throw new Error(`Código de grupos no compatible: ${patch.id}.`);
 }
 
 // Recognize only exact instruction sets emitted during development of this
@@ -121,9 +122,9 @@ export function upgradeGroupSelector(original,patches){
  if(!hasCustomGroups(candidate))return patches;
  const groups=readGroups(candidate);
  for(const legacy of [{columns:4,fullHeightBackground:true},{fixedPaletteHeader:true},{ramClear:true,fixedPaletteHeader:true},{ramClear:true,directRead:true,fixedPaletteHeader:true}]){
-  const expected=groupSelectorPatches(original,groups,legacy);
+  const expected=groupSelectorPatches(original,groups,{...legacy,teamLimit:teamCount(candidate)});
   if(expected.every(p=>p.bytes.every((b,i)=>candidate[p.offset+i]===b))){
-   const upgraded=groupSelectorPatches(original,groups,{columns:groupColumns(candidate)}),ids=new Set(upgraded.map(p=>p.id));
+   const upgraded=groupSelectorPatches(original,groups,{columns:groupColumns(candidate),teamLimit:teamCount(candidate)}),ids=new Set(upgraded.map(p=>p.id));
    return [...patches.filter(p=>!ids.has(p.id)),...upgraded];
   }
  }

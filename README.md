@@ -64,6 +64,12 @@ Inspect original formations, including player coordinates and roles.
 
 The current formation diagram is a schematic representation of the game's data. Custom formation editing is planned for a future update.
 
+## ⚽ Scenario Editor
+
+The **SCENARIOS** menu edits all 12 ISS Deluxe USA challenges: remaining time, player and opponent teams, scores, stadium, weather, and starting play. Each scenario also has an editable description of six lines with up to 26 characters per line, using the game’s original alphabet. Apply text changes with **Apply description to ROM**. A 2D pitch lets you click or drag the ball, with arrow keys and numeric coordinates for precise adjustment. Goal kicks and corners position the ball automatically and lock coordinate controls; changing the stadium updates the fixed position. Native throw-ins remain editable. Free kicks support manual placement. Coordinates are decoded as signed 16-bit words; field dimensions follow the selected stadium and original off-field positions are preserved. Advanced controls expose their original low and high bytes. The fixed 1–5 star rating is editable independently of the AI difficulty. Each field is saved immediately and supports undo/redo, individual or full restoration, project backups, and ROM export with or without an SMC header.
+
+The binary layout follows the decompiled `ISSDeluxeEditor/Form1.cs` and its enums: 12 records of 15 bytes at unheadered offset `0x5FCF8`. Fixed star ratings are twelve bytes at `0xDF81` (`DATA_81DF81`, read by `CODE_8AA521`); changing them only changes the displayed rating. Position words at record offsets +11 and +13 are loaded by `CODE_8BDA6A`; stadium dimensions come from `DATA_81EC47`. Seconds use BCD encoding, team IDs use twice the native team index, and the first two bytes of each record are preserved. The selector’s two-line label is synchronized with team, score, time, and starting-play changes, including older saved projects. Labels use the native tall menu font and remain within two rows of 28 characters. Descriptions occupy twelve independent 156-byte blocks starting at `0x3F12D`, referenced by `DATA_87F113` and rendered by `CODE_8AA5A3` with the small menu font. Run `node tests/scenarios.cjs` to verify encoding, validation, history, project import, and export against a local USA ROM.
+
 ## 🎨 Pixel Art Maker
 
 The integrated **Pixel Art Maker** allows you to edit original SNES graphics directly in your browser.
@@ -210,6 +216,13 @@ be applied to become part of the ROM. **Detener**, leaving the emulator menu,
 or opening another ROM stops the runtime. Pause, fullscreen, keyboard and
 gamepad settings are available in the emulator toolbar. SMC copier headers are
 removed from the emulator copy; exported downloads still preserve them.
+
+**Panel de prueba** sends SNES button presses to player 1 or 2 with a selectable
+press duration. **Título → selector** navigates from PRESS START to the team
+selector; **Cancelar secuencia** stops a running shortcut and releases its inputs.
+Name and save up to eight screens, then use **Ir a** to restore their exact game
+state. Screen bookmarks stay in memory for the loaded ROM and are cleared when
+reloading, stopping, or leaving the emulator.
 
 ### Local Development
 
@@ -411,7 +424,7 @@ El menú **Grupos** permite renombrar los siete grupos originales, agregar nuevo
 
 En **Configuración → Columnas de banderas** se puede elegir **3 columnas · 2 filas** (hasta seis equipos por página) o **4 columnas · 1 fila** (hasta cuatro). La distribución modifica la pantalla nativa del juego, con banderas, nombres, cursor y flechas alineados. Los grupos mayores se dividen en páginas con el mismo título; uno de ocho equipos ocupa dos páginas en ambas opciones. La opción se guarda con el proyecto y admite deshacer/rehacer. Se adaptan los conteos, controles, búsqueda, paletas, banderas, rótulos y referencias de jugadores. El atlas de títulos conserva su capacidad de 1850 bytes comprimidos; un dibujo que la exceda se rechaza sin modificar el proyecto. Cuando se usan grupos personalizados, estos controlan la visibilidad de ALL STARS.
 
-Los equipos siguen siendo los 42 slots de la ROM (36 selecciones y seis All-Star). Chile, Perú, Bolivia y Ecuador requieren sustituir un slot existente; agregar grupos no crea selecciones nuevas. La ampliación a 48 selecciones distintas sigue pendiente. Las rutinas modificadas se verifican en pruebas de CPU de 16 bits y DMA, además de importación/exportación y checksum.
+En **Equipos → Nuevo equipo → Agregar equipo** se pueden crear hasta **48 equipos** (los 42 originales y seis adicionales). Cada nuevo equipo copia los datos actuales de Italia en planteles, nombres de jugadores, uniformes, bandera y formación independientes, y aparece en el grupo **EXTRA**. El nombre grande admite hasta diez caracteres A–Z, puntos y espacios; el nombre pequeño también debe caber en sus 32 píxeles. La ampliación usa espacio libre verificado de la ROM USA de 2 MiB, conserva el tamaño y el encabezado SMC y admite guardado, importación, deshacer/rehacer y edición de los equipos nuevos. Cada grupo admite hasta 42 equipos; para mostrar los 48 se pueden distribuir en varios grupos. Los formatos de los torneos conservan sus reglas originales. Las rutinas modificadas se verifican en pruebas de CPU de 16 bits y DMA, además de importación/exportación y checksum.
 
 ### Main menu editor
 

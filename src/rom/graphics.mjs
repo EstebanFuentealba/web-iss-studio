@@ -1,3 +1,4 @@
+import {MAX_TEAMS,teamCount,hasExtraTeams,teamPointer,teamTable} from './team-count.mjs';
 import {bootScreenResources,bootScreenPatches} from './boot-screens.mjs';
 import {mainMenuGraphics} from './main-menu.mjs';
 import {compress} from './compression.mjs';
@@ -22,19 +23,19 @@ export function graphicResources(rom, team) {
     return {id:`graphic:${offset}`,label,offset,capacity,bpp,columns,compressed:true,interleaved:!!(word(rom,offset)&0x8000),matrix:tiles(data,bpp,columns),colors,decodedSize:data.length};
   };
   const flagColors=new Array(16).fill('transparent');
-  flagColors.splice(12,4,...palette(rom,loRom(0x890000|word(rom,0xe7d8+team*2))+2,4));
+  flagColors.splice(12,4,...palette(rom,loRom(0x890000|teamPointer(rom,0xe7d8,team))+2,4));
   const result=[{id:`flag:${team}`,label:'Bandera completa · independiente',kind:'flag',team,bpp:4,columns:3,capacity:204,colors:flagColors,matrix:flagMatrix(rom,team)}];
   result.push({id:`team-label:${team}`,kind:'label',team,label:'Rótulo del equipo',bpp:2,columns:4,capacity:69,matrix:smallLabelMatrix(rom,team),colors:['transparent','#ffffff','#b8b8b8','#555555']});
-  const kit=palette(rom,loRom(0x890000|word(rom,0x1027a+team*2))+2,16);kit[0]='transparent';
+  const kit=palette(rom,loRom(0x890000|teamPointer(rom,0x1027a,team))+2,16);kit[0]='transparent';
   const raw=(label,start,end,columns,colors=kit)=> {
     const offset=loRom(start),capacity=loRom(end)-offset;
     return {id:`graphic:${offset}`,label,offset,capacity,bpp:4,columns,compressed:false,shared:true,matrix:tiles(rom.slice(offset,offset+capacity),4,columns),colors,decodedSize:capacity};
   };
-  const detail=0x980000|word(rom,0xce8a+team*2);
+  const detail=0x980000|teamPointer(rom,0xce8a,team);
   const playerRanges=[[0xa9a7c6,256],[0xa9a8c8,224],[detail,32]];
   result.push(spriteResource(rom,'Detalles de camiseta · vista frontal compartida',playerRanges,0x988472,112,kit,[2]));
   result.push(raw('Números de camisetas · atlas compartido',0x98e5d4,0x98f014,2));
-  const goalie=palette(rom,loRom(0x890000|word(rom,0x10326+team*2))+2,11);
+  const goalie=palette(rom,loRom(0x890000|teamPointer(rom,0x10326,team))+2,11);
   goalie.unshift('transparent');
   while(goalie.length<16) goalie.push('transparent');goalie[0]='transparent';
   result.push(spriteResource(rom,'Portero completo · sprite compartido',[[0x90ccf2,224],[0x90cdd4,192]],0x988846,39,goalie));
@@ -67,9 +68,10 @@ export function selectionFlagAddress(team){return team<32?0xa80+team*192:0x3400+
 export function flagBank(rom) {return rom[FLAG_TEMPLATE+6];}
 export function flagMatrix(rom,team) {
   const bank=flagBank(rom)===0xaf && rom[0xe715+6]!==0xaf && team>=36?0xa7:flagBank(rom);
-  return [0,1].flatMap(part=>tiles(decompress(rom,loRom(bank<<16|word(rom,FLAG_TABLE+team*4+part*2))),4,3));
+  return [0,1].flatMap(part=>tiles(decompress(rom,loRom(bank<<16|word(rom,teamTable(rom,FLAG_TABLE)+(hasExtraTeams(rom)||team<42?team:0)*4+part*2))),4,3));
 }
 export function validateFlagStorage(rom,original) {
+  if(hasExtraTeams(rom)){for(let i=0;i<MAX_TEAMS;i++){const off=loRom(0xb00000|teamPointer(rom,FLAG_TABLE,i,4));if((word(rom,off)&0x7fff)>FLAG_SLOT||(word(rom,off+FLAG_SLOT)&0x7fff)>FLAG_SLOT||decompress(rom,off).length!==96||decompress(rom,off+FLAG_SLOT).length!==96||flagMatrix(rom,i).flat().some(p=>p!==0&&p<12))throw new Error("Bandera ampliada inválida.");}return;}
   const bank=flagBank(rom),relocated=bank===0xaf;
   if(bank!==flagBank(original)&&!relocated)throw new Error('Banco de banderas inválido.');
   for(const template of [FLAG_TEMPLATE,0xe715,0xeb80])for(let i=0;i<(template===0xeb80?13:23);i++)if(rom[template+i]!==((template===0xeb80?[6,11]:[6,11,16,21]).includes(i)&&relocated?0xaf:original[template+i]))throw new Error('Cargador de banderas inválido.');
@@ -88,6 +90,7 @@ export function validateFlagStorage(rom,original) {
 }
 export function flagPatches(original,current,team,matrix,legacy=false,force=false) {
   if(matrix.length!==16||matrix.some(row=>row.length!==24))throw new Error('La bandera debe medir 24 × 16.');
+  if(hasExtraTeams(current)){if(team<0||team>=teamCount(current))throw new Error("Equipo inválido.");const offset=loRom(0xb0ca40),bytes=current.slice(offset,offset+MAX_TEAMS*2*FLAG_SLOT);for(let part=0;part<2;part++){const encoded=compress(encodeTiles(matrix.slice(part*8,part*8+8),4));if(encoded.length>FLAG_SLOT)throw new Error("Bandera fuera de su espacio reservado.");bytes.fill(255,(team*2+part)*FLAG_SLOT,(team*2+part+1)*FLAG_SLOT);bytes.set(encoded,(team*2+part)*FLAG_SLOT);}return [{id:"teams:flags",offset,bytes,label:"Bandera independiente"}];}
   const all=Array.from({length:42},(_,i)=>i===team?matrix:flagMatrix(legacy&&i>=36?original:current,i));
   if(all.some(m=>m.flat().some(p=>p!==0&&(!Number.isInteger(p)||p<12||p>15))))throw new Error('La bandera usa los colores 12–15 o transparencia.');
   const pristine=all.every((m,i)=>JSON.stringify(m)===JSON.stringify(flagMatrix(original,i)));
@@ -235,8 +238,9 @@ export const LABEL_POOL=loRom(0xafdf00),LABEL_SLOT=69,LABEL_POOL_SIZE=42*LABEL_S
 export const LABEL_TEMPLATE=0xe6b4,LABEL_TABLE=0xe6c1;
 export const LABEL_RULES=[['labels:pool',LABEL_POOL,LABEL_POOL_SIZE],['labels:pointers',LABEL_TABLE,84],['labels:loader',LABEL_TEMPLATE,13],['labels:select-loader',loRom(0x828f21),256]];
 export function labelBank(rom){return rom[LABEL_TEMPLATE+6];}
-export function smallLabelMatrix(rom,team){return tiles(decompress(rom,loRom(labelBank(rom)<<16|word(rom,LABEL_TABLE+team*2))),2,4);}
+export function smallLabelMatrix(rom,team){return tiles(decompress(rom,loRom(labelBank(rom)<<16|teamPointer(rom,LABEL_TABLE,team))),2,4);}
 export function validateSmallLabelStorage(rom,original){
+  if(hasExtraTeams(rom)){for(let i=0;i<MAX_TEAMS;i++)if((word(rom,loRom(0xaf0000|teamPointer(rom,LABEL_TABLE,i)))&0x7fff)>LABEL_SLOT||decompress(rom,loRom(0xaf0000|teamPointer(rom,LABEL_TABLE,i))).length!==64)throw new Error("Rótulo ampliado inválido.");return;}
   const relocated=labelBank(rom)===0xaf;
   if(labelBank(rom)!==labelBank(original)&&!relocated)throw new Error('Banco de rótulos inválido.');
   for(let i=0;i<13;i++)if(rom[LABEL_TEMPLATE+i]!==([6,11].includes(i)&&relocated?0xaf:original[LABEL_TEMPLATE+i]))throw new Error('Cargador de rótulos inválido.');
@@ -250,8 +254,9 @@ export function validateSmallLabelStorage(rom,original){
   }
 }
 export function smallLabelPatches(original,current,team,matrix){
-  if(!Number.isInteger(team)||team<0||team>=42||matrix.length!==8||matrix.some(row=>row.length!==32))throw new Error('El rótulo debe medir 32 × 8.');
+  if(!Number.isInteger(team)||team<0||team>=teamCount(current)||matrix.length!==8||matrix.some(row=>row.length!==32))throw new Error('El rótulo debe medir 32 × 8.');
   encodeTiles(matrix,2); // Validate every palette index before allocating.
+  if(hasExtraTeams(current)){const encoded=compress(encodeTiles(matrix,2));if(encoded.length>LABEL_SLOT)throw new Error("El rótulo excede su espacio reservado.");const offset=LABEL_POOL+team*LABEL_SLOT,bytes=new Uint8Array(LABEL_SLOT).fill(255);bytes.set(encoded);return [{id:`teams:label:${team}`,offset,bytes,label:"Rótulo independiente"}];}
   const all=Array.from({length:42},(_,i)=>i===team?matrix:smallLabelMatrix(current,i));
   const pristine=all.every((m,i)=>JSON.stringify(m)===JSON.stringify(smallLabelMatrix(original,i)));
   const changes=LABEL_RULES.map(([id,offset,size])=>({id,offset,label:'Rótulos de equipo independientes',bytes:Uint8Array.from(original.subarray(offset,offset+size))}));
@@ -265,10 +270,10 @@ export function smallLabelPatches(original,current,team,matrix){
 }
 
 export function flagPalettePatches(rom,team,colors){
-  if(!Number.isInteger(team)||team<0||team>=42||colors.length!==16)throw new Error('Paleta de bandera inválida.');
-  const offset=loRom(0x890000|word(rom,0xe7d8+team*2))+2;
+  if(!Number.isInteger(team)||team<0||team>=teamCount(rom)||colors.length!==16)throw new Error('Paleta de bandera inválida.');
+  const offset=loRom(0x890000|teamPointer(rom,0xe7d8,team))+2;
   if(JSON.stringify(colors.slice(12,16))===JSON.stringify(palette(rom,offset,4)))return [];
-  for(let other=0;other<42;other++)if(other!==team){const start=loRom(0x890000|word(rom,0xe7d8+other*2))+2;if(start<offset+8&&offset<start+8)throw new Error('La paleta de esta bandera está compartida y requiere reubicación.');}
+  for(let other=0;other<42;other++)if(other!==team){const start=loRom(0x890000|teamPointer(rom,0xe7d8,other))+2;if(start<offset+8&&offset<start+8)throw new Error('La paleta de esta bandera está compartida y requiere reubicación.');}
   return colors.slice(12,16).map((color,i)=>({id:`palette:${offset+i*2}`,offset:offset+i*2,label:'Paleta de bandera independiente',bytes:rgb555(color)}));
 }
 

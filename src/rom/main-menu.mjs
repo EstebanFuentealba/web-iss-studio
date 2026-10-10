@@ -139,7 +139,7 @@ function menuLayer(rom,part,mapAddress,{width,height,top=0,base=0,context=null})
   if(tile>=0&&tile*8+yy<strip.length){owners[y][x]={part:0,x:xx,y:tile*8+yy};return strip[tile*8+yy][xx];}
   return other?.[(e&1023)*8+yy]?.[xx]??0;
  }));
- return {...part,kind:'menu-layer',parts:[part],matrix,owners,editable:owners.map(row=>row.map(Boolean))};
+ return {...part,kind:'menu-layer',columns:width/8,compressed:false,parts:[part],matrix,owners,editable:owners.map(row=>row.map(Boolean))};
 }
 export function mainMenuGraphics(rom,expand=false){
  const bright=palette(rom,loRom(0x89c856),16);bright[0]='transparent';

@@ -74,3 +74,26 @@ for (const [language, locale, startName] of [['en', 'en-US', 'Start game'], ['pt
   assert.match(localizedGame.textContent, language === 'en' ? /Check your connection/ : /Verifique sua conexão/);
 }
 console.log('PASS emulator languages: English and Portuguese runtime, start button and load errors');
+
+// Panel commands cross only the trusted frame and always release SNES inputs.
+(async()=>{
+  const inputs=[],restored=[];let restarts=0;
+  context.setTimeout=fn=>{queueMicrotask(fn);};
+  context.window.EJS_emulator={gameManager:{simulateInput:(...args)=>inputs.push(args),restart:()=>restarts++,getState:()=>Uint8Array.of(9,8,7),loadState:bytes=>restored.push(bytes)}};
+  const command=(id,action,options={})=>listeners.message({origin,source:parent,data:{type:'issd:emulator-command',id,action,...options}});
+  const flush=()=>new Promise(resolve=>setImmediate(resolve));
+  command(1,'press',{player:0,index:8,duration:150});await flush();assert.deepEqual(inputs,[[0,8,1],[0,8,0]]);
+  command(2,'press',{player:2,index:8,duration:150});await flush();assert.equal(inputs.length,2);assert.equal(reports.at(-1).ok,false);
+  listeners.message({origin:'https://untrusted.example',source:parent,data:{type:'issd:emulator-command',id:3,action:'restart'}});assert.equal(restarts,0);
+  command(3,'save-screen',{slot:1});await flush();command(4,'load-screen',{slot:1});await flush();assert.deepEqual(restored,[Uint8Array.of(9,8,7)]);
+  command(5,'load-screen',{slot:9});await flush();assert.equal(reports.at(-1).ok,false);
+  command(6,'title-selector');command(7,'cancel');await flush();assert.deepEqual(inputs.slice(2),[[0,3,1],[0,3,0]]);
+  command(8,'title-selector');await flush();assert.deepEqual(inputs.slice(4).filter(i=>i[2]),[[0,3,1],[0,8,1],[0,8,1],[0,8,1]]);
+  command(9,'restart');await flush();assert.equal(restarts,1);command(9,'restart');await flush();assert.equal(restarts,1);
+  editor.project.exportRom=()=>exported.slice();editor.$t=x=>x;editor.start();editor.running=true;
+  editor.bookmarkName='EXTRA';editor.saveScreen();const pending=editor.pendingCommand;assert.equal(sent.at(-1)[0].action,'save-screen');
+  editor.receive({origin,source:frame,data:{type:'issd:emulator-command-result',id:pending.id+1,ok:true}});assert.equal(editor.busy,true);
+  editor.receive({origin,source:frame,data:{type:'issd:emulator-command-result',id:pending.id,ok:true}});assert.deepEqual(JSON.parse(JSON.stringify(editor.screens)),[{slot:1,name:'EXTRA'}]);assert.equal(editor.busy,false);
+  editor.stop();assert.equal(editor.screens.length,0);assert.equal(editor.running,false);
+  console.log('PASS emulator test panel: controller pulse/release, bounded commands, cancellation, screen save/load, title navigation, origin checks and ROM lifecycle');
+})().catch(error=>{console.error(error);process.exitCode=1;});

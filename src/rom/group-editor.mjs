@@ -1,3 +1,4 @@
+import {teamCount} from './team-count.mjs';
 import {groupSelectorPatches,groupColumns,readGroups,hasCustomGroups,GROUP_EDITOR_RULES} from './groups.mjs';
 import {graphicPatches,selectionGroupGraphics,flagPatches,flagMatrix} from './graphics.mjs';
 import {previewGroupText,groupTexts} from './group-text.mjs';
@@ -9,7 +10,7 @@ export function editGroupsPatches(original,current,groups,columns=groupColumns(c
  const before=editableGroups(current),headers=selectionGroupGraphics(current);
  const matrices=groups.map((g,i)=>{const old=before[i]?.name===g.name?i:before.findIndex(b=>b.name===g.name);return old>=0?headers[old].matrix:previewGroupText(original,{id:`selection-group:${i}`},g.name).matrix;});
  const patches=new Map(),candidate=current.slice(),put=p=>{patches.set(p.id,p);candidate.set(p.bytes,p.offset);};
- groupSelectorPatches(original,groups,{columns}).forEach(put);
+ groupSelectorPatches(original,groups,{columns,teamLimit:teamCount(current)}).forEach(put);
  flagPatches(original,candidate,0,flagMatrix(candidate,0),false,true).forEach(put);
  // Rebuild the atlas in the new group order, preserving drawings for titles
  // that keep their names. Renaming a group rasterizes its new text.

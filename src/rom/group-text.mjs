@@ -1,4 +1,5 @@
-import {hasCustomGroups,readGroups,groupDataPatch} from './groups.mjs';
+import {teamCount} from './team-count.mjs';
+import {hasCustomGroups,readGroups,groupDataPatch,groupColumns} from './groups.mjs';
 import {graphicPatches,selectionGroupGraphics} from './graphics.mjs';
 import {previewBigTeamText} from './team-labels.mjs';
 import {loRom} from './binary.mjs';
@@ -78,7 +79,7 @@ export function previewGroupText(rom,resource,text){
 }
 export function groupTextPatches(original,current,resource,text){
  const preview=previewGroupText(original,resource,text),patches=graphicPatches(original,current,resource,preview.matrix);
- if(hasCustomGroups(current)){const groups=readGroups(current);groups[Number(resource.id.split(':')[1])].name=preview.text;patches.push(groupDataPatch(groups));return patches;}
+ if(hasCustomGroups(current)){const groups=readGroups(current);groups[Number(resource.id.split(':')[1])].name=preview.text;patches.push(groupDataPatch(groups,groupColumns(current),teamCount(current)));return patches;}
  const [id,offset,size]=GROUP_TEXT_RULES[0];if(!original.slice(offset,offset+size).every(b=>b===255)&&String.fromCharCode(...original.slice(offset,offset+4))!=='GRPT')throw new Error('El espacio reservado para los grupos está ocupado.');const names=groupTexts(current),bytes=new Uint8Array(size);bytes.set([71,82,80,84]);names[Number(resource.id.split(':')[1])]=preview.text;
  names.forEach((name,i)=>bytes.set(Array.from(name,c=>c.charCodeAt(0)),4+i*16));
  patches.push({id,offset,bytes,label:'Textos de grupos'});return patches;

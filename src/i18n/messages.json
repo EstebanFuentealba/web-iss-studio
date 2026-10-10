@@ -3088,5 +3088,540 @@
     "es": "La imagen está armada como en el juego. Los píxeles reutilizados cambian en todas sus apariciones; el borde sombreado sirve de referencia.",
     "en": "The image is assembled as in the game. Reused pixels change in every appearance; the shaded border serves as a reference.",
     "pt": "A imagem está montada como no jogo. Pixels reutilizados mudam em todas as suas aparições; a borda sombreada serve de referência."
+  },
+  "Scenarios": {
+    "es": "Escenarios",
+    "en": "Scenarios",
+    "pt": "Cenários"
+  },
+  "Restaurar los 12 escenarios": {
+    "es": "Restaurar los 12 escenarios",
+    "en": "Restore all 12 scenarios",
+    "pt": "Restaurar os 12 cenários"
+  },
+  "Edita las condiciones iniciales de los 12 desafíos del juego. Los cambios se guardan al modificar cada campo.": {
+    "es": "Edita las condiciones iniciales de los 12 desafíos del juego. Los cambios se guardan al modificar cada campo.",
+    "en": "Edit the starting conditions of the 12 game challenges. Changes are saved when you edit each field.",
+    "pt": "Edite as condições iniciais dos 12 desafios do jogo. As alterações são salvas ao modificar cada campo."
+  },
+  "Seleccionar escenario": {
+    "es": "Seleccionar escenario",
+    "en": "Select scenario",
+    "pt": "Selecionar cenário"
+  },
+  "Restaurar escenario": {
+    "es": "Restaurar escenario",
+    "en": "Restore scenario",
+    "pt": "Restaurar cenário"
+  },
+  "Tiempo restante": {
+    "es": "Tiempo restante",
+    "en": "Time remaining",
+    "pt": "Tempo restante"
+  },
+  "Minutos": {
+    "es": "Minutos",
+    "en": "Minutes",
+    "pt": "Minutos"
+  },
+  "Segundos": {
+    "es": "Segundos",
+    "en": "Seconds",
+    "pt": "Segundos"
+  },
+  "Equipos y marcador": {
+    "es": "Equipos y marcador",
+    "en": "Teams and score",
+    "pt": "Equipes e placar"
+  },
+  "Equipo del jugador": {
+    "es": "Equipo del jugador",
+    "en": "Player team",
+    "pt": "Equipe do jogador"
+  },
+  "Equipo rival": {
+    "es": "Equipo rival",
+    "en": "Opponent team",
+    "pt": "Equipe adversária"
+  },
+  "Goles del jugador": {
+    "es": "Goles del jugador",
+    "en": "Player goals",
+    "pt": "Gols do jogador"
+  },
+  "Goles del rival": {
+    "es": "Goles del rival",
+    "en": "Opponent goals",
+    "pt": "Gols do adversário"
+  },
+  "Estadio y clima": {
+    "es": "Estadio y clima",
+    "en": "Stadium and weather",
+    "pt": "Estádio e clima"
+  },
+  "Estadio": {
+    "es": "Estadio",
+    "en": "Stadium",
+    "pt": "Estádio"
+  },
+  "Clima": {
+    "es": "Clima",
+    "en": "Weather",
+    "pt": "Clima"
+  },
+  "Valor original": {
+    "es": "Valor original",
+    "en": "Original value",
+    "pt": "Valor original"
+  },
+  "Condición inicial": {
+    "es": "Condición inicial",
+    "en": "Starting condition",
+    "pt": "Condição inicial"
+  },
+  "Inicio de la jugada": {
+    "es": "Inicio de la jugada",
+    "en": "Start of play",
+    "pt": "Início da jogada"
+  },
+  "Posición inicial · avanzado": {
+    "es": "Posición inicial · avanzado",
+    "en": "Starting position · advanced",
+    "pt": "Posição inicial · avançado"
+  },
+  "Valores de los bytes de posición (0–255). Se conservan por separado las coordenadas y los bytes de la pelota del editor original.": {
+    "es": "Valores de los bytes de posición (0–255). Se conservan por separado las coordenadas y los bytes de la pelota del editor original.",
+    "en": "Position byte values (0–255). Coordinates and ball bytes from the original editor are kept separately.",
+    "pt": "Valores dos bytes de posição (0–255). As coordenadas e os bytes da bola do editor original são mantidos separadamente."
+  },
+  "Código de inicio": {
+    "es": "Código de inicio",
+    "en": "Start code",
+    "pt": "Código de início"
+  },
+  "Posición X": {
+    "es": "Posición X",
+    "en": "X position",
+    "pt": "Posição X"
+  },
+  "Posición Y": {
+    "es": "Posición Y",
+    "en": "Y position",
+    "pt": "Posição Y"
+  },
+  "Pelota X": {
+    "es": "Pelota X",
+    "en": "Ball X",
+    "pt": "Bola X"
+  },
+  "Pelota Y": {
+    "es": "Pelota Y",
+    "en": "Ball Y",
+    "pt": "Bola Y"
+  },
+  "Ninguno": {
+    "es": "Ninguno",
+    "en": "None",
+    "pt": "Nenhum"
+  },
+  "Día": {
+    "es": "Día",
+    "en": "Day",
+    "pt": "Dia"
+  },
+  "Despejado": {
+    "es": "Despejado",
+    "en": "Fine",
+    "pt": "Céu limpo"
+  },
+  "Noche": {
+    "es": "Noche",
+    "en": "Night",
+    "pt": "Noite"
+  },
+  "Día despejado": {
+    "es": "Día despejado",
+    "en": "Fine day",
+    "pt": "Dia de céu limpo"
+  },
+  "Lluvia": {
+    "es": "Lluvia",
+    "en": "Rain",
+    "pt": "Chuva"
+  },
+  "Nieve": {
+    "es": "Nieve",
+    "en": "Snow",
+    "pt": "Neve"
+  },
+  "Noche despejada": {
+    "es": "Noche despejada",
+    "en": "Fine night",
+    "pt": "Noite de céu limpo"
+  },
+  "Saque de meta": {
+    "es": "Saque de meta",
+    "en": "Goal kick",
+    "pt": "Tiro de meta"
+  },
+  "Saque de esquina": {
+    "es": "Saque de esquina",
+    "en": "Corner kick",
+    "pt": "Escanteio"
+  },
+  "Tiro libre rival": {
+    "es": "Tiro libre rival",
+    "en": "Opponent free kick",
+    "pt": "Tiro livre do adversário"
+  },
+  "Tiro libre del jugador": {
+    "es": "Tiro libre del jugador",
+    "en": "Player free kick",
+    "pt": "Tiro livre do jogador"
+  },
+  "Escenario inválido.": {
+    "es": "Escenario inválido.",
+    "en": "Invalid scenario.",
+    "pt": "Cenário inválido."
+  },
+  "Tabla de escenarios incompleta.": {
+    "es": "Tabla de escenarios incompleta.",
+    "en": "Incomplete scenario table.",
+    "pt": "Tabela de cenários incompleta."
+  },
+  "Tamaño de escenario inválido.": {
+    "es": "Tamaño de escenario inválido.",
+    "en": "Invalid scenario size.",
+    "pt": "Tamanho de cenário inválido."
+  },
+  "Cabecera de escenario alterada.": {
+    "es": "Cabecera de escenario alterada.",
+    "en": "Scenario header changed.",
+    "pt": "Cabeçalho de cenário alterado."
+  },
+  "Valor de escenario fuera de rango.": {
+    "es": "Valor de escenario fuera de rango.",
+    "en": "Scenario value out of range.",
+    "pt": "Valor de cenário fora do intervalo."
+  },
+  "Descripción del escenario": {
+    "es": "Descripción del escenario",
+    "en": "Scenario description",
+    "pt": "Descrição do cenário"
+  },
+  "Texto que aparece en el juego": {
+    "es": "Texto que aparece en el juego",
+    "en": "Text displayed in the game",
+    "pt": "Texto exibido no jogo"
+  },
+  "Hasta 6 líneas de 26 caracteres. Respeta los saltos de línea; usa letras sin tildes.": {
+    "es": "Hasta 6 líneas de 26 caracteres. Respeta los saltos de línea; usa letras sin tildes.",
+    "en": "Up to 6 lines of 26 characters. Keep line breaks; use letters without accents.",
+    "pt": "Até 6 linhas de 26 caracteres. Respeite as quebras de linha; use letras sem acentos."
+  },
+  "Aplicar descripción a la ROM": {
+    "es": "Aplicar descripción a la ROM",
+    "en": "Apply description to ROM",
+    "pt": "Aplicar descrição à ROM"
+  },
+  "Descartar cambios del texto": {
+    "es": "Descartar cambios del texto",
+    "en": "Discard text changes",
+    "pt": "Descartar alterações do texto"
+  },
+  "Tabla de descripciones no compatible.": {
+    "es": "Tabla de descripciones no compatible.",
+    "en": "Unsupported description table.",
+    "pt": "Tabela de descrições não compatível."
+  },
+  "Descripción de escenario inválida.": {
+    "es": "Descripción de escenario inválida.",
+    "en": "Invalid scenario description.",
+    "pt": "Descrição de cenário inválida."
+  },
+  "La descripción admite 6 líneas de hasta 26 caracteres.": {
+    "es": "La descripción admite 6 líneas de hasta 26 caracteres.",
+    "en": "Descriptions allow 6 lines of up to 26 characters.",
+    "pt": "A descrição permite 6 linhas de até 26 caracteres."
+  },
+  "Usa letras A–Z y a–z sin tildes, números, espacios y puntuación compatible.": {
+    "es": "Usa letras A–Z y a–z sin tildes, números, espacios y puntuación compatible.",
+    "en": "Use unaccented A–Z and a–z letters, numbers, spaces and supported punctuation.",
+    "pt": "Use letras A–Z e a–z sem acentos, números, espaços e pontuação compatível."
+  },
+  "Edita los datos y la descripción de los 12 desafíos del juego.": {
+    "es": "Edita los datos y la descripción de los 12 desafíos del juego.",
+    "en": "Edit the data and description of the 12 game challenges.",
+    "pt": "Edite os dados e a descrição dos 12 desafios do jogo."
+  },
+  "equipos": {
+    "es": "equipos",
+    "en": "teams",
+    "pt": "equipes"
+  },
+  "jugadores": {
+    "es": "jugadores",
+    "en": "players",
+    "pt": "jogadores"
+  },
+  "Nuevo equipo": {
+    "es": "Nuevo equipo",
+    "en": "New team",
+    "pt": "Nova equipe"
+  },
+  "Nombre del nuevo equipo": {
+    "es": "Nombre del nuevo equipo",
+    "en": "New team name",
+    "pt": "Nome da nova equipe"
+  },
+  "Agregar equipo": {
+    "es": "Agregar equipo",
+    "en": "Add team",
+    "pt": "Adicionar equipe"
+  },
+  "Puedes agregar equipos hasta completar 48. Cada equipo nuevo comienza con una copia independiente de Italia y aparece en el grupo EXTRA.": {
+    "es": "Puedes agregar equipos hasta completar 48. Cada equipo nuevo comienza con una copia independiente de Italia y aparece en el grupo EXTRA.",
+    "en": "You can add up to 48 teams. Each new team starts with an independent copy of Italy and appears in the EXTRA group.",
+    "pt": "Você pode adicionar até 48 equipes. Cada nova equipe começa com uma cópia independente da Itália e aparece no grupo EXTRA."
+  },
+  "El equipo nuevo copia el plantel, uniformes, bandera y formación de Italia. Después puedes editarlos por separado.": {
+    "es": "El equipo nuevo copia el plantel, uniformes, bandera y formación de Italia. Después puedes editarlos por separado.",
+    "en": "The new team copies Italy’s squad, uniforms, flag and formation. You can then edit them independently.",
+    "pt": "A nova equipe copia o elenco, os uniformes, a bandeira e a formação da Itália. Depois você pode editá-los separadamente."
+  },
+  "El equipo admite hasta 10 letras A–Z, puntos y espacios.": {
+    "es": "El equipo admite hasta 10 letras A–Z, puntos y espacios.",
+    "en": "The team name allows up to 10 A–Z letters, periods and spaces.",
+    "pt": "O nome permite até 10 letras A–Z, pontos e espaços."
+  },
+  "Se permiten hasta 48 equipos.": {
+    "es": "Se permiten hasta 48 equipos.",
+    "en": "Up to 48 teams are allowed.",
+    "pt": "São permitidas até 48 equipes."
+  },
+  "Libera un grupo para agregar equipos.": {
+    "es": "Libera un grupo para agregar equipos.",
+    "en": "Free a group to add teams.",
+    "pt": "Libere um grupo para adicionar equipes."
+  },
+  "Rótulo en el juego": {
+    "es": "Rótulo en el juego",
+    "en": "In-game label",
+    "pt": "Rótulo no jogo"
+  },
+  "Rótulo de escenario no compatible.": {
+    "es": "Rótulo de escenario no compatible.",
+    "en": "Unsupported scenario label.",
+    "pt": "Rótulo de cenário não compatível."
+  },
+  "Escenario": {
+    "es": "Escenario",
+    "en": "Scenario",
+    "pt": "Cenário"
+  },
+  "Dificultad del escenario": {
+    "es": "Dificultad del escenario",
+    "en": "Scenario difficulty",
+    "pt": "Dificuldade do cenário"
+  },
+  "Estrellas de dificultad": {
+    "es": "Estrellas de dificultad",
+    "en": "Difficulty stars",
+    "pt": "Estrelas de dificuldade"
+  },
+  "Las estrellas son una valoración fija del escenario. No cambian automáticamente ni modifican el nivel de la IA.": {
+    "es": "Las estrellas son una valoración fija del escenario. No cambian automáticamente ni modifican el nivel de la IA.",
+    "en": "Stars are a fixed scenario rating. They do not change automatically or alter the AI level.",
+    "pt": "As estrelas são uma avaliação fixa do cenário. Não mudam automaticamente nem alteram o nível da IA."
+  },
+  "Posición inicial de la pelota": {
+    "es": "Posición inicial de la pelota",
+    "en": "Initial ball position",
+    "pt": "Posição inicial da bola"
+  },
+  "Haz clic o arrastra la pelota. Usa las flechas del teclado para ajustar la posición.": {
+    "es": "Haz clic o arrastra la pelota. Usa las flechas del teclado para ajustar la posición.",
+    "en": "Click or drag the ball. Use the arrow keys to adjust its position.",
+    "pt": "Clique ou arraste a bola. Use as setas do teclado para ajustar a posição."
+  },
+  "Cancha del escenario": {
+    "es": "Cancha del escenario",
+    "en": "Scenario pitch",
+    "pt": "Campo do cenário"
+  },
+  "Posición de la pelota": {
+    "es": "Posición de la pelota",
+    "en": "Ball position",
+    "pt": "Posição da bola"
+  },
+  "Dimensiones de la cancha": {
+    "es": "Dimensiones de la cancha",
+    "en": "Pitch dimensions",
+    "pt": "Dimensões do campo"
+  },
+  "La posición original está fuera de la cancha. Se conserva hasta que muevas la pelota.": {
+    "es": "La posición original está fuera de la cancha. Se conserva hasta que muevas la pelota.",
+    "en": "The original position is outside the pitch. It is preserved until you move the ball.",
+    "pt": "A posição original está fora do campo. É preservada até você mover a bola."
+  },
+  "Coordenada X de la pelota": {
+    "es": "Coordenada X de la pelota",
+    "en": "Ball X coordinate",
+    "pt": "Coordenada X da bola"
+  },
+  "Coordenada Y de la pelota": {
+    "es": "Coordenada Y de la pelota",
+    "en": "Ball Y coordinate",
+    "pt": "Coordenada Y da bola"
+  },
+  "Cada coordenada ocupa dos bytes: parte baja y alta. La cancha actualiza ambos; estos campos permiten editar los bytes originales (0–255).": {
+    "es": "Cada coordenada ocupa dos bytes: parte baja y alta. La cancha actualiza ambos; estos campos permiten editar los bytes originales (0–255).",
+    "en": "Each coordinate uses two bytes: low and high. The pitch updates both; these fields let you edit the original bytes (0–255).",
+    "pt": "Cada coordenada ocupa dois bytes: baixo e alto. O campo atualiza ambos; estes controles permitem editar os bytes originais (0–255)."
+  },
+  "Dificultad de escenario fuera de rango.": {
+    "es": "Dificultad de escenario fuera de rango.",
+    "en": "Scenario difficulty out of range.",
+    "pt": "Dificuldade do cenário fora do intervalo."
+  },
+  "Posición de escenario fuera de rango.": {
+    "es": "Posición de escenario fuera de rango.",
+    "en": "Scenario position out of range.",
+    "pt": "Posição do cenário fora do intervalo."
+  },
+  "X · byte alto": {
+    "es": "X · byte alto",
+    "en": "X · high byte",
+    "pt": "X · byte alto"
+  },
+  "X · byte bajo": {
+    "es": "X · byte bajo",
+    "en": "X · low byte",
+    "pt": "X · byte baixo"
+  },
+  "Y · byte alto": {
+    "es": "Y · byte alto",
+    "en": "Y · high byte",
+    "pt": "Y · byte alto"
+  },
+  "Y · byte bajo": {
+    "es": "Y · byte bajo",
+    "en": "Y · low byte",
+    "pt": "Y · byte baixo"
+  },
+  "Posición automática según el saque y el estadio. Cambia el inicio de la jugada para colocar la pelota libremente.": {
+    "es": "Posición automática según el saque y el estadio. Cambia el inicio de la jugada para colocar la pelota libremente.",
+    "en": "Automatic position based on the restart and stadium. Change the starting play to position the ball freely.",
+    "pt": "Posição automática conforme o reinício e o estádio. Mude o início da jogada para posicionar a bola livremente."
+  },
+  "Saque de banda original": {
+    "es": "Saque de banda original",
+    "en": "Original throw-in",
+    "pt": "Lateral original"
+  },
+  "Panel de prueba": {
+    "es": "Panel de prueba",
+    "en": "Test panel",
+    "pt": "Painel de teste"
+  },
+  "Mando": {
+    "es": "Mando",
+    "en": "Controller",
+    "pt": "Controle"
+  },
+  "Duración": {
+    "es": "Duración",
+    "en": "Press duration",
+    "pt": "Duração"
+  },
+  "Título → selector": {
+    "es": "Título → selector",
+    "en": "Title → team selection",
+    "pt": "Título → seleção"
+  },
+  "Cancelar secuencia": {
+    "es": "Cancelar secuencia",
+    "en": "Cancel sequence",
+    "pt": "Cancelar sequência"
+  },
+  "El acceso al selector parte de la pantalla PRESS START. Guarda otras pantallas para volver a ellas con un clic.": {
+    "es": "El acceso al selector parte de la pantalla PRESS START. Guarda otras pantallas para volver a ellas con un clic.",
+    "en": "The team selection shortcut starts at PRESS START. Save other screens to return with one click.",
+    "pt": "O atalho de seleção começa na tela PRESS START. Salve outras telas para voltar com um clique."
+  },
+  "Mando SNES de prueba": {
+    "es": "Mando SNES de prueba",
+    "en": "SNES test controller",
+    "pt": "Controle SNES de teste"
+  },
+  "Arriba": {
+    "es": "Arriba",
+    "en": "Up",
+    "pt": "Cima"
+  },
+  "Abajo": {
+    "es": "Abajo",
+    "en": "Down",
+    "pt": "Baixo"
+  },
+  "Izquierda": {
+    "es": "Izquierda",
+    "en": "Left",
+    "pt": "Esquerda"
+  },
+  "Derecha": {
+    "es": "Derecha",
+    "en": "Right",
+    "pt": "Direita"
+  },
+  "Nombre de pantalla": {
+    "es": "Nombre de pantalla",
+    "en": "Screen name",
+    "pt": "Nome da tela"
+  },
+  "Ejemplo: EXTRA": {
+    "es": "Ejemplo: EXTRA",
+    "en": "Example: EXTRA",
+    "pt": "Exemplo: EXTRA"
+  },
+  "Guardar pantalla": {
+    "es": "Guardar pantalla",
+    "en": "Save screen",
+    "pt": "Salvar tela"
+  },
+  "Ir a": {
+    "es": "Ir a",
+    "en": "Go to",
+    "pt": "Ir para"
+  },
+  "Pantalla": {
+    "es": "Pantalla",
+    "en": "Screen",
+    "pt": "Tela"
+  },
+  "Las pantallas guardadas pertenecen a la ROM cargada y se borran al recargarla o detener el emulador.": {
+    "es": "Las pantallas guardadas pertenecen a la ROM cargada y se borran al recargarla o detener el emulador.",
+    "en": "Saved screens belong to the loaded ROM and are cleared when reloading it or stopping the emulator.",
+    "pt": "As telas salvas pertencem à ROM carregada e são apagadas ao recarregá-la ou parar o emulador."
+  },
+  "Ejecutando control…": {
+    "es": "Ejecutando control…",
+    "en": "Running control…",
+    "pt": "Executando controle…"
+  },
+  "Control completado.": {
+    "es": "Control completado.",
+    "en": "Control completed.",
+    "pt": "Controle concluído."
+  },
+  "No se pudo ejecutar el control.": {
+    "es": "No se pudo ejecutar el control.",
+    "en": "Could not run the control.",
+    "pt": "Não foi possível executar o controle."
+  },
+  "Reiniciar juego": {
+    "es": "Reiniciar juego",
+    "en": "Restart game",
+    "pt": "Reiniciar jogo"
   }
 }
