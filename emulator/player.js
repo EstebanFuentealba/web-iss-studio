@@ -67,8 +67,6 @@
       if(data.action === 'press'){
         if(![0,1].includes(data.player)||![0,1,2,3,4,5,6,7,8,9,10,11].includes(data.index)||!Number.isInteger(data.duration)||data.duration<50||data.duration>1500)throw new Error('input');
         await pulse(manager,data.player,data.index,data.duration,token);
-      }else if(data.action === 'title-selector'){
-        for(const index of [3,8,8,8]){await pulse(manager,0,index,150,token);await wait(3500);if(token!==generation)throw new Error('cancelled');}
       }else if(data.action === 'restart')manager.restart();
       else if(data.action === 'save-screen'){
         if(!Number.isInteger(data.slot)||data.slot<1||data.slot>8)throw new Error('slot');
